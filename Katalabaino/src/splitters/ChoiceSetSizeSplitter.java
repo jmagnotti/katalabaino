@@ -1,0 +1,20 @@
+package splitters;
+
+import core.Trial;
+
+class ChoiceSetSizeRule extends MultiClassRule
+{
+	@Override
+	public String getClassMembership(Trial trial)
+	{
+		return "css" + trial.choiceSetSize;
+	}
+}
+
+public class ChoiceSetSizeSplitter extends Splitter
+{
+	public ChoiceSetSizeSplitter()
+	{
+		super(new ChoiceSetSizeRule());
+	}
+}
