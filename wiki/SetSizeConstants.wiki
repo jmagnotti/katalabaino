@@ -1,0 +1,17 @@
+#How does SetSizeConstants work?
+
+= Introduction =
+
+SetSizeConstants is a class that works to inform the program of what items are included in their respective training set sizes.  This class currently contains vectors for both matching-to-sample training sets and same/different training sets.
+
+= Details =
+
+Training set size is manipulated in several of our studies, and during normal data analysis, it is important to determine what items are from the current training set and which items come from previous training sets.  SetSizeConstants, when used with ItemSplitter, informs performance based on these criteria.
+
+To add new training sets, create the vectors in the public class and edit them within the private SetSizeConstants() routine.  When implementing this in an analysis, a vector will need to be created to call upon the static vectors in SetSizeConstants.  For example:
+
+  //Vector<String> includedImages = new Vector<String>();
+  //includedImages.addAll(SetSizeConstants.GetInstance().mts6itemSet);
+
+Then use the ItemSplitter to split the data based on previous experience.
+  //analysis.addSplitter(new ItemSplitter(includedImages));
