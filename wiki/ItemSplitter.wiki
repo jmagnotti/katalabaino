@@ -1,0 +1,9 @@
+#How does ItemSplitter work?
+
+= Introduction =
+
+ItemSplitter is a routine that is used to determine how a subject performs on novel items, familiar items, or a mix of the two.  
+
+= Details =
+
+Used in conjunction with SetSizeConstants, the ItemSplitter can parse apart performance based on a chosen vector of items.
