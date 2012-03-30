@@ -23,7 +23,19 @@ To add new image sets, declare a public vector in the SetSizeConstants class and
 
 public Vector<String> myNewImageSet;
 
+...
 
+public SetSizeContants() 
+{
+...
+
+myNewImageSet = new Vector<String>();
+myNewImageSet.add("image001.bmp");
+myNewImageSet.add("image002.bmp");
+
+...
+
+}
 } // end class
 }}}
 
