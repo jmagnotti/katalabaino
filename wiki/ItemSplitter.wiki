@@ -1,5 +1,5 @@
+#summary How does ItemSplitter work?
 #labels Tutorial
-#How does ItemSplitter work?
 
 = Introduction =
 
