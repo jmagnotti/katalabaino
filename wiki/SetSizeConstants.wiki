@@ -14,7 +14,18 @@ analysis.addSplitter(new ItemSplitter(SetSizeConstants.GetInstance().mts6itemSet
 }}}
 
 = Adding new image sets =
-To add new image sets, declare a public vector in the SetSizeConstants class and then initialize withing the private SetSizeConstants() constructor.
+To add new image sets, declare a public vector in the SetSizeConstants class and then initialize within the private SetSizeConstants() constructor.
+
+{{{
+{ //begin class
+
+...
+
+public Vector<String> myNewImageSet;
+
+
+} // end class
+}}}
 
 = Implementation note =
 The SetSizeConstants class use the Singleton Pattern to avoid duplicate creation of the image vectors. The vectors are loaded at first call to the accessor method.
