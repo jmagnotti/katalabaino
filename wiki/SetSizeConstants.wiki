@@ -29,15 +29,16 @@ public SetSizeConstants
 
     public SetSizeContants() 
     {
-    ...
+        ...
 
-    myNewImageSet = new Vector<String>();
-    myNewImageSet.add("image001.bmp");
-    myNewImageSet.add("image002.bmp");
+        myNewImageSet = new Vector<String>();
+        myNewImageSet.add("image001.bmp");
+        myNewImageSet.add("image002.bmp");
 
-    ...
+        ...
     }
 
+    ...
 } // end class
 }}}
 
