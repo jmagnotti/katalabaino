@@ -31,8 +31,10 @@ public class Colors
 	public static final int			TRAVEL_SLIDE	= 16;
 	public static final int			COUNTING_STROOP	= 17;
 
+	public static final int 		OBJECT_STROOP 	= 18;
+
 	public static final int			COLORS[]		= { AQUA, BLUE, GRAY, GREEN, LIME, NAVY,
-			ORANGE, PINK, RED, WHITE, YELLOW, YELLOWGREEN, PURPLE, BROWN, CLIP_ART, KSCOPE };
+			ORANGE, PINK, RED, WHITE, YELLOW, YELLOWGREEN, PURPLE, BROWN, CLIP_ART, KSCOPE, OBJECT_STROOP };
 
 	public HashMap<Integer, String>	colorIDToLabel;
 	public HashMap<String, Integer>	abbrToID;
