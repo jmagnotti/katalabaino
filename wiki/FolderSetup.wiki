@@ -1,0 +1,16 @@
+#summary Expected directory structure
+
+= Introduction =
+
+Add your content here.
+
+
+= Details =
+
+Folder Structure:
+----
+  * ExperimentName
+    * Phase
+      * Bird 1
+      * Bird 2
+    * Sessions
