@@ -1,20 +1,34 @@
+#labels Tutorial
 #How does ItemSplitter work?
 
 = Introduction =
 
 ItemSplitter is a routine that is used to determine how a subject performs on novel items, familiar items, or a mix of the two.  
 
-= Details =
+= Usage =
 
 Used in conjunction with SetSizeConstants, the ItemSplitter can parse apart performance based on a chosen vector of items.  Once imported to the appropriate analysis class, the ItemSplitter compares all sample and probe items to the created vector.  In most designs, this will create up to four different performance classes.
 
 {{{
-  Vector<String> includedImages = new Vector<String>();
-  includedImages.addAll(SetSizeConstants.GetInstance().mts6itemSet);
-  analysis.addSplitter(new ItemSplitter(includedImages)));
+import splitters.ItemSplitter;
+...
+
+{ // begin class
+
+    public static void main(String args[])
+    {
+        ...
+
+        analysis.addSplitter(new ItemSplitter(SetSizeConstants.GetInstance().mts6itemSet)));
+
+        ...
+    }
+
+} // end class
 }}}
 
-Example of use:  subjects training in a same/different task are currently training in a 32-item set.  If we would like to see how well they are performing on the previously learned 8-item set, we can reference that set from its SetSizeConstants vector (in this case, "sd8itemSet").  If we decided to look at 16-item performance, the 16-item vector includes the 8-item set as well, so there would be no need to run both.
+= Example of use =
+Subjects training in a same/different task are currently training in a 32-item set.  If we would like to see how well they are performing on the previously learned 8-item set, we can reference that set from its SetSizeConstants vector (in this case, "sd8itemSet").  If we decided to look at 16-item performance, the 16-item vector includes the 8-item set as well, so there would be no need to run both.
 
 == Performance Classes ==
 
