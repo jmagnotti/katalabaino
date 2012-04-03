@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.Vector;
 
 import mappers.CountMap;
-import mappers.HMFACR_Map;
-import mappers.SessionInfoMap;
+import mappers.HitsMissesFalseAlarmsCorrectRejectionsMap;
+import mappers.SessionInformationMap;
 import sessions.HumanCDSession;
 import splitters.TrialTypeSplitter;
 import core.Analysis;
@@ -22,7 +22,7 @@ public class HumanCDAnalysis
 
 		Analysis analysis = new Analysis(sessions);
 
-		analysis.addMap(new SessionInfoMap());
+		analysis.addMap(new SessionInformationMap());
 		// analysis.addMap(new CountCorrectMap());
 		analysis.addMap(new CountMap());
 		analysis.addFilter(new LookForTrialDuplicatesFilter());

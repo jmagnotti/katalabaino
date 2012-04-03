@@ -3,6 +3,7 @@ package mappers;
 import java.util.Vector;
 
 import calc.MahalanobisHelper;
+import core.Mapper;
 import core.Session;
 import core.Trial;
 

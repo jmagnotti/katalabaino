@@ -95,7 +95,7 @@ public class SessionFactory
 		}
 		rs.close();
 
-		 System.out.println(rfn);
+		// System.out.println(rfn);
 
 		sfn = sfn.substring(0, sfn.length() - 2) + "mdb";
 
@@ -115,7 +115,7 @@ public class SessionFactory
 
 		String sessdb = DB_OPEN_STR + dir + "/sessions/" + sfn + DB_CLOSE_STR;
 
-		// System.out.println(sessdb);
+		System.out.println(sessdb);
 
 		sessionDB = DriverManager.getConnection(sessdb, "", "");
 

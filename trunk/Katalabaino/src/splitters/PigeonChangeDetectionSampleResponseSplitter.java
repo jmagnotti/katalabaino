@@ -1,5 +1,7 @@
 package splitters;
 
+import core.MultiClassRule;
+import core.Splitter;
 import core.Trial;
 
 class PeckLocationRule extends MultiClassRule
@@ -19,9 +21,9 @@ class PeckLocationRule extends MultiClassRule
 
 }
 
-public class CD_SamplePeckSplitter extends Splitter
+public class PigeonChangeDetectionSampleResponseSplitter extends Splitter
 {
-	public CD_SamplePeckSplitter()
+	public PigeonChangeDetectionSampleResponseSplitter()
 	{
 		super(new PeckLocationRule());
 	}

@@ -2,8 +2,10 @@ package splitters;
 
 import java.util.Vector;
 
+import core.ComparisonRule;
+import core.MultiClassRule;
+import core.Splitter;
 import core.Trial;
-import filters.ComparisonRule;
 
 class BlockSplitRule extends MultiClassRule
 {

@@ -1,12 +1,14 @@
 package filters;
 
+import core.ComparisonRule;
+import core.Filter;
 import core.Session;
 
-public class SessionIDFilter extends Filter
+public class SessionNumberFilter extends Filter
 {
 	private ComparisonRule	rule;
 
-	public SessionIDFilter(ComparisonRule rule)
+	public SessionNumberFilter(ComparisonRule rule)
 	{
 		super();
 		this.rule = rule;

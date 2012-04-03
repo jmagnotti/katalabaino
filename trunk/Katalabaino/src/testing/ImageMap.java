@@ -3,7 +3,7 @@ package testing;
 import java.util.HashMap;
 import java.util.Vector;
 
-import mappers.Mapper;
+import core.Mapper;
 import core.Session;
 import core.Stimulus;
 import core.Trial;

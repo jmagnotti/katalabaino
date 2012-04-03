@@ -1,5 +1,6 @@
 package filters;
 
+import core.Filter;
 import core.Session;
 
 public class SessionNameFilter extends Filter

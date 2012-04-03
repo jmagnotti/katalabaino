@@ -2,17 +2,18 @@ package mappers;
 
 import java.util.Vector;
 
+import core.Mapper;
 import core.Session;
 import core.Trial;
 
-public class AverageFR_RTMap extends Mapper
+public class MeanResponseTimeMap extends Mapper
 {
 
 	private double	rt, count;
 
-	public AverageFR_RTMap()
+	public MeanResponseTimeMap()
 	{
-		super("avgFR_RT");
+		super("avgRT");
 	}
 
 	@Override
@@ -23,7 +24,7 @@ public class AverageFR_RTMap extends Mapper
 	public void nextTrial(Trial trial)
 	{
 		count = count + 1;
-		rt += trial.sampleResponses.lastElement().responseTime;
+		rt += trial.responseTime;
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package splitters;
 
+import core.MultiClassRule;
 import core.SampleResponse;
+import core.Splitter;
 import core.Trial;
 
 class ViewTimeAbortRule extends MultiClassRule

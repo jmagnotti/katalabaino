@@ -1,5 +1,7 @@
 package filters;
 
+import core.ComparisonRule;
+import core.Filter;
 import core.Trial;
 
 public class TrialFilter extends Filter

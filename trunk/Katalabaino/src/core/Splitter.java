@@ -1,9 +1,9 @@
-package splitters;
+package core;
 
 import java.util.HashMap;
 import java.util.Vector;
 
-import core.Trial;
+
 
 /**
  * Create a spliter based on some multiclass rule. then call getSplits to get a labelled map of

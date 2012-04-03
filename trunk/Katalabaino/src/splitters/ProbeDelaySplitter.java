@@ -2,6 +2,8 @@ package splitters;
 
 import java.text.DecimalFormat;
 
+import core.MultiClassRule;
+import core.Splitter;
 import core.Trial;
 
 class ProbeDelayRule extends MultiClassRule
@@ -16,7 +18,11 @@ class ProbeDelayRule extends MultiClassRule
 	@Override
 	public String getClassMembership(Trial trial)
 	{
-		return "pd" + df.format(trial.probeDelay);
+		String pd = df.format(trial.probeDelay);
+		while (pd.length() < 4)
+			pd = "0" + pd;
+
+		return "pd" + pd;
 	}
 
 }

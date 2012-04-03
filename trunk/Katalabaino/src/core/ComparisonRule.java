@@ -1,4 +1,4 @@
-package filters;
+package core;
 
 public class ComparisonRule
 {

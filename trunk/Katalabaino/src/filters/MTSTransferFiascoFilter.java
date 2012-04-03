@@ -1,5 +1,6 @@
 package filters;
 
+import core.Filter;
 import core.Shapes;
 import core.Stimulus;
 import core.Trial;

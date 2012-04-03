@@ -3,11 +3,11 @@ package analyses;
 import java.io.File;
 import java.util.Vector;
 
-import mappers.AccuracyMap;
-import mappers.AverageFRMap;
-import mappers.AverageFR_RTMap;
-import mappers.ObservingResponseInfoMap;
-import mappers.SessionInfoMap;
+import mappers.PercentCorrectMap;
+import mappers.MeanSampleResponseMap;
+import mappers.MeanSampleCompletionResponseTimeMap;
+import mappers.SampleResponseInformationMap;
+import mappers.SessionInformationMap;
 import mappers.ViewTimeAbortsMap;
 import sessions.YN_CDSession;
 import splitters.*;
@@ -21,7 +21,7 @@ public class YN_CDAnalysis
 	public static void main(String[] args) throws Exception
 	{
 		String dir = "Y:/warehouse/YN_cd/acquisition/";
-		String bird = "curly";
+		String bird = "ted";
 		String workDir = dir + bird + "/";
 
 		// FileTypeConverter.CreateZipFileFromDirectory(workDir, bird, new YN_CDSession());
@@ -32,17 +32,17 @@ public class YN_CDAnalysis
 
 		Analysis analysis = new Analysis(sessions);
 
-		analysis.addMap(new SessionInfoMap());
-		// analysis.addMap(new AccuracyMap());
+		analysis.addMap(new SessionInformationMap());
+		analysis.addMap(new PercentCorrectMap());
 		// analysis.addMap(new ViewTimeAbortsMap());
 		// analysis.addMap(new AverageRTMap());
 		// analysis.addMap(new AverageFRMap());
-		analysis.addMap(new ObservingResponseInfoMap());
+		// analysis.addMap(new ObservingResponseInfoMap());
 
-		// analysis.addSplitter(new SampleSetSizeSplitter());
-		// analysis.addSplitter(new TrialTypeSplitter());
-		// analysis.addSplitter(new ProbeDelaySplitter());
-		// analysis.addSplitter(new ConfigurationSplitter("icm"));
+		analysis.addSplitter(new SampleSetSizeSplitter());
+		 analysis.addSplitter(new TrialTypeSplitter());
+//		analysis.addSplitter(new ProbeDelaySplitter());
+//		 analysis.addSplitter(new ConfigurationSplitter("icm"));
 
 		// analysis.addSplitter(new CorrectPositionSplitter());
 

@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Vector;
 
-import mappers.Mapper;
 import core.Colors;
+import core.Mapper;
 import core.Session;
 import core.Trial;
 
@@ -92,9 +92,9 @@ public class ItemPairAccuracyMap extends Mapper
 
 				if (itemCounts.containsKey(sample) && itemCounts.get(sample).containsKey(probe)) {
 					string = string + "\t"
-					 + (100.0 * itemCorrect.get(sample).get(probe) / itemCounts.get(sample)
-					 .get(probe));
-//							+ (itemCounts.get(sample).get(probe));
+					// + (100.0 * itemCorrect.get(sample).get(probe) / itemCounts.get(sample)
+					// .get(probe));
+							+ (itemCounts.get(sample).get(probe));
 				}
 				else {
 					string = string + "\t.";

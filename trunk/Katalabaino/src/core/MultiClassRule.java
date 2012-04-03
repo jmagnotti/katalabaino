@@ -1,9 +1,7 @@
-package splitters;
+package core;
 
 import java.util.Vector;
 
-import core.Trial;
-import filters.ComparisonRule;
 
 /**
  * These rules are like {@link ComparisonRule} but are multi-class.

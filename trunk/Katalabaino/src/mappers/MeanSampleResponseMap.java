@@ -4,15 +4,16 @@ import java.util.Vector;
 
 import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
 
+import core.Mapper;
 import core.Session;
 import core.Trial;
 
-public class SamplePecksAverageMap extends Mapper
+public class MeanSampleResponseMap extends Mapper
 {
 
 	private DescriptiveStatistics	ds;
 
-	public SamplePecksAverageMap()
+	public MeanSampleResponseMap()
 	{
 		super("fr");
 		ds = new DescriptiveStatistics();

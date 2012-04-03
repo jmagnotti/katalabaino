@@ -1,12 +1,14 @@
 package filters;
 
+import core.ComparisonRule;
+import core.Filter;
 import core.Trial;
 
-public class SamplePeckFilter extends Filter
+public class SampleResponseFilter extends Filter
 {
 	private ComparisonRule	rule;
 
-	public SamplePeckFilter(ComparisonRule rule)
+	public SampleResponseFilter(ComparisonRule rule)
 	{
 		this.rule = rule;
 	}

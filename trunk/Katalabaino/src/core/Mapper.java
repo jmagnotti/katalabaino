@@ -1,10 +1,7 @@
-package mappers;
+package core;
 
 import java.util.Vector;
 
-import core.Analysis;
-import core.Session;
-import core.Trial;
 
 public abstract class Mapper
 {

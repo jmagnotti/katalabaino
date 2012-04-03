@@ -6,26 +6,26 @@ import core.Mapper;
 import core.Session;
 import core.Trial;
 
-public class CountCorrectMap extends Mapper
+public class PercentCorrectMap extends Mapper
 {
-	private double	correct;
+	private double	count, correct;
 
-	public CountCorrectMap()
+	public PercentCorrectMap()
 	{
-		super("corr");
-
-		correct = 0.0;
+		super("accuracy");
+		count = correct = 0.0;
 	}
 
 	@Override
 	public void nextSession(Session session)
 	{
-		correct = 0.0;
+		count = correct = 0.0;
 	}
 
 	@Override
 	public void nextTrial(Trial trial)
 	{
+		count++;
 		correct += trial.getCorrectAsInt();
 	}
 
@@ -33,10 +33,9 @@ public class CountCorrectMap extends Mapper
 	public Vector<String> cleanUp()
 	{
 		resultString = new Vector<String>();
+		resultString.add("" + (100.0 * correct / count));
 
-		resultString.add("" + correct);
-
-		correct = 0.0;
+		count = correct = 0.0;
 
 		return resultString;
 	}

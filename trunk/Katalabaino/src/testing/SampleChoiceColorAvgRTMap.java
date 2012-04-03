@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import core.Colors;
+import core.Mapper;
 import core.Session;
 import core.Trial;
-import mappers.Mapper;
 
 public class SampleChoiceColorAvgRTMap extends Mapper
 {

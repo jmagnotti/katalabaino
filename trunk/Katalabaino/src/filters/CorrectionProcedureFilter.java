@@ -1,15 +1,16 @@
 package filters;
 
+import core.Filter;
 import core.Session;
 
-public class CPFilter extends Filter
+public class CorrectionProcedureFilter extends Filter
 {
 	private int				cpStatus;
 
 	public static final int	CP_ON	= 1;
 	public static final int	CP_OFF	= 0;
 
-	public CPFilter(int cpStatus)
+	public CorrectionProcedureFilter(int cpStatus)
 	{
 		this.cpStatus = cpStatus;
 	}

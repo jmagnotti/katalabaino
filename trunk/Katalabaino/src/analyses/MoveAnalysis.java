@@ -3,8 +3,8 @@ package analyses;
 import java.io.File;
 import java.util.Vector;
 
-import mappers.AccuracyMap;
-import mappers.SessionInfoMap;
+import mappers.PercentCorrectMap;
+import mappers.SessionInformationMap;
 import sessions.MovementSession;
 //import splitters.ItemSplitter;
 import core.Analysis;
@@ -27,8 +27,8 @@ public static void main(String[] args) throws Exception
 	Analysis analysis = new Analysis(sessions);
 
 
-	analysis.addMap(new SessionInfoMap());
-	analysis.addMap(new AccuracyMap());
+	analysis.addMap(new SessionInformationMap());
+	analysis.addMap(new PercentCorrectMap());
 	//analysis.addSplitter(new ItemSplitter(includedImages));
 	// analysis.addMap(new AverageRTMap());
 	// analysis.addMap(new SamplePecksAverageMap());

@@ -2,6 +2,8 @@ package splitters;
 
 import java.util.HashMap;
 
+import core.MultiClassRule;
+import core.Splitter;
 import core.Trial;
 
 class CDProbeDelayRule extends MultiClassRule
@@ -30,9 +32,9 @@ class CDProbeDelayRule extends MultiClassRule
 
 }
 
-public class CD_ProbeDelaySplitter extends Splitter
+public class PigeonChangeDetectionProbeDelaySplitter extends Splitter
 {
-	public CD_ProbeDelaySplitter()
+	public PigeonChangeDetectionProbeDelaySplitter()
 	{
 		super(new CDProbeDelayRule());
 	}

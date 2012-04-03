@@ -2,10 +2,10 @@ package testing;
 
 import java.util.Vector;
 
-import mappers.Mapper;
-import splitters.Splitter;
 import core.Analysis;
+import core.Mapper;
 import core.Session;
+import core.Splitter;
 import core.Trial;
 
 public class MultiSessionHDAnalysis extends Analysis
