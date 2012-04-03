@@ -2,15 +2,27 @@
 
 = Introduction =
 
-Add your content here.
-
+Katalabaino relies on the user to have a specific folder directory in order to process data from Access files.  This directory is not only needed for the program to run, but it is also just good practice for project maintenance.
 
 = Details =
 
-Folder Structure:
-----
+Katalabaino assumes that you have created your directory with folders to store individual subjects' data.  It also assumes that you have a folder just for sessions.  Both the session and results folders should be contained within a parent experiment folder.  Your folder structure should look something like this:
   * Experiment Name
     * Phase
       * Bird 1
       * Bird 2
     * Sessions
+
+Any given analysis class in Katalabaino should read a few lines like this:
+{{{
+String dir = "C:/information/mtsofs/6item/";
+String bird = "leo";
+String workDir = dir + bird + "/";
+}}}
+
+Here, "information" is the folder that holds all of my experiments.  "Mtsofs" is the name of the experiment.  "6item" is a subset of this experiment, and I have selected to look at our subject Leo's data.  It may be important to point out that "Leo" is its own folder as well.  This directory looks like:
+  *  C:/information/mtsofs/6item/leo
+  *  C:/information/mtsofs/6item/mike
+  *  C:/information/mtsofs/6item/sessions
+
+Within the 6item folder, I will need to have an additional folder named "Sessions".  This folder will hold all of the Access files that served as sessions within the experiment. 
