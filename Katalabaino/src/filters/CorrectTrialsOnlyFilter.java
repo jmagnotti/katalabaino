@@ -1,5 +1,6 @@
 package filters;
 
+import core.Filter;
 import core.Trial;
 
 public class CorrectTrialsOnlyFilter extends Filter

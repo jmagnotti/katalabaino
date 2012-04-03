@@ -2,12 +2,13 @@ package mappers;
 
 import java.util.Vector;
 
+import core.Mapper;
 import core.Session;
 import core.Trial;
 
-public class CPInfoMap extends Mapper
+public class CorrectionProcedureStatusMap extends Mapper
 {
-	public CPInfoMap()
+	public CorrectionProcedureStatusMap()
 	{
 		super("CP");
 	}

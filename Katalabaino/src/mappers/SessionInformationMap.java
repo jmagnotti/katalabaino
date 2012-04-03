@@ -2,20 +2,18 @@ package mappers;
 
 import java.util.Vector;
 
+import core.Mapper;
 import core.Session;
 import core.Trial;
 
-public class SessionInfoMap extends Mapper
+public class SessionInformationMap extends Mapper
 {
-	public SessionInfoMap()
+	public SessionInformationMap()
 	{
-//		super(" subject\tid");
-		 super(" session");
-//		 super(" results\tsession");
-//		super(" cmt\tsubj\tid\tsfile");
+		super(" comment\tsubject\tid\tsessionFile\tresultsFile");
 	}
 
-	public SessionInfoMap(String... keys)
+	public SessionInformationMap(String... keys)
 	{
 		super(implode(keys));
 	}
@@ -36,11 +34,11 @@ public class SessionInfoMap extends Mapper
 	{
 		resultString = new Vector<String>();
 
-//		 resultString.add(session.comment);
-//		resultString.add(session.subject);
-//		resultString.add(session.id);
-//		 resultString.add(session.resultsFile);
-		 resultString.add(session.sessionFile);
+		resultString.add(session.comment);
+		resultString.add(session.subject);
+		resultString.add(session.id);
+		resultString.add(session.sessionFile);
+		resultString.add(session.resultsFile);
 	}
 
 	@Override

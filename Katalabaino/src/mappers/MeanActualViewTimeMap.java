@@ -2,15 +2,18 @@ package mappers;
 
 import java.util.Vector;
 
+import core.Mapper;
 import core.Session;
 import core.Trial;
 
-public class ViewTimeMap extends Mapper
+/**
+ * Make sure you know what unit your VT is stored in--likely ms.
+ */
+public class MeanActualViewTimeMap extends Mapper
 {
-
 	double	vt, count;
 
-	protected ViewTimeMap()
+	public MeanActualViewTimeMap()
 	{
 		super("vt");
 	}
@@ -32,7 +35,7 @@ public class ViewTimeMap extends Mapper
 	@Override
 	public Vector<String> cleanUp()
 	{
-		resultString.add("" + (.001*vt/count));
+		resultString.add("" + (vt / count));
 		return resultString;
 	}
 

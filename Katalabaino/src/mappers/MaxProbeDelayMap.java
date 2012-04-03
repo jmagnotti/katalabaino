@@ -2,42 +2,39 @@ package mappers;
 
 import java.util.Vector;
 
+import core.Mapper;
 import core.Session;
 import core.Trial;
 
-public class AccuracyMap extends Mapper
+public class MaxProbeDelayMap extends Mapper
 {
-	public AccuracyMap()
+	private int maxPD;
+
+	public MaxProbeDelayMap()
 	{
-		super("acc");
-
-		count = correct = 0.0;
+		super("maxPD");
 	}
-
-	private double	count, correct;
-
+	
+	
 	@Override
 	public void nextSession(Session session)
 	{
-		count = correct = 0.0;
+		maxPD = -1;
 	}
 
 	@Override
 	public void nextTrial(Trial trial)
 	{
-		count++;
-		correct += trial.getCorrectAsInt();
+		if (trial.probeDelay > maxPD)
+			maxPD = (int) trial.probeDelay;
 	}
 
 	@Override
 	public Vector<String> cleanUp()
 	{
 		resultString = new Vector<String>();
-
-		resultString.add("" + (100.0 * correct / count));
-
-		count = correct = 0.0;
-
+		resultString.add(""+maxPD);
 		return resultString;
 	}
+
 }

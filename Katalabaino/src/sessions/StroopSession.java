@@ -24,15 +24,18 @@ import core.Shapes;
 import core.Stimulus;
 import core.Trial;
 
-public class StroopSession extends Session {
+public class StroopSession extends Session
+{
 
-	public StroopSession() {
+	public StroopSession()
+	{
 		super();
 	}
 
 	@Override
-	public Session fromMDB(Connection session, Connection results,
-			String sName, String rName) throws SQLException {
+	public Session fromMDB(Connection session, Connection results, String sName, String rName)
+			throws SQLException
+	{
 		StroopSession stroops = new StroopSession();
 
 		stroops.comment = "Stroop";
@@ -47,8 +50,8 @@ public class StroopSession extends Session {
 		Vector<Stimulus> probes = new Vector<Stimulus>();
 		while (rs.next()) {
 			probeDelays.add(rs.getInt("Delay"));
-			probes.add(new Stimulus(rs.getString("Filename"), 0,
-					Colors.OBJECT_STROOP, Shapes.RECT_IMAGE, "OBJECT_STROOP:RECT_IMAGE"));
+//			probes.add(new Stimulus(rs.getString("Filename"), 0, Colors.OBJECT_STROOP,
+//					Shapes.RECT_IMAGE, "OBJECT_STROOP:RECT_IMAGE"));
 		}
 		rs.close();
 		ses.close();
@@ -64,9 +67,8 @@ public class StroopSession extends Session {
 			samples.put(tnum, new Vector<Stimulus>());
 
 			samples.get(tnum).add(
-					new Stimulus(rs.getString("Filename"), rs
-							.getInt("Position"), Colors.TRAVEL_SLIDE,
-							Shapes.TRAVEL_SLIDE, "TRAVEL_SLIDE:TRAVEL_SLIDE"));
+					new Stimulus(rs.getString("Filename"), rs.getInt("Position"),
+							Colors.TRAVEL_SLIDE, Shapes.TRAVEL_SLIDE, "TRAVEL_SLIDE:TRAVEL_SLIDE"));
 			// update this
 
 			if (viewTime == -1) {
@@ -93,8 +95,7 @@ public class StroopSession extends Session {
 		rs = res.getResultSet();
 		while (rs.next()) {
 			responses.get(rs.getInt("TrialNum") - 1).add(
-					new SampleResponse(rs.getInt("ListPosition"), rs
-							.getInt("ResponseTime"), rs
+					new SampleResponse(rs.getInt("ListPosition"), rs.getInt("ResponseTime"), rs
 							.getInt("CorrectionTrial")));
 		}
 		rs.close();
@@ -105,8 +106,7 @@ public class StroopSession extends Session {
 		rs = res.getResultSet();
 		while (rs.next()) {
 			corrTrialResponses.get(rs.getInt("TrialNum") - 1).add(
-					new SampleResponse(rs.getInt("ListPosition"), rs
-							.getInt("ResponseTime"), rs
+					new SampleResponse(rs.getInt("ListPosition"), rs.getInt("ResponseTime"), rs
 							.getInt("CorrectionTrial")));
 		}
 		rs.close();
@@ -124,14 +124,13 @@ public class StroopSession extends Session {
 				t.trialType = "Left";
 			String Congruence = rs.getString("Configuration");
 			int CurrentCongruence = Integer.parseInt(Congruence);
-				if (CurrentCongruence < 100) 
-					t.configuration = "Baseline";
-				else
-					t.configuration = "Congruent";
-				if (CurrentCongruence > 199)
-					t.configuration = "Incongruent";
-//			Changed; configuration will not always equal trial type in this program
-//			t.configuration = t.trialType;
+			if (CurrentCongruence < 100)
+				t.configuration = "Baseline";
+			else
+				t.configuration = "Congruent";
+			if (CurrentCongruence > 199) t.configuration = "Incongruent";
+			// Changed; configuration will not always equal trial type in this program
+			// t.configuration = t.trialType;
 			t.sampleSetSize = rs.getInt("ListLength");
 			t.choiceSetSize = 1;
 			t.response = rs.getString("Response");
@@ -139,23 +138,26 @@ public class StroopSession extends Session {
 			t.isTransfer = rs.getBoolean("Transfer");
 			t.correctResponse = t.trialType;
 			t.correctLocation = rs.getInt("CorrectPosition");
-//			t.incorrectCorrections = rs.getInt("IncorrectCorrections");
+			// t.incorrectCorrections = rs.getInt("IncorrectCorrections");
 			t.intertrialInterval = rs.getInt("ITI");
 			t.probeDelay = probeDelays.get(t.trialNumber - 1);
-//			t.sampleResponses = responses.get(t.trialNumber - 1);
-//			t.correctionTrialSampleResponses = corrTrialResponses
-//					.get(t.trialNumber - 1);
-//			t.viewTime = (int) t.sampleResponses.lastElement().responseTime;
-//			t.actualViewTime = t.viewTime;
+			// t.sampleResponses = responses.get(t.trialNumber - 1);
+			// t.correctionTrialSampleResponses = corrTrialResponses
+			// .get(t.trialNumber - 1);
+			// t.viewTime = (int) t.sampleResponses.lastElement().responseTime;
+			// t.actualViewTime = t.viewTime;
 
 			// ItemP2 is the RIGHT item
-			t.choiceStimuli.add(new Stimulus(rs.getString("ItemP2"), 2, Colors.OBJECT_STROOP, Shapes.RECT_IMAGE, "OBJECT_STROOP:RECT_IMAGE"));
+//			t.choiceStimuli.add(new Stimulus(rs.getString("ItemP2"), 2, Colors.OBJECT_STROOP,
+//					Shapes.RECT_IMAGE, "OBJECT_STROOP:RECT_IMAGE"));
 
 			// ItemP is the LEFT item
-			t.choiceStimuli.add(new Stimulus(rs.getString("ItemP"), 1, Colors.OBJECT_STROOP, Shapes.RECT_IMAGE, "OBJECT_STROOP:RECT_IMAGE"));
+//			t.choiceStimuli.add(new Stimulus(rs.getString("ItemP"), 1, Colors.OBJECT_STROOP,
+//					Shapes.RECT_IMAGE, "OBJECT_STROOP:RECT_IMAGE"));
 
-			t.sampleStimuli.add(new Stimulus(rs.getString("Item1"), 0, Colors.OBJECT_STROOP, Shapes.RECT_IMAGE, "OBJECT_STROOP:RECT_IMAGE"));
-			
+//			t.sampleStimuli.add(new Stimulus(rs.getString("Item1"), 0, Colors.OBJECT_STROOP,
+//					Shapes.RECT_IMAGE, "OBJECT_STROOP:RECT_IMAGE"));
+
 			stroops.trials.add(t);
 		}
 
@@ -169,24 +171,28 @@ public class StroopSession extends Session {
 	}
 
 	@Override
-	public Session fromXML(File xmlFile) throws FileNotFoundException,
-			SAXException, IOException, ParserConfigurationException {
+	public Session fromXML(File xmlFile) throws FileNotFoundException, SAXException, IOException,
+			ParserConfigurationException
+	{
 		return new StroopSession(xmlFile);
 	}
 
-	public StroopSession(File f) throws FileNotFoundException,
-			ParserConfigurationException, SAXException, IOException {
+	public StroopSession(File f) throws FileNotFoundException, ParserConfigurationException,
+			SAXException, IOException
+	{
 		this(new FileInputStream(f));
 	}
 
-	public StroopSession(InputStream is) throws ParserConfigurationException,
-			SAXException, IOException {
+	public StroopSession(InputStream is) throws ParserConfigurationException, SAXException,
+			IOException
+	{
 		super(is);
 	}
 
 	@Override
-	public Session fromStream(InputStream stream) throws FileNotFoundException,
-			SAXException, IOException, ParserConfigurationException {
+	public Session fromStream(InputStream stream) throws FileNotFoundException, SAXException,
+			IOException, ParserConfigurationException
+	{
 		return new StroopSession(stream);
 	}
 

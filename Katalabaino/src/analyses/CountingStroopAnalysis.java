@@ -3,20 +3,15 @@ package analyses;
 import java.io.File;
 import java.util.Vector;
 
-import mappers.AccuracyMap;
-import mappers.AverageRTMap;
-import mappers.CountMap;
-import mappers.SessionInfoMap;
+import mappers.PercentCorrectMap;
+import mappers.SessionInformationMap;
 import splitters.TrialTypeSplitter;
 import core.Analysis;
-import core.FileTypeConverter;
-import core.KMLFilter;
+import core.ComparisonRule;
 import core.Session;
 import core.SessionFactory;
-import filters.ComparisonRule;
-import filters.CorrectTrialsOnlyFilter;
-import filters.ReactionTimeFilter;
-import filters.SessionIDFilter;
+import filters.ResponseTimeFilter;
+import filters.SessionNumberFilter;
 
 public class CountingStroopAnalysis
 {
@@ -45,16 +40,16 @@ public class CountingStroopAnalysis
 
 		Analysis analysis = new Analysis(sessions);
 
-		analysis.addMap(new SessionInfoMap());
-		analysis.addMap(new AccuracyMap());
+		analysis.addMap(new SessionInformationMap());
+		analysis.addMap(new PercentCorrectMap());
 		// analysis.addMap(new CountMap());
 		// analysis.addSplitter(new ConfigurationSplitter("n"));
-		analysis.addFilter(new ReactionTimeFilter(ReactionTimeFilter.FOUR_SIGMA));
+		analysis.addFilter(new ResponseTimeFilter(ResponseTimeFilter.FOUR_SIGMA));
 
-		analysis.addFilter(new SessionIDFilter(new ComparisonRule(ComparisonRule.EQUAL_TO, 4)));
+		analysis.addFilter(new SessionNumberFilter(new ComparisonRule(ComparisonRule.EQUAL_TO, 4)));
 
-//		analysis.addFilter(new CorrectTrialsOnlyFilter());
-		
+		// analysis.addFilter(new CorrectTrialsOnlyFilter());
+
 		analysis.addSplitter(new TrialTypeSplitter());
 		analysis.analyze();
 	}

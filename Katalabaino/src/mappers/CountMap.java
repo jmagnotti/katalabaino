@@ -2,6 +2,7 @@ package mappers;
 
 import java.util.Vector;
 
+import core.Mapper;
 import core.Session;
 import core.Trial;
 

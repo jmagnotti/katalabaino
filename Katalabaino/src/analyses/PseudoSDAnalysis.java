@@ -3,8 +3,8 @@ package analyses;
 import java.io.File;
 import java.util.Vector;
 
-import mappers.AccuracyMap;
-import mappers.SessionInfoMap;
+import mappers.PercentCorrectMap;
+import mappers.SessionInformationMap;
 import sessions.PseudoSDSession;
 import splitters.ItemSplitter;
 import core.Analysis;
@@ -68,10 +68,10 @@ public class PseudoSDAnalysis {
 		// includedImages.add("t264.tga");
 		// items learned in 64-item set
 
-		analysis.addMap(new SessionInfoMap());
+		analysis.addMap(new SessionInformationMap());
 		// analysis.addMap(new AverageRTMap());
 		// analysis.addMap(new CPInfoMap());
-		analysis.addMap(new AccuracyMap());
+		analysis.addMap(new PercentCorrectMap());
 		analysis.addSplitter(new ItemSplitter(includedImages));
 		// analysis.addSplitter(new TrialTypeSplitter());
 //		analysis.addSplitter(new PseudoTrueSplitter());

@@ -3,26 +3,14 @@ package analyses;
 import java.io.File;
 import java.util.Vector;
 
-import mappers.AccuracyMap;
-import mappers.AverageFR_RTMap;
-import mappers.AverageRTMap;
-import mappers.CountMap;
-import mappers.SamplePecksAverageMap;
-import mappers.SessionInfoMap;
-import sessions.N_ItemMTSSession;
+import mappers.PercentCorrectMap;
+import mappers.SessionInformationMap;
 import sessions.OFSSession;
 import splitters.BaselineTransferSplitter;
-import splitters.CorrectPositionSplitter;
-import splitters.ItemSplitter;
-import testing.ChoiceStimuliPositionAnalysis;
-import testing.MultiSessionHDAnalysis;
 import core.Analysis;
 import core.FileTypeConverter;
 import core.Session;
 import core.SessionFactory;
-import filters.ChoiceSetSizeFilter;
-import filters.ComparisonRule;
-import filters.SessionIDFilter;
 
 public class OFSAnalysis
 	{
@@ -434,8 +422,8 @@ public class OFSAnalysis
 	
 	
 			
-			analysis.addMap(new SessionInfoMap());
-			analysis.addMap(new AccuracyMap());
+			analysis.addMap(new SessionInformationMap());
+			analysis.addMap(new PercentCorrectMap());
 			analysis.addSplitter(new BaselineTransferSplitter());
 //			analysis.addSplitter(new ItemSplitter(includedImages));
 			// analysis.addMap(new AverageRTMap());

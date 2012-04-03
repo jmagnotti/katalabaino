@@ -5,15 +5,21 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 public class FileTypeConverter
 {
 	private static final int	BUFFER	= 2048;
 
-	public static Vector<File> ConvertToKML(Vector<? extends Session> sessions) throws Exception
+	public static Vector<File> ConvertToKML(Vector<? extends Session> sessions) throws IOException
 	{
 		System.out.println("Building " + sessions.size() + " files...");
 
@@ -33,12 +39,13 @@ public class FileTypeConverter
 		return kmlFiles;
 	}
 
-	public static File ZipToDBO(String name, Vector<File> files) throws Exception
+	public static File ZipToDBO(String name, Vector<File> files) throws IOException
 	{
 		return ZipToDBO(name, files, true);
 	}
 
-	public static File ZipToDBO(String name, Vector<File> files, boolean cleanUp) throws Exception
+	public static File ZipToDBO(String name, Vector<File> files, boolean cleanUp)
+			throws IOException
 	{
 
 		if (!name.endsWith("dbo")) name = name + ".dbo";
@@ -75,8 +82,8 @@ public class FileTypeConverter
 		return zipFile;
 	}
 
-	public static void CreateZipFileFromDirectory(String workDir, String bird, Session prototype)
-			throws Exception
+	public static File CreateZipFileFromDirectory(String workDir, String fileName, Session prototype)
+			throws IOException, SQLException, SAXException, ParserConfigurationException
 	{
 		File files[] = new File(workDir).listFiles(new MDBTRFilter());
 
@@ -84,7 +91,8 @@ public class FileTypeConverter
 
 		Vector<Session> sessions = SessionFactory.BuildSessions(prototype, files);
 
-		FileTypeConverter.ZipToDBO(workDir + bird, FileTypeConverter.ConvertToKML(sessions));
+		return FileTypeConverter.ZipToDBO(workDir + fileName,
+				FileTypeConverter.ConvertToKML(sessions));
 	}
 
 }

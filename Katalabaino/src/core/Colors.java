@@ -30,11 +30,14 @@ public class Colors
 	public static final int			KSCOPE			= 15;
 	public static final int			TRAVEL_SLIDE	= 16;
 	public static final int			COUNTING_STROOP	= 17;
+	public static final int			SNODGRASS		= 18;
+	public static final int			KANJI			= 19;
 
-	public static final int 		OBJECT_STROOP 	= 18;
+	public static final int			OBJECT_STROOP	= 20;
 
 	public static final int			COLORS[]		= { AQUA, BLUE, GRAY, GREEN, LIME, NAVY,
-			ORANGE, PINK, RED, WHITE, YELLOW, YELLOWGREEN, PURPLE, BROWN, CLIP_ART, KSCOPE, OBJECT_STROOP };
+			ORANGE, PINK, RED, WHITE, YELLOW, YELLOWGREEN, PURPLE, BROWN, CLIP_ART, KSCOPE,
+			TRAVEL_SLIDE, COUNTING_STROOP, SNODGRASS, KANJI, OBJECT_STROOP };
 
 	public HashMap<Integer, String>	colorIDToLabel;
 	public HashMap<String, Integer>	abbrToID;
@@ -45,7 +48,7 @@ public class Colors
 		abbrToID = new HashMap<String, Integer>();
 		abbrToID.put("mag", MAGENTA);
 		abbrToID.put("pin", PINK);
-		
+
 		abbrToID.put("whi", WHITE);
 		abbrToID.put("pur", PURPLE);
 		abbrToID.put("ora", ORANGE);
@@ -91,6 +94,10 @@ public class Colors
 		colorIDToLabel.put(CLIP_ART, "ClipArt");
 
 		colorIDToLabel.put(KSCOPE, "Kaleidoscope");
+		colorIDToLabel.put(KANJI, "Kanji");
+		colorIDToLabel.put(SNODGRASS, "Snodgrass");
+
+		colorIDToLabel.put(OBJECT_STROOP, "Object Stroop");
 	}
 
 	public static Colors GetInstance()

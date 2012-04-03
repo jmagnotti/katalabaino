@@ -2,14 +2,15 @@ package mappers;
 
 import java.util.Vector;
 
+import core.Mapper;
 import core.Session;
 import core.Trial;
 
-public class ObservingResponseInfoMap extends Mapper
+public class SampleResponseInformationMap extends Mapper
 {
 	private int	fr;
 
-	public ObservingResponseInfoMap()
+	public SampleResponseInformationMap()
 	{
 		super("FR");
 	}

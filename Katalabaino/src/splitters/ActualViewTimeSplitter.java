@@ -1,15 +1,17 @@
 package splitters;
 
+import core.MultiClassRule;
+import core.Splitter;
 import core.Trial;
 
 /**
  * Splits the data based on the actualViewingTime attribute of {@link Trial}
  */
-class ViewTimeRule extends MultiClassRule
+class ActualViewTimeRule extends MultiClassRule
 {
 	private int	start, binSize, cutoff;
 
-	public ViewTimeRule(int start, int binSize, int cutoff)
+	public ActualViewTimeRule(int start, int binSize, int cutoff)
 	{
 		this.start = start;
 		this.binSize = binSize;
@@ -35,20 +37,20 @@ class ViewTimeRule extends MultiClassRule
 }
 
 /**
- * Uses the {@link ViewTimeRule} to generate class memberships based on actualViewingTime. Seeks to
- * provide sensible defaults;
+ * Uses the {@link ActualViewTimeRule} to generate class memberships based on actualViewingTime.
+ * Seeks to provide sensible defaults;
  */
-public class ViewTimeSplitter extends Splitter
+public class ActualViewTimeSplitter extends Splitter
 {
 
-	public ViewTimeSplitter()
+	public ActualViewTimeSplitter()
 	{
-		super(new ViewTimeRule(1000, 1000, 9000));
+		super(new ActualViewTimeRule(1000, 1000, 9000));
 	}
 
-	public ViewTimeSplitter(int start, int binSize, int cutoff)
+	public ActualViewTimeSplitter(int start, int binSize, int cutoff)
 	{
-		super(new ViewTimeRule(start, binSize, cutoff));
+		super(new ActualViewTimeRule(start, binSize, cutoff));
 	}
 
 }

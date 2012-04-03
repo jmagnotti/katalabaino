@@ -1,5 +1,7 @@
 package splitters;
 
+import core.MultiClassRule;
+import core.Splitter;
 import core.Trial;
 
 class ItemRule extends MultiClassRule

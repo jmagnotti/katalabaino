@@ -2,38 +2,44 @@ package mappers;
 
 import java.util.Vector;
 
-import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
-
+import core.Mapper;
 import core.Session;
 import core.Trial;
 
-public class MedianRTMap extends Mapper
+public class MaxSampleSizeMap extends Mapper
 {
-	private DescriptiveStatistics	stats;
 
-	public MedianRTMap()
+	int	sampleSize;
+
+	public MaxSampleSizeMap()
 	{
-		super("medRT");
+		super("maxSS");
 	}
 
 	@Override
 	public void nextSession(Session session)
 	{
-		stats = new DescriptiveStatistics();
+		sampleSize = -1;
 	}
 
 	@Override
 	public void nextTrial(Trial trial)
 	{
-		stats.addValue(trial.responseTime);
+		if (trial.sampleSetSize > sampleSize) sampleSize = trial.sampleSetSize;
+
+	}
+	
+	@Override
+	public boolean allowSplits()
+	{
+		return false;
 	}
 
 	@Override
 	public Vector<String> cleanUp()
 	{
 		resultString = new Vector<String>();
-
-		resultString.add("" + stats.getPercentile(50));
+		resultString.add("" + sampleSize);
 
 		return resultString;
 	}

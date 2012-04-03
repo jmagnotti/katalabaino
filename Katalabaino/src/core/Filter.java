@@ -1,7 +1,5 @@
-package filters;
+package core;
 
-import core.Session;
-import core.Trial;
 
 public abstract class Filter
 {

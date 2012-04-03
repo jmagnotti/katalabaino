@@ -3,18 +3,17 @@ package analyses;
 import java.io.File;
 import java.util.Vector;
 
-import mappers.AccuracyMap;
-import mappers.AverageRTMap;
-import mappers.SessionInfoMap;
+import mappers.MeanResponseTimeMap;
+import mappers.SessionInformationMap;
 import sessions.StroopSession;
 import splitters.ConfigurationSplitter;
 import core.Analysis;
+import core.ComparisonRule;
 import core.FileTypeConverter;
 import core.Session;
 import core.SessionFactory;
-import filters.ComparisonRule;
 import filters.CorrectTrialsOnlyFilter;
-import filters.ReactionTimeFilter;
+import filters.ResponseTimeFilter;
 
 public class StroopAnalysis {
 
@@ -31,12 +30,12 @@ public static void main(String[] args) throws Exception
 	Analysis analysis = new Analysis(sessions);
 
 
-	analysis.addMap(new SessionInfoMap());
-	analysis.addFilter(new ReactionTimeFilter(
+	analysis.addMap(new SessionInformationMap());
+	analysis.addFilter(new ResponseTimeFilter(
 			new ComparisonRule(ComparisonRule.LT_OR_EQ, 301)));
 	analysis.addFilter(new CorrectTrialsOnlyFilter());
 	analysis.addSplitter(new ConfigurationSplitter());
-	analysis.addMap(new AverageRTMap());
+	analysis.addMap(new MeanResponseTimeMap());
 	analysis.analyze();
 }
 }

@@ -3,8 +3,8 @@ package analyses;
 import java.io.File;
 import java.util.Vector;
 
-import mappers.AccuracyMap;
-import mappers.SessionInfoMap;
+import mappers.PercentCorrectMap;
+import mappers.SessionInformationMap;
 import sessions.HumanListMemorySession;
 import splitters.CorrectPositionSplitter;
 import splitters.ListMemoryInteferenceSplitter;
@@ -32,8 +32,8 @@ public class ListMemoryAnalysis
 
 		Analysis analysis = new Analysis(sessions);
 
-		analysis.addMap(new SessionInfoMap());
-		analysis.addMap(new AccuracyMap());
+		analysis.addMap(new SessionInformationMap());
+		analysis.addMap(new PercentCorrectMap());
 
 		analysis.addFilter(new SessionNameFilter("_B"));
 		analysis.addSplitter(new ListMemoryInteferenceSplitter(ListMemoryInteferenceSplitter.SET_B));

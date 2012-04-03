@@ -146,7 +146,7 @@ public class FC_CDSession extends Session implements Comparable<Session>
 			else
 				t.actualViewTime = t.viewTime;
 
-			for (int i = 1; i <= t.sampleSetSize; i++) {
+			for (int i = 1; i <= t.sampleSetSize; i++) {		
 				t.sampleStimuli.add(new Stimulus(rs.getString("Item" + i), rs.getInt("POS" + i)));
 			}
 

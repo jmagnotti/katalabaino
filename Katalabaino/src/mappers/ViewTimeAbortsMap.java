@@ -3,6 +3,7 @@ package mappers;
 import java.util.Vector;
 
 import core.DescriptiveStatistics;
+import core.Mapper;
 import core.SampleResponse;
 import core.Session;
 import core.Trial;

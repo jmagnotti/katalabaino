@@ -3,6 +3,7 @@ package splitters;
 import java.util.HashMap;
 import java.util.Vector;
 
+import core.Splitter;
 import core.Trial;
 
 abstract class InterferenceRules

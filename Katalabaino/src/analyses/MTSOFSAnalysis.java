@@ -3,18 +3,18 @@ package analyses;
 import java.io.File;
 import java.util.Vector;
 
-import mappers.AccuracyMap;
-import mappers.CPInfoMap;
+import mappers.PercentCorrectMap;
+import mappers.CorrectionProcedureStatusMap;
 import mappers.CountMap;
-import mappers.SessionInfoMap;
+import mappers.SessionInformationMap;
 import sessions.MTSOFSSession;
 import splitters.BlockSplitter;
 import core.Analysis;
 import core.FileTypeConverter;
+import core.Filter;
 import core.Session;
 import core.SessionFactory;
-import filters.CPFilter;
-import filters.Filter;
+import filters.CorrectionProcedureFilter;
 
 public class MTSOFSAnalysis
 	{
@@ -32,11 +32,11 @@ public class MTSOFSAnalysis
 			
 			Analysis.SPACE_DELIMITER = "\t";
 			
-			analysis.addMap(new SessionInfoMap());
-			analysis.addMap(new AccuracyMap());
+			analysis.addMap(new SessionInformationMap());
+			analysis.addMap(new PercentCorrectMap());
 			analysis.addSplitter(new BlockSplitter(8, 96));
 //			analysis.addMap(new CPInfoMap());
-			analysis.addFilter(new CPFilter(0));
+			analysis.addFilter(new CorrectionProcedureFilter(0));
 			
 //			analysis.addSplitter(new ItemSplitter(includedImages));
 			// analysis.addMap(new AverageRTMap());

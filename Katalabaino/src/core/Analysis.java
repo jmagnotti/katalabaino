@@ -4,9 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Vector;
 
-import mappers.Mapper;
-import splitters.Splitter;
-import filters.Filter;
 import filters.PassThroughFilter;
 
 public class Analysis

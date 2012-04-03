@@ -2,14 +2,18 @@ package splitters;
 
 import java.util.Vector;
 
+import core.MultiClassRule;
+import core.Splitter;
 import core.Stimulus;
 import core.Trial;
 
-class StimulusInclusionRule extends MultiClassRule {
+class StimulusInclusionRule extends MultiClassRule
+{
 
-	private Vector<String> includedImages;
+	private Vector<String>	includedImages;
 
-	public StimulusInclusionRule(Vector<String> img) {
+	public StimulusInclusionRule(Vector<String> img)
+	{
 		this.includedImages = img;
 
 		for (int i = 0; i < includedImages.size(); i++) {
@@ -20,38 +24,38 @@ class StimulusInclusionRule extends MultiClassRule {
 	}
 
 	@Override
-	public String getClassMembership(Trial trial) {
+	public String getClassMembership(Trial trial)
+	{
 
 		String cls = "";
 
 		// what makes a familiar--familiar
-		if (includedImages.contains(trial.sampleStimuli.get(0).file
-				.toLowerCase())) {
+		if (includedImages.contains(trial.sampleStimuli.get(0).file.toLowerCase())) {
 			cls = "f-";
 
 			boolean novel = false;
 			for (Stimulus stim : trial.choiceStimuli)
-				novel = novel
-						|| (!includedImages.contains(stim.file.toLowerCase()));
+				novel = novel || (!includedImages.contains(stim.file.toLowerCase()));
 
 			if (novel) {
 				cls = cls + "n";
 
-			} else {
+			}
+			else {
 				cls = cls + "f";
 			}
-		} else {
+		}
+		else {
 			cls = "n-";
-			char[] sampleStimuli = null;
 
 			boolean novel = true;
 			for (Stimulus stim : trial.choiceStimuli)
-				novel = novel
-						&& (!includedImages.contains(stim.file.toLowerCase()));
+				novel = novel && (!includedImages.contains(stim.file.toLowerCase()));
 
 			if (novel) {
 				cls = cls + "n";
-			} else {
+			}
+			else {
 				cls = cls + "f";
 			}
 		}
@@ -60,8 +64,10 @@ class StimulusInclusionRule extends MultiClassRule {
 	}
 }
 
-public class ItemSplitter extends Splitter {
-	public ItemSplitter(Vector<String> includeImages) {
+public class ItemSplitter extends Splitter
+{
+	public ItemSplitter(Vector<String> includeImages)
+	{
 		super(new StimulusInclusionRule(includeImages));
 	}
 

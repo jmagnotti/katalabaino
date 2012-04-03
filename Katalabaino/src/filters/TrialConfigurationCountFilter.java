@@ -2,16 +2,18 @@ package filters;
 
 import java.util.HashMap;
 
+import core.ComparisonRule;
+import core.Filter;
 import core.Trial;
 
-public class TrialConfigurationFilter extends Filter
+public class TrialConfigurationCountFilter extends Filter
 {
 	private HashMap<String, HashMap<String, Double>>	itemCounts;
 	private ComparisonRule								rule;
 
 	public static final String							REMOVE_EXTENSION	= ".tga";
 
-	public TrialConfigurationFilter(ComparisonRule cr)
+	public TrialConfigurationCountFilter(ComparisonRule cr)
 	{
 		rule = cr;
 		itemCounts = new HashMap<String, HashMap<String, Double>>();

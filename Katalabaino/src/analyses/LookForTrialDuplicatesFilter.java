@@ -1,8 +1,8 @@
 package analyses;
 
+import core.Filter;
 import core.Session;
 import core.Trial;
-import filters.Filter;
 
 public class LookForTrialDuplicatesFilter extends Filter
 {

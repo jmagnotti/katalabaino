@@ -4,8 +4,10 @@ import java.text.DecimalFormat;
 import java.util.Vector;
 
 import calc.MahalanobisHelper;
+import core.ComparisonRule;
+import core.MultiClassRule;
+import core.Splitter;
 import core.Trial;
-import filters.ComparisonRule;
 
 class MahalanobisDistanceRule extends MultiClassRule
 {

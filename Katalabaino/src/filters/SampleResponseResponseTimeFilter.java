@@ -1,9 +1,11 @@
 package filters;
 
+import core.ComparisonRule;
+import core.Filter;
 import core.Session;
 import core.Trial;
 
-public class FR_ReactionTimeFilter extends Filter
+public class SampleResponseResponseTimeFilter extends Filter
 {
 	public static final int	FOUR_SIGMA	= 1;
 
@@ -11,7 +13,7 @@ public class FR_ReactionTimeFilter extends Filter
 
 	private ComparisonRule	rule;
 
-	public FR_ReactionTimeFilter(int specialCase)
+	public SampleResponseResponseTimeFilter(int specialCase)
 	{
 		usingRule = true;
 	}
@@ -45,7 +47,7 @@ public class FR_ReactionTimeFilter extends Filter
 		return true;
 	}
 
-	public FR_ReactionTimeFilter(ComparisonRule comparisonRule)
+	public SampleResponseResponseTimeFilter(ComparisonRule comparisonRule)
 	{
 		usingRule = false;
 		rule = comparisonRule;

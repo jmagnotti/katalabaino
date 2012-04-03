@@ -3,8 +3,8 @@ package analyses;
 import java.io.File;
 import java.util.Vector;
 
-import mappers.AverageRTMap;
-import mappers.SessionInfoMap;
+import mappers.MeanResponseTimeMap;
+import mappers.SessionInformationMap;
 import sessions.HumanSDSession;
 import sessions.PseudoSDSession;
 import splitters.BlockSplitter;
@@ -12,11 +12,11 @@ import splitters.TrialTypeSplitter;
 import testing.ItemPairAccuracyMap;
 import testing.MultiSessionHDAnalysis;
 import core.Analysis;
+import core.ComparisonRule;
 import core.FileTypeConverter;
 import core.Session;
 import core.SessionFactory;
-import filters.ComparisonRule;
-import filters.SessionIDFilter;
+import filters.SessionNumberFilter;
 import filters.TrialFilter;
 
 public class HumanSDAnalysis

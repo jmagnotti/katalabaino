@@ -28,7 +28,7 @@ public abstract class Session implements Comparable<Session>
 	public boolean			isIncorrectCorrectionsEnabled;
 
 	public Vector<Trial>	trials;
-
+	
 	public Session()
 	{
 		trials = new Vector<Trial>();
@@ -276,23 +276,29 @@ public abstract class Session implements Comparable<Session>
 		rs.close();
 		ses.close();
 	}
-
+	
+	
 	@Override
 	public int compareTo(Session o)
 	{
 		int retVal = subject.toLowerCase().compareTo(o.subject.toLowerCase());
 		//
-		 if (retVal == 0) {
-		 if (Double.parseDouble(o.id) == Double.parseDouble(id))
-		 retVal = 0;
-		 else
-		 retVal = Double.parseDouble(id) > Double.parseDouble(o.id) ? 1 : -1;
-		 }
+		if (retVal == 0) {
+			if (Double.parseDouble(o.id) == Double.parseDouble(id))
+				retVal = 0;
+			else
+				retVal = Double.parseDouble(id) > Double.parseDouble(o.id) ? 1 : -1;
+		}
 
 		// quick kludge
-//		if (retVal == 0) retVal = resultsFile.compareTo(o.resultsFile);
+		// if (retVal == 0) retVal = resultsFile.compareTo(o.resultsFile);
 
 		return retVal;
+	}
+
+	public int idAsInt()
+	{
+		return Integer.parseInt(id);
 	}
 
 }

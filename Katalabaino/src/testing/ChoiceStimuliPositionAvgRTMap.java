@@ -2,9 +2,9 @@ package testing;
 
 import java.util.Vector;
 
+import core.Mapper;
 import core.Session;
 import core.Trial;
-import mappers.Mapper;
 
 public class ChoiceStimuliPositionAvgRTMap extends Mapper
 {

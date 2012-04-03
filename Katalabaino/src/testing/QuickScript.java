@@ -1,5 +1,8 @@
 package testing;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class QuickScript
 {
 	public static double[] forcedChoice_ECJ(double n, double c)

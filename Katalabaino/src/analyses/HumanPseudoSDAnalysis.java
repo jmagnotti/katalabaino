@@ -3,25 +3,25 @@ package analyses;
 import java.io.File;
 import java.util.Vector;
 
-import mappers.AccuracyMap;
+import mappers.PercentCorrectMap;
 import mappers.CountMap;
 import sessions.HumanSDSession;
 import sessions.PseudoSDSession;
 import splitters.BaselineTransferSplitter;
 import splitters.BlockSplitter;
-import splitters.MultiClassRule;
 import splitters.PseudoTrueSplitter;
-import splitters.Splitter;
 import splitters.TrialTypeSplitter;
 import testing.ItemPairAccuracyMap;
 import testing.MultiSessionHDAnalysis;
 import core.Analysis;
+import core.ComparisonRule;
 import core.FileTypeConverter;
+import core.MultiClassRule;
 import core.Session;
 import core.SessionFactory;
+import core.Splitter;
 import core.Trial;
-import filters.ComparisonRule;
-import filters.TrialConfigurationFilter;
+import filters.TrialConfigurationCountFilter;
 
 public class HumanPseudoSDAnalysis
 {
@@ -38,7 +38,7 @@ public class HumanPseudoSDAnalysis
 		Vector<Session> sessions = SessionFactory.BuildSessions(new HumanSDSession(), zipFile);
 
 		Analysis analysis = new Analysis(sessions);
-		analysis.addMap(new AccuracyMap());
+		analysis.addMap(new PercentCorrectMap());
 		// analysis.addSplitter(new TrialTypeSplitter());
 		analysis.addSplitter(new BaselineTransferSplitter());
 		// analysis.addSplitter(new BlockSplitter(20, 100));
