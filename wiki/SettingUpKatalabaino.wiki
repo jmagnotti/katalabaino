@@ -14,5 +14,38 @@ Before you can analyze your data, there are several prerequisites. This guide wi
   * Sigmaplot
   * MS Excel
   * SPSS
+
+= Software Installation =
+  # Download Eclipse and extract the zip file to a preferred directory, e.g., C:/Users/John
+  # Run Eclipse by Clicking on the executable
+  # Install subclipse using the help->Install new software... option in Eclipse
+    # Click the "Add..." button and provide a name (subclipse) and repository URL (see above)
+    # Ensure subclipse is selected in the drop-down box
+    # Choose "Select All"
+    # Choose "Next," then "Next" again
+    # Accept the license agreements, then choose "Finish"
+    # Choose "OK" if you receive any informational pop-up dialogs
+    # Choose the "Restart Now" option (restarting Eclipse, not your computer) once your software is installed
+  # Grab the latest code from the repository^2^
+    # In Eclipse, File->Import->SVN->Checkout Projects from SVN
+    # Choose "Next"
+    # Create New Repository Location: <pre> http://katalabaino.googlecode.com/svn/trunk/ </pre>
+    # Choose "Next"
+    # Select Katalabaino, Then "Finish"
+      * Watch all the downloading, maybe grab a coffee if you have a slow connection
+= Running Katalabaino =
+  # From Eclipse, Double-click on the Katalabaino project in the left-hand tree-view
+  # Open the folder called <pre>src</pre> and then <pre>analyses</pre>
+  # Double-click the file <pre>GUIAnalyze</pre>
+  # Choose "Run" from the menu bar, and "Run Last Launched"
+  # Select the session type from the drop-down (e.g., SDSession)
+  # Select Create DBO (Windows Only) or Load DBO
+  # Navigate to the directory with your .mdb/.tr files. (See For Create DBO, select an .mdb or .tr file from a direcec
+
+
+= Obtaining Sample Data =
+  * Send a request to the authors for sample data, or see the relevant wiki for the XML schema to roll your own data.
+
 ----
-  # Although the code is written in Java, the code makes use of the windows-only JET Engine to read in MS Access files. It's unclear if there is an easy way to handle MS Access files in OSX and Linux 
+  # Although the code is written in Java, the code makes use of the windows-only JET Engine to read in MS Access files. It's unclear if there is an easy way to handle MS Access files in OSX and Linux
+  # There is something exhilarating about downloading freshly minted code, although this approach is not without its problem. Once the code reaches a stable point, we should change this to have users download a recent tag, rather than checkout trunk
