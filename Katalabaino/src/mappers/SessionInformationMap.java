@@ -10,7 +10,8 @@ public class SessionInformationMap extends Mapper
 {
 	public SessionInformationMap()
 	{
-		super(" comment\tsubject\tid\tsessionFile\tresultsFile");
+//		super(" comment\tsubject\tid\tsessionFile\tresultsFile");
+		super(" sessionFile");
 	}
 
 	public SessionInformationMap(String... keys)
@@ -34,11 +35,11 @@ public class SessionInformationMap extends Mapper
 	{
 		resultString = new Vector<String>();
 
-		resultString.add(session.comment);
-		resultString.add(session.subject);
-		resultString.add(session.id);
+//		resultString.add(session.comment);
+//		resultString.add(session.subject);
+//		resultString.add(session.id);
 		resultString.add(session.sessionFile);
-		resultString.add(session.resultsFile);
+//		resultString.add(session.resultsFile);
 	}
 
 	@Override
