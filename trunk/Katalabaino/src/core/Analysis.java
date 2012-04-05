@@ -126,7 +126,9 @@ public class Analysis
 		keys.toArray(keyset);
 		Arrays.sort(keyset);
 
-		System.out.print(keyset[0]);
+		System.out.println("\n---\n");
+
+		if (keyset.length > 0) System.out.print(keyset[0]);
 		for (int i = 1; i < keyset.length; i++) {
 			System.out.print(SPACE_DELIMITER + keyset[i]);
 		}

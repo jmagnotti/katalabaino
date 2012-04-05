@@ -20,28 +20,21 @@ import mappers.MeanSampleCompletionResponseTimeMap;
 import mappers.MeanSampleResponseMap;
 import mappers.MedianResponseTimeMap;
 import mappers.PercentCorrectMap;
-import mappers.SampleResponseInformationMap;
 import mappers.SessionInformationMap;
-import mappers.ViewTimeAbortsMap;
 
 import org.xml.sax.SAXException;
 
-import splitters.ActualViewTimeSplitter;
 import splitters.BaselineTransferSplitter;
 import splitters.ChoiceSetSizeSplitter;
 import splitters.ConfigurationSplitter;
 import splitters.CorrectIncorrectSplitter;
 import splitters.CorrectPositionSplitter;
 import splitters.ItemConfigurationSplitter;
-import splitters.PigeonChangeDetectionProbeDelaySplitter;
-import splitters.PigeonChangeDetectionSampleResponseSplitter;
 import splitters.ProbeDelaySplitter;
 import splitters.PseudoTrueSplitter;
 import splitters.SampleColorSplitter;
-import splitters.SampleResponseSplitter;
 import splitters.SampleSetSizeSplitter;
 import splitters.TrialTypeSplitter;
-import splitters.ViewTimeAbortSplitter;
 import filters.CorrectTrialsOnlyFilter;
 import filters.CorrectionProcedureFilter;
 import filters.ResponseTimeFilter;
@@ -116,13 +109,7 @@ public class AnalysisBuilder implements Runnable
 		analysis.analyze();
 	}
 
-	// ----------- BEGIN MAPPERS --------------//
-	// public void REFL_map_change_item_mahalanobis()
-	// {
-	// analysis.addMap(new ChangeItemMahalanobisMap());
-	// }
-
-	public void REFL_map_correction_procedure_status()
+	public void REFL_map_cp_status()
 	{
 		analysis.addMap(new CorrectionProcedureStatusMap());
 	}
@@ -137,25 +124,10 @@ public class AnalysisBuilder implements Runnable
 		analysis.addMap(new CountMap());
 	}
 
-	// public void REFL_map_hits_misses_false_alarms_correct_rejections()
-	// {
-	// analysis.addMap(new HitsMissesFalseAlarmsCorrectRejectionsMap());
-	// }
-
 	public void REFL_map_incorrect_corrections()
 	{
 		analysis.addMap(new IncorrectCorrectionsMap());
 	}
-
-	// public void REFL_map_max_probe_delay()
-	// {
-	// analysis.addMap(new MaxProbeDelayMap());
-	// }
-	//
-	// public void REFL_map_max_sample_size()
-	// {
-	// analysis.addMap(new MaxSampleSizeMap());
-	// }
 
 	public void REFL_map_mean_actual_view_time()
 	{
@@ -167,12 +139,12 @@ public class AnalysisBuilder implements Runnable
 		analysis.addMap(new MeanResponseTimeMap());
 	}
 
-	public void REFL_map_mean_sample_completion_response_time()
+	public void REFL_map_mean_fr_response_time()
 	{
 		analysis.addMap(new MeanSampleCompletionResponseTimeMap());
 	}
 
-	public void REFL_map_mean_sample_response()
+	public void REFL_map_mean_fr()
 	{
 		analysis.addMap(new MeanSampleResponseMap());
 	}
@@ -187,19 +159,9 @@ public class AnalysisBuilder implements Runnable
 		analysis.addMap(new PercentCorrectMap());
 	}
 
-	public void REFL_map_sample_response_information()
-	{
-		analysis.addMap(new SampleResponseInformationMap());
-	}
-
 	public void REFL_map_session_information()
 	{
 		analysis.addMap(new SessionInformationMap());
-	}
-
-	public void REFL_map_view_time_aborts()
-	{
-		analysis.addMap(new ViewTimeAbortsMap());
 	}
 
 	// ----------- END MAPPERS ---------------//
@@ -208,10 +170,6 @@ public class AnalysisBuilder implements Runnable
 	// ----------- END FILTERS ---------------//
 
 	// ----------- BEGIN SPLITTERS ---------------//
-	public void REFL_split_actual_view_time()
-	{
-		analysis.addSplitter(new ActualViewTimeSplitter());
-	}
 
 	public void REFL_split_baseline_transfer()
 	{
@@ -248,16 +206,6 @@ public class AnalysisBuilder implements Runnable
 		analysis.addSplitter(new ItemConfigurationSplitter());
 	}
 
-	public void REFL_split_pigeon_change_detection_probe_delay()
-	{
-		analysis.addSplitter(new PigeonChangeDetectionProbeDelaySplitter());
-	}
-
-	public void REFL_split_pigeon_change_detection_sample_response()
-	{
-		analysis.addSplitter(new PigeonChangeDetectionSampleResponseSplitter());
-	}
-
 	public void REFL_split_probe_delay()
 	{
 		analysis.addSplitter(new ProbeDelaySplitter());
@@ -273,11 +221,6 @@ public class AnalysisBuilder implements Runnable
 		analysis.addSplitter(new SampleColorSplitter());
 	}
 
-	public void REFL_split_sample_response()
-	{
-		analysis.addSplitter(new SampleResponseSplitter());
-	}
-
 	public void REFL_split_sample_set_size()
 	{
 		analysis.addSplitter(new SampleSetSizeSplitter());
@@ -285,17 +228,13 @@ public class AnalysisBuilder implements Runnable
 
 	public void REFL_split_trial_type()
 	{
-		analysis.addSplitter(new TrialTypeSplitter());
-	}
-
-	public void REFL_split_view_time_abort()
-	{
-		analysis.addSplitter(new ViewTimeAbortSplitter());
+		analysis.addSplitter(new TrialTypeSplitter(true));
 	}
 
 	// ----------- END SPLITTERS ---------------//
 
 	// ----------- BEING FILTERS ---------------//
+
 	public void REFL_filter_response_time_10s()
 	{
 		analysis.addFilter(new ResponseTimeFilter(new ComparisonRule(ComparisonRule.LT_OR_EQ,
@@ -307,23 +246,23 @@ public class AnalysisBuilder implements Runnable
 		analysis.addFilter(new CorrectTrialsOnlyFilter());
 	}
 
-	public void REFL_filter_sample_response_response_time_4sd()
+	public void REFL_filter_fr_response_time_4sd()
 	{
 		analysis.addFilter(new SampleResponseResponseTimeFilter(
 				SampleResponseResponseTimeFilter.FOUR_SIGMA));
 	}
 
-	public void REFL_filter_correction_procedure_on()
+	public void REFL_filter_cp_on()
 	{
 		analysis.addFilter(new CorrectionProcedureFilter(CorrectionProcedureFilter.CP_ON));
 	}
 
-	public void REFL_filter_correction_procedure_off()
+	public void REFL_filter_cp_off()
 	{
 		analysis.addFilter(new CorrectionProcedureFilter(CorrectionProcedureFilter.CP_OFF));
 	}
 
-	// ----------- END CUSTOM ANALYSES---------------//
+	// ----------- END Filters---------------//
 
 	public void loadData(File dboFile, Session session) throws IOException, SQLException,
 			SAXException, ParserConfigurationException
