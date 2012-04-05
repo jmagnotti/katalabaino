@@ -1,4 +1,4 @@
-#summary From MS Access to DBO and beyond
+#summary Software prerequisites and installation details
 
 = Introduction =
 
