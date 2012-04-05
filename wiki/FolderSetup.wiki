@@ -13,11 +13,17 @@ Katalabaino assumes that you have created your directory with folders to store i
       * Bird 2
     * Sessions
 
-Any given analysis class in Katalabaino should read a few lines like this:
+Any given analysis class in Katalabaino will likely use the structure to build/load DBO files:
 {{{
 String dir = "C:/information/mtsofs/6item/";
 String bird = "leo";
 String workDir = dir + bird + "/";
+
+File zipFile = new File(workDir + bird + ".dbo");
+
+//Create a vector of Session objects from the dbo
+Vector<Session> sessions = SessionFactory.BuildSessions(new MTSOFSSession(), zipFile);
+
 }}}
 
 Here, "information" is the folder that holds all of my experiments.  "Mtsofs" is the name of the experiment.  "6item" is a subset of this experiment, and I have selected to look at our subject Leo's data.  It may be important to point out that "Leo" is its own folder as well.  This directory looks like:
