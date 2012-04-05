@@ -35,8 +35,8 @@ Within the 6item folder, I will need to have an additional folder named "session
 
 == Bonus ==
 The Katalabaino GUI tries to open file dialog windows according to the following preferences (first available will be chosen)
-# Y:/warehouse/
-# C:/warehouse/
-# C:/information/
-# C:/
-# D:/
+  # Y:/warehouse/
+  # C:/warehouse/
+  # C:/information/
+  # C:/
+  # D:/
