@@ -7,11 +7,11 @@ Katalabaino relies on the user to have a specific folder directory in order to p
 = Details =
 
 Katalabaino assumes that you have created your directory with folders to store individual subjects' data.  It also assumes that you have a folder just for sessions.  Both the session and results folders should be contained within a parent experiment folder.  Your folder structure should look something like this:
-  * Experiment Name
-    * Phase
-      * Bird 1
-      * Bird 2
-    * Sessions
+  * experiment_name
+    * phase
+      * bird_1
+      * bird_2
+    * sessions
 
 Any given analysis class in Katalabaino will likely use the structure to build/load DBO files:
 {{{
@@ -31,4 +31,12 @@ Here, "information" is the folder that holds all of my experiments.  "Mtsofs" is
   *  C:/information/mtsofs/6item/mike
   *  C:/information/mtsofs/6item/sessions
 
-Within the 6item folder, I will need to have an additional folder named "Sessions".  This folder will hold all of the Access files that served as sessions within the experiment. 
+Within the 6item folder, I will need to have an additional folder named "sessions".  This folder will hold all of the Access files that served as sessions within the experiment.
+
+== Bonus ==
+The Katalabaino GUI tries to open file dialog windows according to the following preferences (first available will be chosen)
+# Y:/warehouse/
+# C:/warehouse/
+# C:/information/
+# C:/
+# D:/
