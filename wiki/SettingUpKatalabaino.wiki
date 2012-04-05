@@ -4,9 +4,15 @@
 
 Before you can analyze your data, there are several prerequisites. This guide will describe the prerequisites in sufficient detail and finish with a quick analysis example.
 
-= Details =
+== Software needed to create and analyze DBO files ==
+  * Windows XP or better
+  * Microsoft Office XP or better^1^
+  * [http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/indigo/SR2/eclipse-java-indigo-SR2-win32.zip Eclipse 32-bit] or 64-bit
+  * [http://subclipse.tigris.org/ Subclipse], which may be installed through Eclipse <pre>http://subclipse.tigris.org/update_1.8.x</pre>
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+== Optional Software ==
+  * Sigmaplot
+  * MS Excel
+  * SPSS
+----
+  # Although the code is written in Java, the code makes use of the windows-only JET Engine to read in MS Access files. It's unclear if there is an easy way to handle MS Access files in OSX and Linux 
