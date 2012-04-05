@@ -40,8 +40,12 @@ Before you can analyze your data, there are several prerequisites. This guide wi
   # Choose "Run" from the menu bar, and "Run Last Launched"
   # Select the session type from the drop-down (e.g., SDSession)
   # Select Create DBO (Windows Only) or Load DBO
-  # Navigate to the directory with your .mdb/.tr files. (See For Create DBO, select an .mdb or .tr file from a direcec
-
+  # Navigate to the directory with your .mdb/.tr files. (See FolderSetup page for directory structure information)
+    * For Create DBO, select an .mdb or .tr file from a subject directory
+      # A DBO will be created with subject_name_timestamp.dbo
+    * For Load DBO, select the DBO you want to load
+  # Choose output as well as grouping and filtering, and then choose Run
+  # Data will fill into the Eclipse console as tab-separated columns. These columns will copy/paste into most major spreadsheet programs.
 
 = Obtaining Sample Data =
   * Send a request to the authors for sample data, or see the relevant wiki for the XML schema to roll your own data.
