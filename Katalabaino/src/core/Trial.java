@@ -40,4 +40,15 @@ public class Trial
 		return (incorrectCorrections == 0) && response.equalsIgnoreCase(correctResponse);
 	}
 
+	public double getMaxSampleResponseTime()
+	{
+		double max = -1;
+
+		for (int i = 0; i < sampleResponses.size(); i++) {
+			if (max < sampleResponses.get(i).responseTime)
+				max = sampleResponses.get(i).responseTime;
+		}
+		return max;
+	}
+
 }
