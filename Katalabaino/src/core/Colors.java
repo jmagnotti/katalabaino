@@ -34,10 +34,15 @@ public class Colors
 	public static final int			KANJI			= 19;
 
 	public static final int			OBJECT_STROOP	= 20;
+	public static final int			SHADED_CUBE		= 21;
+	public static final int			POLYGON			= 22;
+	public static final int			SNAKE			= 23;
+	public static final int			SPIDER			= 24;
 
 	public static final int			COLORS[]		= { AQUA, BLUE, GRAY, GREEN, LIME, NAVY,
 			ORANGE, PINK, RED, WHITE, YELLOW, YELLOWGREEN, PURPLE, BROWN, CLIP_ART, KSCOPE,
-			TRAVEL_SLIDE, COUNTING_STROOP, SNODGRASS, KANJI, OBJECT_STROOP };
+			TRAVEL_SLIDE, COUNTING_STROOP, SNODGRASS, KANJI, OBJECT_STROOP, SHADED_CUBE, POLYGON,
+			SNAKE, SPIDER							};
 
 	public HashMap<Integer, String>	colorIDToLabel;
 	public HashMap<String, Integer>	abbrToID;
@@ -75,6 +80,10 @@ public class Colors
 		// polygon stimuli are all white
 		abbrToID.put("pol", WHITE);
 
+		abbrToID.put("lin", GRAY);
+
+		abbrToID.put("cub", SHADED_CUBE);
+
 		colorIDToLabel = new HashMap<Integer, String>();
 		colorIDToLabel.put(AQUA, "Aqua");
 		colorIDToLabel.put(BLUE, "Blue");
@@ -98,6 +107,13 @@ public class Colors
 		colorIDToLabel.put(SNODGRASS, "Snodgrass");
 
 		colorIDToLabel.put(OBJECT_STROOP, "Object Stroop");
+
+		colorIDToLabel.put(SHADED_CUBE, "Shaded Cube");
+
+		colorIDToLabel.put(POLYGON, "Polygon");
+
+		colorIDToLabel.put(SPIDER, "Spider");
+		colorIDToLabel.put(SNAKE, "Snake");
 	}
 
 	public static Colors GetInstance()
@@ -112,6 +128,8 @@ public class Colors
 		// we have to special case some of the strings
 		if (string.equalsIgnoreCase("yellowGreen.jpg")) return YELLOWGREEN;
 		if (string.equalsIgnoreCase("green.jpg")) return GREEN;
+
+//		System.out.println(string);
 
 		return abbrToID.get(string.substring(0, 3).toLowerCase());
 	}

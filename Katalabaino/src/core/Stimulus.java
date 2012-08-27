@@ -21,6 +21,38 @@ public class Stimulus
 			colorID = Colors.KSCOPE;
 			shapeID = Shapes.KSCOPE;
 		}
+		else if (fileName.startsWith("line")) {
+			colorID = Colors.GRAY;
+			shapeID = Shapes.LINE_SEGMENT;
+		}
+		else if (fileName.startsWith("cube")) {
+			colorID = Colors.SHADED_CUBE;
+			shapeID = Shapes.SHADED_CUBE;
+		}
+		else if (fileName.startsWith("col")) {
+			switch (Integer.parseInt(fileName.substring(3, 4))) {
+				case 1:
+					colorID = Colors.RED;
+					break;
+				case 2:
+					colorID = Colors.LIME;
+					break;
+				case 3:
+					colorID = Colors.BLUE;
+					break;
+				case 4:
+					colorID = Colors.YELLOW;
+					break;
+				case 5:
+					colorID = Colors.AQUA;
+					break;
+				case 6:
+					colorID = Colors.MAGENTA;
+					break;
+			}
+
+			shapeID = Shapes.RECTANGLE;
+		}
 		else {
 			colorID = Colors.GetInstance().fileToColorID(fileName);
 
