@@ -36,7 +36,7 @@ public class SessionFactory
 				for (Session sess : temp)
 					sessions.add(sess);
 			}
-			else {
+			else if (!f.isDirectory()) {
 				sessions.add(getSessionFromFile(f, prototype));
 			}
 		}
@@ -73,52 +73,63 @@ public class SessionFactory
 		else if (file.getName().endsWith(".tr"))
 			return getSessionFromMDB(session, convertTRtoMDB(file.getAbsolutePath()));
 
-		throw new FileNotFoundException("Invalid File Format");
+		throw new FileNotFoundException("Invalid File Format: " + file.getAbsolutePath());
 	}
 
 	private static Session getSessionFromMDB(Session session, String filePath) throws SQLException
 	{
 		Connection sessionDB = null, resultsDB = null;
-		resultsDB = DriverManager.getConnection(DB_OPEN_STR + filePath + DB_CLOSE_STR);
+		String rfn = "", sfn = "";
 
-		String rfn = filePath.substring(filePath.lastIndexOf("\\") + 1);
+		try {
 
-		// System.out.println(rfn);
+			resultsDB = DriverManager.getConnection(DB_OPEN_STR + filePath + DB_CLOSE_STR);
 
-		// we need to extract the session DB information
-		Statement s = resultsDB.createStatement();
-		s.execute("Select * from SessionResults");
-		ResultSet rs = s.getResultSet();
-		String sfn = "";
-		while (rs.next()) {
-			sfn = new File(rs.getString("SessionFile")).getName();
+			rfn = filePath.substring(filePath.lastIndexOf("\\") + 1);
+
+			// System.out.println(rfn);
+
+			// we need to extract the session DB information
+			Statement s = resultsDB.createStatement();
+			s.execute("Select * from SessionResults");
+			ResultSet rs = s.getResultSet();
+			while (rs.next()) {
+				sfn = new File(rs.getString("SessionFile")).getName();
+			}
+			rs.close();
+
+			System.out.println(rfn);
+
+			sfn = sfn.substring(0, sfn.length() - 2) + "mdb";
+
+			// because of how the sessions are stored, we need to peel off the subject name from the
+			// hierarchy:
+			// Y:/warehouse/paradigm/phase/birdname/ --> Y:/warhouse/paradigm/phase/sessions/
+			String dir = "";
+			String[] t = filePath.split("\\\\");
+
+			dir = t[0];
+			for (int i = 1; i < t.length - 2; i++)
+				dir = dir + "/" + t[i];
+			// --
+
+			// we need to make sure that the DB_DIR is in MDB format, not TS format.
+			convertTStoMDB(dir + "/sessions/");
+
+			String sessdb = DB_OPEN_STR + dir + "/sessions/" + sfn + DB_CLOSE_STR;
+
+			System.out.println(sessdb);
+
+			sessionDB = DriverManager.getConnection(sessdb, "", "");
 		}
-		rs.close();
+		catch (SQLException sqle) {
 
-		// System.out.println(rfn);
+			if (resultsDB != null) resultsDB.close();
 
-		sfn = sfn.substring(0, sfn.length() - 2) + "mdb";
+			if (sessionDB != null) sessionDB.close();
 
-		// because of how the sessions are stored, we need to peel off the subject name from the
-		// hierarchy:
-		// Y:/warehouse/paradigm/phase/birdname/ --> Y:/warhouse/paradigm/phase/sessions/
-		String dir = "";
-		String[] t = filePath.split("\\\\");
-
-		dir = t[0];
-		for (int i = 1; i < t.length - 2; i++)
-			dir = dir + "/" + t[i];
-		// --
-
-		// we need to make sure that the DB_DIR is in MDB format, not TS format.
-		convertTStoMDB(dir + "/sessions/");
-
-		String sessdb = DB_OPEN_STR + dir + "/sessions/" + sfn + DB_CLOSE_STR;
-
-		System.out.println(sessdb);
-
-		sessionDB = DriverManager.getConnection(sessdb, "", "");
-
+			throw sqle;
+		}
 		return session.fromMDB(sessionDB, resultsDB, sfn, rfn);
 	}
 
@@ -138,6 +149,7 @@ public class SessionFactory
 				f.renameTo(new File(f.getPath().substring(0, f.getPath().length() - 2) + "mdb"));
 			}
 		}
+
 	}
 
 	private static String convertTRtoMDB(String filePath) throws IOException
