@@ -23,12 +23,13 @@ public class Shapes
 	public static final int			COUTING_STROOP	= 12;
 	public static final int			KANJI			= 13;
 	public static final int			CLIP_ART		= 14;
+	public static final int			SNODGRASS		= 15;
+	public static final int			LINE_SEGMENT	= 16;
+	public static final int			SHADED_CUBE		= 17;
 
 	public static final int			SHAPES[]		= { CIRCLE, BUTTERFLY, HEART, CLUBS, PENTAGON,
 			RECTANGLE, SPIRAL, TRIANGLE, POLYGON, RECT_IMAGE, KSCOPE, TRAVEL_SLIDE, COUTING_STROOP,
-			KANJI, CLIP_ART						};
-
-	public static final int			SNODGRASS		= 0;
+			KANJI, CLIP_ART, SNODGRASS, LINE_SEGMENT, SHADED_CUBE };
 
 	public HashMap<Integer, String>	shapeIDToLabel;
 	public HashMap<String, Integer>	abbrToID;
@@ -77,5 +78,8 @@ public class Shapes
 
 		shapeIDToLabel.put(KANJI, "Kanji");
 		shapeIDToLabel.put(CLIP_ART, "Clip Art");
+		
+		shapeIDToLabel.put(SHADED_CUBE, "Shaded Cube");
+		
 	}
 }
