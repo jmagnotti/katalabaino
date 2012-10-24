@@ -30,6 +30,7 @@ import splitters.ConfigurationSplitter;
 import splitters.CorrectIncorrectSplitter;
 import splitters.CorrectPositionSplitter;
 import splitters.ItemConfigurationSplitter;
+import splitters.LineSegmentDistanceSplitter;
 import splitters.ProbeDelaySplitter;
 import splitters.PseudoTrueSplitter;
 import splitters.SampleColorSplitter;
@@ -40,20 +41,18 @@ import filters.CorrectionProcedureFilter;
 import filters.ResponseTimeFilter;
 import filters.SampleResponseResponseTimeFilter;
 
-public class AnalysisBuilder implements Runnable
-{
-	public Analysis							analysis;
+public class AnalysisBuilder implements Runnable {
+	public Analysis analysis;
 
-	private static HashMap<String, Method>	methods		= null;
-	public static Vector<String>			sortedNames	= null;
+	private static HashMap<String, Method> methods = null;
+	public static Vector<String> sortedNames = null;
 	// public static AnalysisBuilder builder = null;
 
-	public static Vector<String>			mappers, splitters, filters;
+	public static Vector<String> mappers, splitters, filters;
 
-	public Vector<String>					sessionTypes;
+	public Vector<String> sessionTypes;
 
-	public AnalysisBuilder()
-	{
+	public AnalysisBuilder() {
 		methods = new HashMap<String, Method>();
 		Method[] meths = AnalysisBuilder.class.getMethods();
 
@@ -77,11 +76,9 @@ public class AnalysisBuilder implements Runnable
 		for (String name : sortedNames) {
 			if (name.startsWith("filter_")) {
 				filters.add(name);
-			}
-			else if (name.startsWith("map_")) {
+			} else if (name.startsWith("map_")) {
 				mappers.add(name);
-			}
-			else if (name.startsWith("split_")) {
+			} else if (name.startsWith("split_")) {
 				splitters.add(name);
 			}
 		}
@@ -104,63 +101,51 @@ public class AnalysisBuilder implements Runnable
 	}
 
 	@Override
-	public void run()
-	{
+	public void run() {
 		analysis.analyze();
 	}
 
-	public void REFL_map_cp_status()
-	{
+	public void REFL_map_cp_status() {
 		analysis.addMap(new CorrectionProcedureStatusMap());
 	}
 
-	public void REFL_map_count_correct()
-	{
+	public void REFL_map_count_correct() {
 		analysis.addMap(new CountCorrectMap());
 	}
 
-	public void REFL_map_count()
-	{
+	public void REFL_map_count() {
 		analysis.addMap(new CountMap());
 	}
 
-	public void REFL_map_incorrect_corrections()
-	{
+	public void REFL_map_incorrect_corrections() {
 		analysis.addMap(new IncorrectCorrectionsMap());
 	}
 
-	public void REFL_map_mean_actual_view_time()
-	{
+	public void REFL_map_mean_actual_view_time() {
 		analysis.addMap(new MeanActualViewTimeMap());
 	}
 
-	public void REFL_map_mean_response_time()
-	{
+	public void REFL_map_mean_response_time() {
 		analysis.addMap(new MeanResponseTimeMap());
 	}
 
-	public void REFL_map_mean_fr_response_time()
-	{
+	public void REFL_map_mean_fr_response_time() {
 		analysis.addMap(new MeanSampleCompletionResponseTimeMap());
 	}
 
-	public void REFL_map_mean_fr()
-	{
+	public void REFL_map_mean_fr() {
 		analysis.addMap(new MeanSampleResponseMap());
 	}
 
-	public void REFL_map_median_response_time()
-	{
+	public void REFL_map_median_response_time() {
 		analysis.addMap(new MedianResponseTimeMap());
 	}
 
-	public void REFL_map_percent_correct()
-	{
+	public void REFL_map_percent_correct() {
 		analysis.addMap(new PercentCorrectMap());
 	}
 
-	public void REFL_map_session_information()
-	{
+	public void REFL_map_session_information() {
 		analysis.addMap(new SessionInformationMap());
 	}
 
@@ -171,8 +156,7 @@ public class AnalysisBuilder implements Runnable
 
 	// ----------- BEGIN SPLITTERS ---------------//
 
-	public void REFL_split_baseline_transfer()
-	{
+	public void REFL_split_baseline_transfer() {
 		analysis.addSplitter(new BaselineTransferSplitter());
 	}
 
@@ -181,53 +165,48 @@ public class AnalysisBuilder implements Runnable
 	// analysis.addSplitter(new ChangeItemMahalanobisSplitter());
 	// }
 
-	public void REFL_split_choice_set_size()
-	{
+	public void REFL_split_choice_set_size() {
 		analysis.addSplitter(new ChoiceSetSizeSplitter());
 	}
 
-	public void REFL_split_configuration()
-	{
+	public void REFL_split_configuration() {
 		analysis.addSplitter(new ConfigurationSplitter());
 	}
 
-	public void REFL_split_correct_incorrect()
-	{
+	public void REFL_split_correct_incorrect() {
 		analysis.addSplitter(new CorrectIncorrectSplitter());
 	}
 
-	public void REFL_split_correct_position()
-	{
+	public void REFL_split_correct_position() {
 		analysis.addSplitter(new CorrectPositionSplitter());
 	}
 
-	public void REFL_split_item_configuration()
-	{
+	public void REFL_split_item_configuration() {
 		analysis.addSplitter(new ItemConfigurationSplitter());
 	}
 
-	public void REFL_split_probe_delay()
-	{
+	public void REFL_split_line_segment_distance() {
+		analysis.addSplitter(new LineSegmentDistanceSplitter(
+				LineSegmentDistanceSplitter.TARGET_SEARCH));
+	}
+
+	public void REFL_split_probe_delay() {
 		analysis.addSplitter(new ProbeDelaySplitter());
 	}
 
-	public void REFL_split_pseudo_true()
-	{
+	public void REFL_split_pseudo_true() {
 		analysis.addSplitter(new PseudoTrueSplitter());
 	}
 
-	public void REFL_split_sample_color()
-	{
+	public void REFL_split_sample_color() {
 		analysis.addSplitter(new SampleColorSplitter());
 	}
 
-	public void REFL_split_sample_set_size()
-	{
+	public void REFL_split_sample_set_size() {
 		analysis.addSplitter(new SampleSetSizeSplitter());
 	}
 
-	public void REFL_split_trial_type()
-	{
+	public void REFL_split_trial_type() {
 		analysis.addSplitter(new TrialTypeSplitter(true));
 	}
 
@@ -235,67 +214,64 @@ public class AnalysisBuilder implements Runnable
 
 	// ----------- BEING FILTERS ---------------//
 
-	public void REFL_filter_response_time_10s()
-	{
-		analysis.addFilter(new ResponseTimeFilter(new ComparisonRule(ComparisonRule.LT_OR_EQ,
-				10 * 1000)));
+	public void REFL_filter_response_time_10s() {
+		analysis.addFilter(new ResponseTimeFilter(new ComparisonRule(
+				ComparisonRule.LT_OR_EQ, 10 * 1000)));
 	}
 
-	public void REFL_filter_correct_trials_only()
-	{
+	public void REFL_filter_correct_trials_only() {
 		analysis.addFilter(new CorrectTrialsOnlyFilter());
 	}
 
-	public void REFL_filter_fr_response_time_4sd()
-	{
+	public void REFL_filter_fr_response_time_4sd() {
 		analysis.addFilter(new SampleResponseResponseTimeFilter(
 				SampleResponseResponseTimeFilter.FOUR_SIGMA));
 	}
 
-	public void REFL_filter_cp_on()
-	{
-		analysis.addFilter(new CorrectionProcedureFilter(CorrectionProcedureFilter.CP_ON));
+	public void REFL_filter_cp_on() {
+		analysis.addFilter(new CorrectionProcedureFilter(
+				CorrectionProcedureFilter.CP_ON));
 	}
 
-	public void REFL_filter_cp_off()
-	{
-		analysis.addFilter(new CorrectionProcedureFilter(CorrectionProcedureFilter.CP_OFF));
+	public void REFL_filter_cp_off() {
+		analysis.addFilter(new CorrectionProcedureFilter(
+				CorrectionProcedureFilter.CP_OFF));
 	}
 
 	// ----------- END Filters---------------//
 
-	public void loadData(File dboFile, Session session) throws IOException, SQLException,
-			SAXException, ParserConfigurationException
-	{
+	public void loadData(File dboFile, Session session) throws IOException,
+			SQLException, SAXException, ParserConfigurationException {
 		analysis = new Analysis(SessionFactory.BuildSessions(session, dboFile));
 
 	}
 
-	public void LoadData(String directory, String filename, Session session) throws IOException,
-			SQLException, SAXException, ParserConfigurationException
-	{
-		FileTypeConverter.CreateZipFileFromDirectory(directory, filename, session);
+	public void LoadData(String directory, String filename, Session session)
+			throws IOException, SQLException, SAXException,
+			ParserConfigurationException {
+		FileTypeConverter.CreateZipFileFromDirectory(directory, filename,
+				session);
 		File zipFile = new File(directory + filename + ".dbo");
 
 		analysis = new Analysis(SessionFactory.BuildSessions(session, zipFile));
 	}
 
-	public void AddStep(String command)
-	{
+	public void AddStep(String command) {
 		try {
-			// System.out.println("Trying: " + command);
+			System.out.println("Trying: " + command);
 			methods.get("REFL_" + command).invoke(this);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void loadData(File selectedFile, String selectedItem) throws IOException, SQLException,
-			SAXException, ParserConfigurationException, InstantiationException,
-			IllegalAccessException, ClassNotFoundException
-	{
-		loadData(selectedFile, (Session) Class.forName("sessions." + selectedItem).newInstance());
+	public void loadData(File selectedFile, String selectedItem)
+			throws IOException, SQLException, SAXException,
+			ParserConfigurationException, InstantiationException,
+			IllegalAccessException, ClassNotFoundException {
+		loadData(selectedFile,
+				(Session) Class.forName("sessions." + selectedItem)
+						.newInstance());
 	}
 
 }
