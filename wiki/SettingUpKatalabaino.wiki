@@ -15,7 +15,7 @@ Before you can analyze your data, there are several prerequisites. This guide wi
   * SPSS
 
 = Software Installation =
-  # Download Eclipse and extract the zip file to a preferred directory, e.g., C:/Users/John
+  # [http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/indigo/SR2/eclipse-java-indigo-SR2-win32.zip Download Eclipse] if you don't have it and extract the zip file to a preferred directory, e.g., C:/Users/John
   # Run Eclipse by Clicking on the executable
   # Install subclipse using the help->Install new software... option in Eclipse
     # Click the "Add..." button and provide a name (subclipse) and repository URL <pre>http://subclipse.tigris.org/update_1.8.x</pre>
