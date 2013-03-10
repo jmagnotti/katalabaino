@@ -8,7 +8,6 @@ Before you can analyze your data, there are several prerequisites. This guide wi
   * Windows XP or better
   * Microsoft Office XP or better^1^
   * [http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/indigo/SR2/eclipse-java-indigo-SR2-win32.zip Eclipse 32-bit] or 64-bit
-  * [http://subclipse.tigris.org/ Subclipse], which may be installed through Eclipse <pre>http://subclipse.tigris.org/update_1.8.x</pre>
 
 == Optional Software ==
   * Sigmaplot
@@ -19,7 +18,7 @@ Before you can analyze your data, there are several prerequisites. This guide wi
   # Download Eclipse and extract the zip file to a preferred directory, e.g., C:/Users/John
   # Run Eclipse by Clicking on the executable
   # Install subclipse using the help->Install new software... option in Eclipse
-    # Click the "Add..." button and provide a name (subclipse) and repository URL (see above)
+    # Click the "Add..." button and provide a name (subclipse) and repository URL <pre>http://subclipse.tigris.org/update_1.8.x</pre>
     # Ensure subclipse is selected in the drop-down box
     # Choose "Select All"
     # Choose "Next," then "Next" again
