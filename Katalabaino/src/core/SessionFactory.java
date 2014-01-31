@@ -20,14 +20,12 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-public class SessionFactory
-{
-	public static final String	DB_OPEN_STR		= "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)};DBQ=";
-	public static final String	DB_CLOSE_STR	= ";DriverID=22;READONLY=true}";
+public class SessionFactory {
+	public static final String DB_PRFX_STR = "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)};DBQ=";
+	public static final String DB_SFFX_STR = ";DriverID=22;READONLY=true}";
 
-	public static Vector<Session> BuildSessions(Session prototype, File... files)
-			throws IOException, SQLException, SAXException, ParserConfigurationException
-	{
+	public static Vector<Session> BuildSessions(Session prototype, File... files) throws IOException, SQLException,
+			SAXException, ParserConfigurationException {
 		Vector<Session> sessions = new Vector<Session>();
 
 		for (File f : files) {
@@ -35,22 +33,20 @@ public class SessionFactory
 				Vector<Session> temp = getSessionsFromZip(f, prototype);
 				for (Session sess : temp)
 					sessions.add(sess);
-			}
-			else if (!f.isDirectory()) {
+			} else if (!f.isDirectory()) {
 				sessions.add(getSessionFromFile(f, prototype));
 			}
 		}
 
-		// paranoia says let's do this everytime we load the data. how long can it take??
-		// only about 16ms with ~ 100 files
+		// paranoia says let's do this every time we load the data. how long can
+		// it take? about 16ms with ~ 100 files
 		Collections.sort(sessions);
 
 		return sessions;
 	}
 
-	private static Vector<Session> getSessionsFromZip(File file, Session session)
-			throws IOException, SAXException, ParserConfigurationException
-	{
+	private static Vector<Session> getSessionsFromZip(File file, Session session) throws IOException, SAXException,
+			ParserConfigurationException {
 		Vector<Session> sessions = new Vector<Session>();
 		ZipFile zipFile = new ZipFile(file);
 		Enumeration<? extends ZipEntry> e = zipFile.entries();
@@ -59,13 +55,12 @@ public class SessionFactory
 			InputStream is = zipFile.getInputStream(ze);
 			sessions.add(session.fromStream(is));
 		}
-
+		zipFile.close();
 		return sessions;
 	}
 
-	private static Session getSessionFromFile(File file, Session session) throws IOException,
-			SQLException, SAXException, ParserConfigurationException
-	{
+	private static Session getSessionFromFile(File file, Session session) throws IOException, SQLException,
+			SAXException, ParserConfigurationException {
 		if (file.getName().endsWith(".kml"))
 			return session.fromXML(file);
 		else if (file.getName().endsWith(".mdb"))
@@ -76,14 +71,14 @@ public class SessionFactory
 		throw new FileNotFoundException("Invalid File Format: " + file.getAbsolutePath());
 	}
 
-	private static Session getSessionFromMDB(Session session, String filePath) throws SQLException
-	{
+	private static Session getSessionFromMDB(Session session, String filePath) throws SQLException {
 		Connection sessionDB = null, resultsDB = null;
 		String rfn = "", sfn = "";
 
 		try {
+			System.out.println(filePath);
 
-			resultsDB = DriverManager.getConnection(DB_OPEN_STR + filePath + DB_CLOSE_STR);
+			resultsDB = DriverManager.getConnection(DB_PRFX_STR + filePath + DB_SFFX_STR);
 
 			rfn = filePath.substring(filePath.lastIndexOf("\\") + 1);
 
@@ -102,9 +97,11 @@ public class SessionFactory
 
 			sfn = sfn.substring(0, sfn.length() - 2) + "mdb";
 
-			// because of how the sessions are stored, we need to peel off the subject name from the
+			// because of how the sessions are stored, we need to peel off the
+			// subject name from the
 			// hierarchy:
-			// Y:/warehouse/paradigm/phase/birdname/ --> Y:/warhouse/paradigm/phase/sessions/
+			// paradigm/phase/birdname/ -->
+			// paradigm/phase/sessions/
 			String dir = "";
 			String[] t = filePath.split("\\\\");
 
@@ -113,33 +110,32 @@ public class SessionFactory
 				dir = dir + "/" + t[i];
 			// --
 
-			// we need to make sure that the DB_DIR is in MDB format, not TS format.
+			// we need to make sure that the DB_DIR is in MDB format, not TS
+			// format.
 			convertTStoMDB(dir + "/sessions/");
 
-			String sessdb = DB_OPEN_STR + dir + "/sessions/" + sfn + DB_CLOSE_STR;
+			String sessdb = DB_PRFX_STR + dir + "/sessions/" + sfn + DB_SFFX_STR;
 
 			System.out.println(sessdb);
 
 			sessionDB = DriverManager.getConnection(sessdb, "", "");
-		}
-		catch (SQLException sqle) {
+		} catch (SQLException sqle) {
 
-			if (resultsDB != null) resultsDB.close();
+			if (resultsDB != null)
+				resultsDB.close();
 
-			if (sessionDB != null) sessionDB.close();
+			if (sessionDB != null)
+				sessionDB.close();
 
 			throw sqle;
 		}
 		return session.fromMDB(sessionDB, resultsDB, sfn, rfn);
 	}
 
-	private static void convertTStoMDB(String dirName)
-	{
+	private static void convertTStoMDB(String dirName) {
 		File[] files = new File(dirName).listFiles(new FileFilter() {
-
 			@Override
-			public boolean accept(File pathname)
-			{
+			public boolean accept(File pathname) {
 				return pathname.getName().endsWith("ts");
 			}
 		});
@@ -152,15 +148,14 @@ public class SessionFactory
 
 	}
 
-	private static String convertTRtoMDB(String filePath) throws IOException
-	{
+	private static String convertTRtoMDB(String filePath) throws IOException {
 		File f = new File(filePath);
 		String outfile = f.getPath().substring(0, f.getPath().length() - 2) + "mdb";
-		if (f.renameTo(new File(outfile))) return outfile;
+		if (f.renameTo(new File(outfile)))
+			return outfile;
 
-		System.out.println(outfile);
+		System.err.println("Unable to rename: " + outfile);
 
-		// throw new IOException("Unable to rename " + filePath + " to " + outfile);
 		return outfile;
 	}
 }

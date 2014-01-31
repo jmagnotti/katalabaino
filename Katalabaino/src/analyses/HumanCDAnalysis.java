@@ -28,7 +28,7 @@ public class HumanCDAnalysis
 		analysis.addFilter(new LookForTrialDuplicatesFilter());
 		// analysis.addMap(new AccuracyMap());
 		// analysis.addMap(new AverageRTMap());
-		Analysis.SPACE_DELIMITER = "\t";
+		Analysis.field_delimiter = "\t";
 
 		// HMFACR_Map.TARGET_ABSENT_TRIAL_TYPE = "Diff";
 		// HMFACR_Map.TARGET_PRESENT_TRIAL_TYPE = "Same";

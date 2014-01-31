@@ -15,12 +15,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-public class FileTypeConverter
-{
-	private static final int	BUFFER	= 2048;
+public class FileTypeConverter {
+	private static final int BUFFER = 2048;
 
-	public static Vector<File> ConvertToKML(Vector<? extends Session> sessions) throws IOException
-	{
+	public static Vector<File> ConvertToKML(Vector<? extends Session> sessions) throws IOException {
 		System.out.println("Building " + sessions.size() + " files...");
 
 		Vector<File> kmlFiles = new Vector<File>();
@@ -28,8 +26,7 @@ public class FileTypeConverter
 		System.out.println("Printing...");
 		for (Session session : sessions) {
 
-			kmlFiles.add(new File(
-					session.resultsFile.substring(0, session.resultsFile.length() - 3) + "kml"));
+			kmlFiles.add(new File(session.resultsFile.substring(0, session.resultsFile.length() - 3) + "kml"));
 
 			session.toXML(kmlFiles.lastElement());
 		}
@@ -39,16 +36,14 @@ public class FileTypeConverter
 		return kmlFiles;
 	}
 
-	public static File ZipToDBO(String name, Vector<File> files) throws IOException
-	{
+	public static File ZipToDBO(String name, Vector<File> files) throws IOException {
 		return ZipToDBO(name, files, true);
 	}
 
-	public static File ZipToDBO(String name, Vector<File> files, boolean cleanUp)
-			throws IOException
-	{
+	public static File ZipToDBO(String name, Vector<File> files, boolean cleanUp) throws IOException {
 
-		if (!name.endsWith("dbo")) name = name + ".dbo";
+		if (!name.endsWith("dbo"))
+			name = name + ".dbo";
 
 		File zipFile = new File(name);
 
@@ -76,23 +71,45 @@ public class FileTypeConverter
 		}
 		out.close();
 
-		if (cleanUp) for (File f : files)
-			f.deleteOnExit();
-
+		if (cleanUp) {
+			for (File f : files)
+				f.deleteOnExit();
+		}
 		return zipFile;
 	}
 
 	public static File CreateZipFileFromDirectory(String workDir, String fileName, Session prototype)
-			throws IOException, SQLException, SAXException, ParserConfigurationException
-	{
+			throws IOException, SQLException, SAXException, ParserConfigurationException {
+
 		File files[] = new File(workDir).listFiles(new MDBTRFilter());
 
 		System.out.println(workDir);
 
-		Vector<Session> sessions = SessionFactory.BuildSessions(prototype, files);
+		// check to see if there is already a DBO here with modification
+		// date < the date of the newest file
+		boolean needRebuild = true;
 
-		return FileTypeConverter.ZipToDBO(workDir + fileName,
-				FileTypeConverter.ConvertToKML(sessions));
+		if (!fileName.endsWith("dbo"))
+			fileName = fileName + ".dbo";
+
+		File zipFile = new File(workDir + fileName);
+		if (zipFile.exists()) {
+			long lm = zipFile.lastModified();
+			long mxlm = -1;
+
+			for (File file : files) {
+				if (file.lastModified() > mxlm)
+					mxlm = file.lastModified();
+			}
+			needRebuild = mxlm > lm;
+		}
+		if (needRebuild) {
+			Vector<Session> sessions = SessionFactory.BuildSessions(prototype, files);
+
+			zipFile = FileTypeConverter.ZipToDBO(workDir + fileName, FileTypeConverter.ConvertToKML(sessions));
+		}
+
+		return zipFile;
 	}
 
 }

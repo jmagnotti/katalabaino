@@ -4,22 +4,19 @@ import core.MultiClassRule;
 import core.Splitter;
 import core.Trial;
 
-class BaselineTransferRule extends MultiClassRule
-{
+class BaselineTransferRule extends MultiClassRule {
 	@Override
-	public String getClassMembership(Trial trial)
-	{
-		if (trial.isTransfer) return "t.";
+	public String getClassMembership(Trial trial) {
+		if (trial.isTransfer)
+			return "t.";
 
 		return "b.";
 	}
 
 }
 
-public class BaselineTransferSplitter extends Splitter
-{
-	public BaselineTransferSplitter()
-	{
+public class BaselineTransferSplitter extends Splitter {
+	public BaselineTransferSplitter() {
 		super(new BaselineTransferRule());
 	}
 }

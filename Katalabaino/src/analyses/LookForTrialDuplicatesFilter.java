@@ -4,28 +4,26 @@ import core.Filter;
 import core.Session;
 import core.Trial;
 
-public class LookForTrialDuplicatesFilter extends Filter
-{
+public class LookForTrialDuplicatesFilter extends Filter {
 
-	public LookForTrialDuplicatesFilter()
-	{}
+	public LookForTrialDuplicatesFilter() {
+	}
 
-	private Session	currentSession;
-	private int		lastTrial;
+	private Session currentSession;
+	private int lastTrial;
 
 	@Override
-	protected boolean doAllow(Session session)
-	{
+	protected boolean doAllow(Session session) {
 		currentSession = session;
 
 		return true;
 	}
 
 	@Override
-	protected boolean doAllow(Trial trial)
-	{
+	protected boolean doAllow(Trial trial) {
 		if (lastTrial == trial.trialNumber) {
-			System.out.println("Dupe at : " + currentSession.resultsFile + ", t: " + lastTrial);
+			System.out.println("Dupe at : " + currentSession.resultsFile
+					+ ", t: " + lastTrial);
 			lastTrial = trial.trialNumber;
 			return false;
 		}

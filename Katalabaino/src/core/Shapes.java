@@ -27,6 +27,7 @@ public class Shapes
 	public static final int			LINE_SEGMENT	= 16;
 	public static final int			SHADED_CUBE		= 17;
 
+
 	public static final int			SHAPES[]		= { CIRCLE, BUTTERFLY, HEART, CLUBS, PENTAGON,
 			RECTANGLE, SPIRAL, TRIANGLE, POLYGON, RECT_IMAGE, KSCOPE, TRAVEL_SLIDE, COUTING_STROOP,
 			KANJI, CLIP_ART, SNODGRASS, LINE_SEGMENT, SHADED_CUBE };

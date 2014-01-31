@@ -1,5 +1,6 @@
 package filters;
 
+import core.Analysis;
 import core.Filter;
 import core.Shapes;
 import core.Stimulus;
@@ -33,7 +34,7 @@ public class MTSTransferFiascoFilter extends Filter
 				isAllPoly = s.shapeID == Shapes.POLYGON;
 
 			if (!isAllPoly && printErrors) {
-				System.out.println("! Trial: " + trial.trialNumber + "\t"
+				System.out.println("! Trial: " + trial.trialNumber + Analysis.field_delimiter
 						+ trial.choiceStimuli.get(1).file);
 			}
 

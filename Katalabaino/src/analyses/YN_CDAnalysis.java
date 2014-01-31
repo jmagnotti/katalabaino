@@ -1,54 +1,44 @@
 package analyses;
 
-import java.io.File;
-import java.util.Vector;
-
 import mappers.PercentCorrectMap;
-import mappers.MeanSampleResponseMap;
-import mappers.MeanSampleCompletionResponseTimeMap;
-import mappers.SampleResponseInformationMap;
 import mappers.SessionInformationMap;
-import mappers.ViewTimeAbortsMap;
 import sessions.YN_CDSession;
-import splitters.*;
-import core.Analysis;
-import core.FileTypeConverter;
-import core.Session;
-import core.SessionFactory;
+import splitters.ConfigurationSplitter;
+import splitters.ProbeDelaySplitter;
+import splitters.SampleSetSizeSplitter;
+import filters.SessionNameFilter;
 
-public class YN_CDAnalysis
-{
-	public static void main(String[] args) throws Exception
-	{
-		String dir = "Y:/warehouse/YN_cd/acquisition/";
-		String bird = "ted";
-		String workDir = dir + bird + "/";
+public class YN_CDAnalysis extends TypicalAnalysis {
 
-		// FileTypeConverter.CreateZipFileFromDirectory(workDir, bird, new YN_CDSession());
+	public YN_CDAnalysis(String directory, String bird) {
+		super(directory, bird, new YN_CDSession());
+	}
 
-		File zipFile = new File(workDir + bird + ".dbo");
-
-		Vector<Session> sessions = SessionFactory.BuildSessions(new YN_CDSession(), zipFile);
-
-		Analysis analysis = new Analysis(sessions);
+	@Override
+	public void do_analyze() {
+		analysis.addFilter(new SessionNameFilter("fr_3"));
 
 		analysis.addMap(new SessionInformationMap());
 		analysis.addMap(new PercentCorrectMap());
-		// analysis.addMap(new ViewTimeAbortsMap());
-		// analysis.addMap(new AverageRTMap());
-		// analysis.addMap(new AverageFRMap());
-		// analysis.addMap(new ObservingResponseInfoMap());
 
 		analysis.addSplitter(new SampleSetSizeSplitter());
-		 analysis.addSplitter(new TrialTypeSplitter());
-//		analysis.addSplitter(new ProbeDelaySplitter());
-//		 analysis.addSplitter(new ConfigurationSplitter("icm"));
-
-		// analysis.addSplitter(new CorrectPositionSplitter());
-
-		// analysis.addSplitter(new ViewTimeAbortSplitter());
-
 		analysis.analyze();
+
+		analysis.addSplitter(new ProbeDelaySplitter());
+		analysis.analyze();
+
+		analysis.addSplitter(new ConfigurationSplitter("icm"));
+		analysis.analyze();
+	}
+
+	public static void main(String[] args) throws Exception {
+		String dir = "Z:/warehouse/YN_CD/acquisition/";
+		String[] birds = { "ted", "mark", "curly" };
+
+		for (String bird : birds) {
+			Thread t = new Thread(new YN_CDAnalysis(dir, bird));
+			t.start();
+		}
 	}
 
 }
