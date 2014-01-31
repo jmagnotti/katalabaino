@@ -1,60 +1,49 @@
 package analyses;
 
-import java.io.File;
-import java.util.Vector;
-
-import mappers.CountMap;
+import mappers.CorrectionProcedureStatusMap;
+import mappers.MedianResponseTimeMap;
+import mappers.PercentCorrectMap;
+import mappers.SampleResponseInformationMap;
 import mappers.SessionInformationMap;
 import sessions.N_ItemMTSSession;
-import splitters.TargetDistractorDirectionSplitter;
-import core.Analysis;
-import core.Session;
-import core.SessionFactory;
-import filters.ChoiceSetSizeFilter;
+import splitters.ChoiceSetSizeSplitter;
+import core.ComparisonRule;
+import filters.CorrectTrialsOnlyFilter;
+import filters.ResponseTimeFilter;
 
-public class NItemMTSAnalysis {
-	public static void main(String[] args) throws Exception {
-		String dir = "Y:/warehouse/n-item_mts/";
-		String bird = "uninformed";
-		String workDir = dir + bird + "/";
+public class NItemMTSAnalysis extends TypicalAnalysis {
+	public NItemMTSAnalysis(String dir, String bird) {
+		super(dir, bird, new N_ItemMTSSession());
+	}
 
-		// FileTypeConverter.CreateZipFileFromDirectory(workDir, bird, new
-		// N_ItemMTSSession());
-
-		// File zipFile = new File(workDir + bird + ".dbo");
-		File zipFile = new File("/Users/jmagnotti/Dropbox/Manuscripts/Sinclair_01_57_PM_16-Jan-13.dbo");
-		Vector<Session> sessions = SessionFactory.BuildSessions(
-				new N_ItemMTSSession(), zipFile);
-
-		Analysis analysis = new Analysis(sessions);
-
+	@Override
+	public void do_analyze() {
 		analysis.addMap(new SessionInformationMap());
-		 analysis.addMap(new CountMap());
-//		 analysis.addMap(new IncorrectCorrectionsMap());
-//		analysis.addSplitter(new ChoiceSetSizeSplitter());
+		analysis.addSplitter(new ChoiceSetSizeSplitter());
+		analysis.addFilter(new ResponseTimeFilter(new ComparisonRule(ComparisonRule.LT_OR_EQ, 10000)));
+		analysis.addFilter(new CorrectTrialsOnlyFilter());
+		analysis.addMap(new CorrectionProcedureStatusMap());
+		analysis.addMap(new MedianResponseTimeMap());
+		analysis.analyze(true);
 
-		// analysis.addSplitter(new CorrectIncorrectSplitter());
+		analysis.addMap(new PercentCorrectMap());
+		analysis.addSplitter(new ChoiceSetSizeSplitter());
+		analysis.analyze(true);
 
-		 analysis.addSplitter(new TargetDistractorDirectionSplitter());
-
-//		analysis.addFilter(new ResponseTimeFilter(new ComparisonRule(
-//				ComparisonRule.LT_OR_EQ, 10000)));
-//		analysis.addFilter(new CorrectTrialsOnlyFilter());
-//		analysis.addMap(new MeanResponseTimeMap());
-		
-		analysis.addFilter(new ChoiceSetSizeFilter(2));
-//		analysis.addSplitter(new TargetDistractorDistanceSplitter());
-
-		// analysis.addFilter(new ChoiceSetSizeFilter(new
-		// ComparisonRule(ComparisonRule.NOT_EQUAL_TO,
-		// 1)));
-
+		analysis.addMap(new SampleResponseInformationMap());
 		analysis.analyze();
+	}
 
-		// MultiSessionHDAnalysis mshda = new MultiSessionHDAnalysis(sessions);
-		// mshda.addMap(new AccuracyMap());
-		// mshda.addSplitter(new CorrectPositionSplitter());
+	public static void main(String[] args) throws Exception {
+		String loc = "Z:/Dropbox/AU_Projects/katz/target_search/For John/n-item_mts/";
+		String[] phases = {"shape_train/", "8_poly/",  "4_poly", "Line_Segments/"};
+		String[] birds = { "oleg", "jupiter", "emil", "Hesse", "mars", "sinclair"};
 
+		for(String dir : phases){
+		for (String bird : birds) {
+			Thread t = new Thread(new NItemMTSAnalysis(loc + dir, bird));
+			t.start();
+		}}
 	}
 
 }
