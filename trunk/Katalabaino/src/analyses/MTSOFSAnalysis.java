@@ -30,7 +30,7 @@ public class MTSOFSAnalysis
 	
 			Analysis analysis = new Analysis(sessions);
 			
-			Analysis.SPACE_DELIMITER = "\t";
+			Analysis.field_delimiter = "\t";
 			
 			analysis.addMap(new SessionInformationMap());
 			analysis.addMap(new PercentCorrectMap());

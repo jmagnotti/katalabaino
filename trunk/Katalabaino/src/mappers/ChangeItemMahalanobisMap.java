@@ -3,6 +3,7 @@ package mappers;
 import java.util.Vector;
 
 import calc.MahalanobisHelper;
+import core.Analysis;
 import core.Mapper;
 import core.Session;
 import core.Trial;
@@ -36,7 +37,7 @@ public class ChangeItemMahalanobisMap extends Mapper
 			distance = MahalanobisHelper.GetSinglePositionDistance(samplePoints,
 					samplePoints[MahalanobisHelper.GetChangedStimulusIndex(trial)]);
 
-			resultString.add(distance + "\t");
+			resultString.add(distance + Analysis.field_delimiter);
 		}
 	}
 

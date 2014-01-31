@@ -165,7 +165,7 @@ public class YN_CDSession extends Session
 				if (iName != null)
 					t.sampleStimuli.add(new Stimulus(iName, rs.getInt("Sample" + i + "Position"),
 							Colors.CLIP_ART, Shapes.RECT_IMAGE, "CLIPART:"
-									+ iName.substring(0, iName.indexOf(".") - 1)));
+									+ iName.substring(0, iName.indexOf("."))));
 			}
 
 			// choice items
@@ -175,7 +175,7 @@ public class YN_CDSession extends Session
 				if (iName != null)
 					t.choiceStimuli.add(new Stimulus(iName, rs.getInt("Probe" + i + "Position"),
 							Colors.CLIP_ART, Shapes.RECT_IMAGE, "CLIPART:"
-									+ iName.substring(0, iName.indexOf(".") - 1)));
+									+ iName.substring(0, iName.indexOf("."))));
 			}
 
 			yncds.trials.add(t);

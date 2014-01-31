@@ -13,7 +13,7 @@ public class PositionHelper
 	 * @param position
 	 *            The index to convert, in the range {1,2,...,16}
 	 * @param whichCoordinate
-	 *            The dimension to retreive, one of {XPOS, YPOS}
+	 *            The dimension to retrieve, one of {XPOS, YPOS}
 	 * @return The X or Y coordinate of the given position.
 	 */
 	public static double PigeonFC_CDLookUp(int position, int whichCoordinate)

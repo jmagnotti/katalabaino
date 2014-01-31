@@ -1,0 +1,29 @@
+++CHANGES TO KATALABAINO
+
+There is a new TypicalAnalysis class that abstracts things that most analyses have to do. See YN_CDAnalysis for simple example using cascading splitters, NH_SD_Acquisition for a more extensive example. The class takes care of loading the DBO file into the analysis and ensures your class is setup for multithreading. Just have a constructor that takes the working directory and the bird name, and then fill out a do_analyze() method. Currently, the method DOES NOT run individual analyses for you (make sure you are calling analyze() as necessary), but it DOES call accumulate() at the end.
+	The end game of TypicalAnalysis is being able to build/save/load Analyses from the GUI more easily
+	The default file output name is {bird}_output.csv and will be in the same location as the DBO file. you can override this behavior by calling analysis.setOutputFile("name_of_file.csv") somewhere in your do_analyze() function.
+
+You can now specify a file (or a generic PrintStream object--sockets anyone?) as the location of ouput for an analysis.
+The new CombinedAnalysis leverages the file option of Analysis to create a single output file that contains the results of multiple analyses. See Examples for details.
+	++ the use of ca.analyze(true) analyzes the data and then clears the maps/filters/splitters
+	++ empty columns can be added by accumulate with the argument true [accumlate(true)].
+	++ the StringMatrix class by default just joins the results, with no row matching
+		Future versions of the StringMatrix class could use named rows, so that (for example) sessionID is used to do row matching. To ensure the CSV file states rectangular (not jagged), we must ensure that each row has the same length, which will mean padding non-matched rows. This could if (for example) some analyses filter out non-CP sessions.
+If you try to recreate a DBO from a folder (recreate means that the DBO already exists in the folder) but no new .mdb/.tr files are detected, the program returns the one already created. This means that you should *always* call the FileTypeConverter.CreateZipFileFromDirectory function and let the program decide if there are new files. 
+	++ The program currently only checks for birdname.dbo
+	++ This has a weird (unhelpful) side effect. If you create a DBO, but then copy in OLD sessions, the modification date may be older than the DBO, and thus they don't make it into the DBO. Just look in the directory, if you have unconverted TR files, you'll know something is wrong. Deleting the DBO will do the trick.
+		Future versions of the program could look for the newest DBO in a directory and compare its contents to the contents of the directory, this would solve the problem.
+
+Check out NH_SD_Acquisition for an example of how multithreading can speed up processing of several birds at once.
+
+Would Like:
+	create/save/load CombinedAnalysis from the GUI
+	parameterized values from the GUI
+
+	
+
+++DID YOU KNOW
+	You can reverse a filter by calling flip() ? It's as easy as:
+		analysis.addFilter(new CorrectTrialsOnlyFilter().flip());
+		to have a nice filter for Incorrect trials without writing a new class!

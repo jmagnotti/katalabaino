@@ -34,14 +34,14 @@ public abstract class Mapper
 	@Override
 	public String toString()
 	{
-		return name.replace("\t", Analysis.SPACE_DELIMITER);
+		return name.replace("\t", Analysis.field_delimiter);
 	}
 
 	public String toString(String prefix)
 	{
 		return prefix
-				+ this.toString().replace(Analysis.SPACE_DELIMITER,
-						Analysis.SPACE_DELIMITER + prefix);
+				+ this.toString().replace(Analysis.field_delimiter,
+						Analysis.field_delimiter + prefix);
 	}
 
 }

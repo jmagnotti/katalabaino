@@ -9,13 +9,11 @@ import core.Mapper;
 import core.Session;
 import core.Trial;
 
-public class SampleChoiceColorAvgRTMap extends Mapper
-{
-	private HashMap<String, HashMap<String, Double>>	itemCounts, itemCorrect;
-	private Vector<String>								imageNames;
+public class SampleChoiceColorAvgRTMap extends Mapper {
+	private HashMap<String, HashMap<String, Double>> itemCounts, itemCorrect;
+	private Vector<String> imageNames;
 
-	public SampleChoiceColorAvgRTMap()
-	{
+	public SampleChoiceColorAvgRTMap() {
 		super("itemAcc");
 
 		itemCorrect = new HashMap<String, HashMap<String, Double>>();
@@ -25,19 +23,20 @@ public class SampleChoiceColorAvgRTMap extends Mapper
 	}
 
 	@Override
-	public void nextSession(Session session)
-	{}
+	public void nextSession(Session session) {
+	}
 
 	@Override
-	public void nextTrial(Trial trial)
-	{
+	public void nextTrial(Trial trial) {
 		// if (trial.sampleSetSize == 1 && trial.responseTime <= 10000) {
 		double previousCount = 0;
 		String sample, probe;
-		sample = Colors.GetInstance().colorIDToLabel.get(Colors.GetInstance().fileToColorID(
-				trial.sampleStimuli.get(0).file)); // .replaceAll(".tga", "");
-		probe = Colors.GetInstance().colorIDToLabel.get(Colors.GetInstance().fileToColorID(
-				trial.choiceStimuli.get(0).file)); // .replaceAll(".tga", "");
+		sample = Colors.GetInstance().colorIDToLabel.get(Colors.GetInstance()
+				.fileToColorID(trial.sampleStimuli.get(0).file)); // .replaceAll(".tga",
+																	// "");
+		probe = Colors.GetInstance().colorIDToLabel.get(Colors.GetInstance()
+				.fileToColorID(trial.choiceStimuli.get(0).file)); // .replaceAll(".tga",
+																	// "");
 
 		// probe = trial.choiceStimuli.get(0).file.replaceAll(".tga", "");
 
@@ -48,8 +47,7 @@ public class SampleChoiceColorAvgRTMap extends Mapper
 				itemCounts.get(sample).put(probe, 1.0);
 				itemCorrect.get(sample).put(probe, 0.0);
 			}
-		}
-		else {
+		} else {
 			itemCounts.put(sample, new HashMap<String, Double>());
 			itemCorrect.put(sample, new HashMap<String, Double>());
 			itemCorrect.get(sample).put(probe, 0.0);
@@ -67,8 +65,7 @@ public class SampleChoiceColorAvgRTMap extends Mapper
 	}
 
 	@Override
-	public Vector<String> cleanUp()
-	{
+	public Vector<String> cleanUp() {
 		resultString.clear();
 
 		String string = "";
@@ -90,14 +87,14 @@ public class SampleChoiceColorAvgRTMap extends Mapper
 			for (int j = 0; j < imageNames.size(); j++) {
 				probe = imageNames.get(j);
 
-				if (itemCounts.containsKey(sample) && itemCounts.get(sample).containsKey(probe)) {
+				if (itemCounts.containsKey(sample)
+						&& itemCounts.get(sample).containsKey(probe)) {
 					string = string
 							+ "\t"
-							+ (itemCorrect.get(sample).get(probe) / itemCounts.get(sample).get(
-									probe));
+							+ (itemCorrect.get(sample).get(probe) / itemCounts
+									.get(sample).get(probe));
 					// + (itemCounts.get(sample).get(probe));
-				}
-				else {
+				} else {
 					string = string + "\t.";
 				}
 

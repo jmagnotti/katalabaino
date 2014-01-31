@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.Vector;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -24,18 +25,15 @@ import core.Shapes;
 import core.Stimulus;
 import core.Trial;
 
-public class SDSession extends Session
-{
+public class SDSession extends Session {
 
-	public SDSession()
-	{
+	public SDSession() {
 		super();
 	}
 
 	@Override
-	public Session fromMDB(Connection session, Connection results, String sName, String rName)
-			throws SQLException
-	{
+	public Session fromMDB(Connection session, Connection results,
+			String sName, String rName) throws SQLException {
 		SDSession psds = new SDSession();
 
 		psds.comment = "Same/Different";
@@ -50,8 +48,9 @@ public class SDSession extends Session
 		Vector<Stimulus> probes = new Vector<Stimulus>();
 		while (rs.next()) {
 			probeDelays.add(rs.getInt("Delay"));
-			probes.add(new Stimulus(rs.getString("Filename"), 0, Colors.TRAVEL_SLIDE,
-					Shapes.TRAVEL_SLIDE, "TRAVEL_SLIDE:TRAVEL_SLIDE"));
+			probes.add(new Stimulus(rs.getString("Filename"), 0,
+					Colors.TRAVEL_SLIDE, Shapes.TRAVEL_SLIDE,
+					"TRAVEL_SLIDE:TRAVEL_SLIDE"));
 		}
 		rs.close();
 		ses.close();
@@ -67,8 +66,9 @@ public class SDSession extends Session
 			samples.put(tnum, new Vector<Stimulus>());
 
 			samples.get(tnum).add(
-					new Stimulus(rs.getString("Filename"), rs.getInt("Position"),
-							Colors.TRAVEL_SLIDE, Shapes.TRAVEL_SLIDE, "TRAVEL_SLIDE:TRAVEL_SLIDE"));
+					new Stimulus(rs.getString("Filename"), rs
+							.getInt("Position"), Colors.TRAVEL_SLIDE,
+							Shapes.TRAVEL_SLIDE, "TRAVEL_SLIDE:TRAVEL_SLIDE"));
 
 			if (viewTime == -1) {
 				viewTime = rs.getInt("ViewTime");
@@ -94,7 +94,8 @@ public class SDSession extends Session
 		rs = res.getResultSet();
 		while (rs.next()) {
 			responses.get(rs.getInt("TrialNum") - 1).add(
-					new SampleResponse(rs.getInt("ListPosition"), rs.getInt("ResponseTime"), rs
+					new SampleResponse(rs.getInt("ListPosition"), rs
+							.getInt("ResponseTime"), rs
 							.getInt("CorrectionTrial")));
 		}
 		rs.close();
@@ -105,7 +106,8 @@ public class SDSession extends Session
 		rs = res.getResultSet();
 		while (rs.next()) {
 			corrTrialResponses.get(rs.getInt("TrialNum") - 1).add(
-					new SampleResponse(rs.getInt("ListPosition"), rs.getInt("ResponseTime"), rs
+					new SampleResponse(rs.getInt("ListPosition"), rs
+							.getInt("ResponseTime"), rs
 							.getInt("CorrectionTrial")));
 		}
 		rs.close();
@@ -117,6 +119,9 @@ public class SDSession extends Session
 		while (rs.next()) {
 			Trial t = new Trial();
 			t.trialNumber = rs.getInt("TrialNum");
+
+			// System.out.println(t.trialNumber);
+
 			t.trialType = rs.getString("TrialType");
 			t.configuration = t.trialType;
 
@@ -135,10 +140,15 @@ public class SDSession extends Session
 			t.probeDelay = probeDelays.get(t.trialNumber - 1);
 
 			t.sampleResponses = responses.get(t.trialNumber - 1);
-			t.correctionTrialSampleResponses = corrTrialResponses.get(t.trialNumber - 1);
+			t.correctionTrialSampleResponses = corrTrialResponses
+					.get(t.trialNumber - 1);
 
-			t.viewTime = (int) t.sampleResponses.lastElement().responseTime;
-
+			try {
+				t.viewTime = (int) t.sampleResponses.lastElement().responseTime;
+			} catch (NoSuchElementException npe) {
+				// just eat the error for now
+				t.viewTime = -99;
+			}
 			t.actualViewTime = t.viewTime;
 
 			for (int i = 0; i < samples.get(t.trialNumber).size(); i++) {
@@ -160,28 +170,24 @@ public class SDSession extends Session
 	}
 
 	@Override
-	public Session fromXML(File xmlFile) throws FileNotFoundException, SAXException, IOException,
-			ParserConfigurationException
-	{
+	public Session fromXML(File xmlFile) throws FileNotFoundException,
+			SAXException, IOException, ParserConfigurationException {
 		return new SDSession(xmlFile);
 	}
 
-	public SDSession(File f) throws FileNotFoundException, ParserConfigurationException,
-			SAXException, IOException
-	{
+	public SDSession(File f) throws FileNotFoundException,
+			ParserConfigurationException, SAXException, IOException {
 		this(new FileInputStream(f));
 	}
 
-	public SDSession(InputStream is) throws ParserConfigurationException, SAXException,
-			IOException
-	{
+	public SDSession(InputStream is) throws ParserConfigurationException,
+			SAXException, IOException {
 		super(is);
 	}
 
 	@Override
-	public Session fromStream(InputStream stream) throws FileNotFoundException, SAXException,
-			IOException, ParserConfigurationException
-	{
+	public Session fromStream(InputStream stream) throws FileNotFoundException,
+			SAXException, IOException, ParserConfigurationException {
 		return new SDSession(stream);
 	}
 

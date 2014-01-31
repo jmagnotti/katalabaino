@@ -6,7 +6,7 @@ import java.util.Vector;
 import mappers.PercentCorrectMap;
 import mappers.SessionInformationMap;
 import sessions.PseudoSDSession;
-import splitters.ItemSplitter;
+import splitters.StimulusSetSplitter;
 import core.Analysis;
 import core.FileTypeConverter;
 import core.Session;
@@ -72,7 +72,7 @@ public class PseudoSDAnalysis {
 		// analysis.addMap(new AverageRTMap());
 		// analysis.addMap(new CPInfoMap());
 		analysis.addMap(new PercentCorrectMap());
-		analysis.addSplitter(new ItemSplitter(includedImages));
+		analysis.addSplitter(new StimulusSetSplitter(includedImages));
 		// analysis.addSplitter(new TrialTypeSplitter());
 //		analysis.addSplitter(new PseudoTrueSplitter());
 		// analysis.addSplitter(new BaselineTransferSplitter());

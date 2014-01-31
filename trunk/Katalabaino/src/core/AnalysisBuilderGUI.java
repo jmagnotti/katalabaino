@@ -29,62 +29,51 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 
-class HideAction implements ActionListener, FocusListener
-{
-	protected JFrame	jf;
+class HideAction implements ActionListener, FocusListener {
+	protected JFrame jf;
 
-	HideAction(JFrame jf)
-	{
+	HideAction(JFrame jf) {
 		this.jf = jf;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0)
-	{
+	public void actionPerformed(ActionEvent arg0) {
 		jf.setVisible(false);
 	}
 
 	@Override
-	public void focusGained(FocusEvent arg0)
-	{}
-
-	@Override
-	public void focusLost(FocusEvent arg0)
-	{
-		jf.setVisible(false);
+	public void focusGained(FocusEvent arg0) {
 	}
 
+	@Override
+	public void focusLost(FocusEvent arg0) {
+		jf.setVisible(false);
+	}
 }
 
-class ShowAction implements ActionListener
-{
-	protected JFrame	jf;
+class ShowAction implements ActionListener {
+	protected JFrame jf;
 
-	ShowAction(JFrame jf)
-	{
+	ShowAction(JFrame jf) {
 		this.jf = jf;
 	}
 
-	public void actionPerformed(ActionEvent arg0)
-	{
+	public void actionPerformed(ActionEvent arg0) {
 		jf.setVisible(true);
 	}
 }
 
-class RandomPictureAction implements ActionListener
-{
-	AnalysisBuilderGUI	ab;
-	Random				rand;
+class RandomPictureAction implements ActionListener {
+	AnalysisBuilderGUI ab;
+	Random rand;
 
-	public RandomPictureAction(AnalysisBuilderGUI ab)
-	{
+	public RandomPictureAction(AnalysisBuilderGUI ab) {
 		this.ab = ab;
 		rand = new Random();
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0)
-	{
+	public void actionPerformed(ActionEvent arg0) {
 		try {
 			BufferedImage myPicture;
 
@@ -101,25 +90,21 @@ class RandomPictureAction implements ActionListener
 
 			ab.jw.setBounds(r);
 			ab.jw.invalidate();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 }
 
-class ClearCheckAction implements ActionListener
-{
-	private Vector<JCheckBox>[]	boxes;
+class ClearCheckAction implements ActionListener {
+	private Vector<JCheckBox>[] boxes;
 
-	public ClearCheckAction(Vector<JCheckBox>... jcb)
-	{
+	public ClearCheckAction(Vector<JCheckBox>... jcb) {
 		boxes = jcb;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0)
-	{
+	public void actionPerformed(ActionEvent arg0) {
 		for (Vector<JCheckBox> boxVector : boxes)
 			for (JCheckBox box : boxVector)
 				box.setSelected(false);
@@ -127,18 +112,15 @@ class ClearCheckAction implements ActionListener
 
 }
 
-class RunAction implements ActionListener
-{
-	AnalysisBuilderGUI	abgui;
+class RunAction implements ActionListener {
+	AnalysisBuilderGUI abgui;
 
-	RunAction(AnalysisBuilderGUI gui)
-	{
+	RunAction(AnalysisBuilderGUI gui) {
 		abgui = gui;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 
 		boolean thereIsWorkToDo = false;
 
@@ -164,36 +146,31 @@ class RunAction implements ActionListener
 				abgui.ab.AddStep("filter_" + jcb.getText().toLowerCase().replaceAll(" ", "_"));
 			}
 		}
-		if (thereIsWorkToDo) abgui.run();
+		if (thereIsWorkToDo)
+			abgui.run();
 	}
 }
 
-class DBOCreater implements ActionListener
-{
+class DBOCreater implements ActionListener {
 
-	AnalysisBuilderGUI	abgui;
+	AnalysisBuilderGUI abgui;
 
-	public DBOCreater(AnalysisBuilderGUI abg)
-	{
+	public DBOCreater(AnalysisBuilderGUI abg) {
 		abgui = abg;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0)
-	{
+	public void actionPerformed(ActionEvent arg0) {
 		abgui.jfc.setFileFilter(new FileFilter() {
 
 			@Override
-			public String getDescription()
-			{
+			public String getDescription() {
 				return "Katalabaino Compatible";
 			}
 
 			@Override
-			public boolean accept(File arg0)
-			{
-				return arg0.isDirectory() || arg0.getName().endsWith(".tr")
-						|| arg0.getName().endsWith(".mdb");
+			public boolean accept(File arg0) {
+				return arg0.isDirectory() || arg0.getName().endsWith(".tr") || arg0.getName().endsWith(".mdb");
 			}
 		});
 
@@ -206,29 +183,24 @@ class DBOCreater implements ActionListener
 
 }
 
-class FileLauncher implements ActionListener
-{
-	AnalysisBuilderGUI	ab;
+class FileLauncher implements ActionListener {
+	AnalysisBuilderGUI ab;
 
-	public FileLauncher(AnalysisBuilderGUI abgui)
-	{
+	public FileLauncher(AnalysisBuilderGUI abgui) {
 		ab = abgui;
 	}
 
-	public void actionPerformed(ActionEvent arg0)
-	{
+	public void actionPerformed(ActionEvent arg0) {
 
 		ab.jfc.setFileFilter(new FileFilter() {
 
 			@Override
-			public String getDescription()
-			{
+			public String getDescription() {
 				return "Katalabaino Compatible";
 			}
 
 			@Override
-			public boolean accept(File arg0)
-			{
+			public boolean accept(File arg0) {
 				return arg0.isDirectory() || arg0.getName().endsWith("dbo");
 			}
 		});
@@ -241,23 +213,21 @@ class FileLauncher implements ActionListener
 	}
 }
 
-public class AnalysisBuilderGUI extends JFrame
-{
-	private static final long	serialVersionUID	= 1L;
-	private JPanel				maps, filters, splits, north;
-	public Vector<JCheckBox>	ckMaps, ckSplits, ckFilters;
-	private JComboBox			sessionNames;
-	private JButton				launchFileDialog, launchCreateDBO, clearCheckBoxes;
-	public File					fileToLoad;
-	public AnalysisBuilder		ab;
-	public JFrame				jw;
-	public JFileChooser			jfc;
-	public JLabel				fileLabel, picLabel;
+public class AnalysisBuilderGUI extends JFrame {
+	private static final long serialVersionUID = 1L;
+	private JPanel maps, filters, splits, north;
+	public Vector<JCheckBox> ckMaps, ckSplits, ckFilters;
+	private JComboBox sessionNames;
+	private JButton launchFileDialog, launchCreateDBO, clearCheckBoxes;
+	public File fileToLoad;
+	public AnalysisBuilder ab;
+	public JFrame jw;
+	public JFileChooser jfc;
+	public JLabel fileLabel, picLabel;
 
-	public String[]				images;
+	public String[] images;
 
-	public AnalysisBuilderGUI()
-	{
+	public AnalysisBuilderGUI() {
 		super("Katalabaino 1.1");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -292,8 +262,7 @@ public class AnalysisBuilderGUI extends JFrame
 			images = new File("fp/").list(new FilenameFilter() {
 
 				@Override
-				public boolean accept(File arg0, String arg1)
-				{
+				public boolean accept(File arg0, String arg1) {
 					return arg1.endsWith("jpg");
 				}
 			});
@@ -308,50 +277,44 @@ public class AnalysisBuilderGUI extends JFrame
 			jw.setBounds(getBounds().x + getBounds().width, getBounds().y, 300, 334);
 			jw.addFocusListener(new HideAction(jw));
 			jw.setAlwaysOnTop(true);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		// initialize the JFC to a nice place. look for the usual suspects, then default windows
+		// initialize the JFC to a nice place. look for the usual suspects, then
+		// default windows
 		// location, then a more specific mac location
-		String[] places = { "Y:/warehouse/", "C:/warehouse/", "C:/information/", "C:/", "D:/",
+		String[] places = { "Y:/warehouse/", "C:/warehouse/", "C:/information/", "Z:/warehouse/", "C:/", "D:/",
 				"/Users/jmagnotti/warehouse/" };
 		File f = null;
 		int i = 0;
 		do {
 			f = new File(places[i]);
 			i++;
-		}
-		while (i < places.length && !f.exists());
+		} while (i < places.length && !f.exists());
 
-		if (!f.exists()) f = null;
+		if (!f.exists())
+			f = null;
 
 		jfc = new JFileChooser(f);
 	}
 
-	public void createDBO(File f)
-	{
+	public void createDBO(File f) {
 		SimpleDateFormat sdf = new SimpleDateFormat("hh_mm_a_dd-MMM-yy");
 		String name = f.getName().split("[^A-Za-z]")[0] + "_" + sdf.format(new Date()) + ".dbo";
 
 		try {
-			Session s = (Session) Class.forName(
-					"sessions." + (String) sessionNames.getSelectedItem()).newInstance();
+			Session s = (Session) Class.forName("sessions." + (String) sessionNames.getSelectedItem()).newInstance();
 			fileToLoad = FileTypeConverter.CreateZipFileFromDirectory(f.getParent() + "/", name, s);
 
 			setAllVisible(true);
 
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void run()
-	{
-		// Thread t = new Thread(ab);
-		// t.start();
+	public void run() {
 		new HideAction(jw).actionPerformed(null);
 		jw.invalidate();
 		ab.run();
@@ -359,8 +322,7 @@ public class AnalysisBuilderGUI extends JFrame
 		new ShowAction(jw).actionPerformed(null);
 	}
 
-	public void setAllVisible(boolean visible)
-	{
+	public void setAllVisible(boolean visible) {
 		maps.setVisible(visible);
 		filters.setVisible(visible);
 		splits.setVisible(visible);
@@ -369,19 +331,16 @@ public class AnalysisBuilderGUI extends JFrame
 			fileLabel.setText("<html>Using: <b>" + fileToLoad.getName() + "</b></html>");
 	}
 
-	public void loadFile()
-	{
+	public void loadFile() {
 		try {
 			ab.loadData(fileToLoad, (String) sessionNames.getSelectedItem());
 			setAllVisible(true);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void addOptions()
-	{
+	public void addOptions() {
 		Container con = getContentPane();
 
 		JCheckBox temp = new JCheckBox();
@@ -415,8 +374,7 @@ public class AnalysisBuilderGUI extends JFrame
 		splits.add(description);
 
 		for (String split : AnalysisBuilder.splitters) {
-			JCheckBox jcb = new JCheckBox(ucwords(split.replaceAll("split_", "").replaceAll("_",
-					" ")));
+			JCheckBox jcb = new JCheckBox(ucwords(split.replaceAll("split_", "").replaceAll("_", " ")));
 			// jcb.setFont(font);
 			ckSplits.add(jcb);
 			splits.add(jcb);
@@ -431,8 +389,7 @@ public class AnalysisBuilderGUI extends JFrame
 		filters.add(description);
 
 		for (String filter : AnalysisBuilder.filters) {
-			JCheckBox jcb = new JCheckBox(ucwords(filter.replaceAll("filter_", "").replaceAll("_",
-					" ")));
+			JCheckBox jcb = new JCheckBox(ucwords(filter.replaceAll("filter_", "").replaceAll("_", " ")));
 			// jcb.setFont(font);
 			ckFilters.add(jcb);
 			filters.add(jcb);
@@ -467,8 +424,7 @@ public class AnalysisBuilderGUI extends JFrame
 		this.validate();
 	}
 
-	private String ucwords(String str)
-	{
+	private String ucwords(String str) {
 		String res = "";
 		String[] pieces = str.split(" ");
 
@@ -480,7 +436,8 @@ public class AnalysisBuilderGUI extends JFrame
 			else
 				res += pieces[i].substring(1);
 
-			if (i < pieces.length - 1) res += " ";
+			if (i < pieces.length - 1)
+				res += " ";
 		}
 
 		return res;

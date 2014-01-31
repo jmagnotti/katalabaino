@@ -151,9 +151,6 @@ public class AnalysisBuilder implements Runnable {
 
 	// ----------- END MAPPERS ---------------//
 
-	// ----------- BEGIN FILTERS ---------------//
-	// ----------- END FILTERS ---------------//
-
 	// ----------- BEGIN SPLITTERS ---------------//
 
 	public void REFL_split_baseline_transfer() {
@@ -186,8 +183,7 @@ public class AnalysisBuilder implements Runnable {
 	}
 
 	public void REFL_split_line_segment_distance() {
-		analysis.addSplitter(new LineSegmentDistanceSplitter(
-				LineSegmentDistanceSplitter.TARGET_SEARCH));
+		analysis.addSplitter(new LineSegmentDistanceSplitter(LineSegmentDistanceSplitter.TARGET_SEARCH));
 	}
 
 	public void REFL_split_probe_delay() {
@@ -215,8 +211,7 @@ public class AnalysisBuilder implements Runnable {
 	// ----------- BEING FILTERS ---------------//
 
 	public void REFL_filter_response_time_10s() {
-		analysis.addFilter(new ResponseTimeFilter(new ComparisonRule(
-				ComparisonRule.LT_OR_EQ, 10 * 1000)));
+		analysis.addFilter(new ResponseTimeFilter(new ComparisonRule(ComparisonRule.LT_OR_EQ, 10 * 1000)));
 	}
 
 	public void REFL_filter_correct_trials_only() {
@@ -224,33 +219,27 @@ public class AnalysisBuilder implements Runnable {
 	}
 
 	public void REFL_filter_fr_response_time_4sd() {
-		analysis.addFilter(new SampleResponseResponseTimeFilter(
-				SampleResponseResponseTimeFilter.FOUR_SIGMA));
+		analysis.addFilter(new SampleResponseResponseTimeFilter(SampleResponseResponseTimeFilter.FOUR_SIGMA));
 	}
 
 	public void REFL_filter_cp_on() {
-		analysis.addFilter(new CorrectionProcedureFilter(
-				CorrectionProcedureFilter.CP_ON));
+		analysis.addFilter(new CorrectionProcedureFilter(CorrectionProcedureFilter.CP_ON));
 	}
 
 	public void REFL_filter_cp_off() {
-		analysis.addFilter(new CorrectionProcedureFilter(
-				CorrectionProcedureFilter.CP_OFF));
+		analysis.addFilter(new CorrectionProcedureFilter(CorrectionProcedureFilter.CP_OFF));
 	}
 
 	// ----------- END Filters---------------//
 
-	public void loadData(File dboFile, Session session) throws IOException,
-			SQLException, SAXException, ParserConfigurationException {
+	public void loadData(File dboFile, Session session) throws IOException, SQLException, SAXException,
+			ParserConfigurationException {
 		analysis = new Analysis(SessionFactory.BuildSessions(session, dboFile));
-
 	}
 
-	public void LoadData(String directory, String filename, Session session)
-			throws IOException, SQLException, SAXException,
-			ParserConfigurationException {
-		FileTypeConverter.CreateZipFileFromDirectory(directory, filename,
-				session);
+	public void LoadData(String directory, String filename, Session session) throws IOException, SQLException,
+			SAXException, ParserConfigurationException {
+		FileTypeConverter.CreateZipFileFromDirectory(directory, filename, session);
 		File zipFile = new File(directory + filename + ".dbo");
 
 		analysis = new Analysis(SessionFactory.BuildSessions(session, zipFile));
@@ -258,20 +247,16 @@ public class AnalysisBuilder implements Runnable {
 
 	public void AddStep(String command) {
 		try {
-			System.out.println("Trying: " + command);
+			// System.out.println("Trying: " + command);
 			methods.get("REFL_" + command).invoke(this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void loadData(File selectedFile, String selectedItem)
-			throws IOException, SQLException, SAXException,
-			ParserConfigurationException, InstantiationException,
-			IllegalAccessException, ClassNotFoundException {
-		loadData(selectedFile,
-				(Session) Class.forName("sessions." + selectedItem)
-						.newInstance());
+	public void loadData(File selectedFile, String selectedItem) throws IOException, SQLException, SAXException,
+			ParserConfigurationException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+		loadData(selectedFile, (Session) Class.forName("sessions." + selectedItem).newInstance());
 	}
 
 }

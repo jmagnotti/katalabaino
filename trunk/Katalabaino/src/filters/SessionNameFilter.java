@@ -6,6 +6,9 @@ import core.Session;
 public class SessionNameFilter extends Filter
 {
 	private String	match;
+	
+	public static boolean CASE_INSENSITIVE = true;
+	
 
 	public SessionNameFilter(String match)
 	{
@@ -15,6 +18,9 @@ public class SessionNameFilter extends Filter
 	@Override
 	protected boolean doAllow(Session session)
 	{
+		if (CASE_INSENSITIVE)
+			return session.sessionFile.toLowerCase().contains(match.toLowerCase());
+		
 		return session.sessionFile.contains(match);
 	}
 
