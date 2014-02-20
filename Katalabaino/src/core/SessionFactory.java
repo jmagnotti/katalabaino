@@ -24,6 +24,11 @@ public class SessionFactory {
 	public static final String DB_PRFX_STR = "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)};DBQ=";
 	public static final String DB_SFFX_STR = ";DriverID=22;READONLY=true}";
 
+	// public static final int LOOK_IN_PARENT_DIR = 1;
+	// public static final int ABSOLUTE_PATH = 2;
+	// public static int SESSION_LOCATION_STRATEGY = LOOK_IN_PARENT_DIR;
+	// public static String SESSION_FILE_DIR = "UNKNOWN";
+
 	public static Vector<Session> BuildSessions(Session prototype, File... files) throws IOException, SQLException,
 			SAXException, ParserConfigurationException {
 		Vector<Session> sessions = new Vector<Session>();
@@ -144,8 +149,9 @@ public class SessionFactory {
 			for (File f : files) {
 				f.renameTo(new File(f.getPath().substring(0, f.getPath().length() - 2) + "mdb"));
 			}
+		} else {
+			System.err.println("Couldn't process path :" + dirName);
 		}
-
 	}
 
 	private static String convertTRtoMDB(String filePath) throws IOException {
