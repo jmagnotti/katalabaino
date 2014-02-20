@@ -89,24 +89,31 @@ public class FileTypeConverter {
 		// date < the date of the newest file
 		boolean needRebuild = true;
 
-		if (!fileName.endsWith("dbo"))
-			fileName = fileName + ".dbo";
+		File zipFile = null;
+		if (files.length < 1) {
+			needRebuild = false;
+		} else {
 
-		File zipFile = new File(workDir + fileName);
-		if (zipFile.exists()) {
-			long lm = zipFile.lastModified();
-			long mxlm = -1;
+			if (!fileName.endsWith("dbo"))
+				fileName = fileName + ".dbo";
 
-			for (File file : files) {
-				if (file.lastModified() > mxlm)
-					mxlm = file.lastModified();
+			zipFile = new File(workDir + fileName);
+			if (zipFile.exists()) {
+				long lm = zipFile.lastModified();
+				long mxlm = -1;
+
+				for (File file : files) {
+					if (file.lastModified() > mxlm)
+						mxlm = file.lastModified();
+				}
+				needRebuild = mxlm > lm;
 			}
-			needRebuild = mxlm > lm;
-		}
-		if (needRebuild) {
-			Vector<Session> sessions = SessionFactory.BuildSessions(prototype, files);
 
-			zipFile = FileTypeConverter.ZipToDBO(workDir + fileName, FileTypeConverter.ConvertToKML(sessions));
+			if (needRebuild) {
+				Vector<Session> sessions = SessionFactory.BuildSessions(prototype, files);
+
+				zipFile = FileTypeConverter.ZipToDBO(workDir + fileName, FileTypeConverter.ConvertToKML(sessions));
+			}
 		}
 
 		return zipFile;

@@ -24,20 +24,21 @@ public abstract class TypicalAnalysis implements Runnable {
 		String workDir = directory + subject + "/";
 
 		try {
-			FileTypeConverter.CreateZipFileFromDirectory(workDir, subject,
-					dataType);
-			File zipFile = new File(workDir + subject + ".dbo");
-			Vector<Session> sessions = SessionFactory.BuildSessions(dataType,
-					zipFile);
-			analysis = new CombinedAnalysis(sessions, workDir + subject
-					+ "_output.csv");
+			File zipFile = FileTypeConverter.CreateZipFileFromDirectory(workDir, subject, dataType);
 
-			// let the sub-class know that everything is ready for them to start
-			// processing
-			do_analyze();
+			if (zipFile != null) {
+				Vector<Session> sessions = SessionFactory.BuildSessions(dataType, zipFile);
+				analysis = new CombinedAnalysis(sessions, workDir + subject + "_output.csv");
 
-			analysis.accumulate(true);
+				// let the sub-class know that everything is ready for them to
+				// start
+				// processing
+				do_analyze();
 
+				analysis.accumulate(true);
+			} else {
+				System.err.println("Nothing to do here..." + workDir);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -49,6 +50,5 @@ public abstract class TypicalAnalysis implements Runnable {
 	 * Note that the parent will take care of creating the CombinedAnalysis
 	 * object and calling accumulate() on it.
 	 */
-	public abstract void do_analyze();
-
+	protected abstract void do_analyze();
 }

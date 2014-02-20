@@ -20,7 +20,7 @@ public class NH_SD_Acquisition extends TypicalAnalysis {
 	}
 
 	@Override
-	public void do_analyze() {
+	protected void do_analyze() {
 		analysis.addMap(new SessionInformationMap());
 		analysis.addMap(new PercentCorrectMap());
 		analysis.analyze();

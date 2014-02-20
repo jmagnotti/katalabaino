@@ -32,13 +32,10 @@ public class NH_SD_Transfer implements Runnable {
 		String workDir = dir + bird + "/";
 
 		try {
-			File zipFile = FileTypeConverter.CreateZipFileFromDirectory(
-					workDir, bird, new SDSession());
-			Vector<Session> sessions = SessionFactory.BuildSessions(
-					new SDSession(), zipFile);
+			File zipFile = FileTypeConverter.CreateZipFileFromDirectory(workDir, bird, new SDSession());
+			Vector<Session> sessions = SessionFactory.BuildSessions(new SDSession(), zipFile);
 
-			CombinedAnalysis ca = new CombinedAnalysis(sessions, workDir + bird
-					+ "_transfer.csv");
+			CombinedAnalysis ca = new CombinedAnalysis(sessions, workDir + bird + "_transfer.csv");
 
 			ca.addMap(new SessionInformationMap());
 			ca.addMap(new PercentCorrectMap());
@@ -51,8 +48,7 @@ public class NH_SD_Transfer implements Runnable {
 			ca.clearMaps();
 			ca.addMap(new SessionInformationMap());
 			ca.addMap(new MeanResponseTimeMap());
-			ca.addFilter(new ResponseTimeFilter(new ComparisonRule(
-					ComparisonRule.LT_OR_EQ, 10 * 1000)));
+			ca.addFilter(new ResponseTimeFilter(new ComparisonRule(ComparisonRule.LT_OR_EQ, 10 * 1000)));
 
 			ca.addSplitter(new BaselineTransferSplitter());
 			ca.analyze(true);
@@ -75,7 +71,6 @@ public class NH_SD_Transfer implements Runnable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -83,13 +78,11 @@ public class NH_SD_Transfer implements Runnable {
 		// String[] birds = { "blue", "blueA0", "blueA3", "red", "red004",
 		// "redx01", "yellow" };
 		String[] birds = { "red004" };
-
 		for (int i = 0; i < birds.length; i++) {
 			NH_SD_Transfer nhsda = new NH_SD_Transfer(dir, birds[i]);
 			Thread t = new Thread(nhsda);
 			t.start();
 		}
-
 	}
 
 }
