@@ -6,7 +6,7 @@ import java.io.FileFilter;
 public class PushResultFileNumbers {
 
 	public static void main(String[] args) {
-		String location = "Z:/Dropbox/AU_Projects/katz/target_search/For John/n-item_mts/Shape_Train/Mars_3900_series/";
+		String location = "/Users/jmagnotti/Dropbox/AU_Projects/katz/target_search/For John/n-item_mts/Shape_Train/mars/";
 		int offset = 500;
 
 		String birdName = "mars";
@@ -18,9 +18,9 @@ public class PushResultFileNumbers {
 		});
 
 		for (File f : filesToChange) {
-			String[] tokens = f.getName().split("\\.");
+			String[] tokens = f.getName().toLowerCase().split("\\.");
 			int originalSession = Integer.parseInt(tokens[0].split(birdName)[1]);
-			// System.out.println(originalSession);
+			System.out.println(originalSession);
 
 			int newSession = offset + originalSession;
 			File newFile = new File(f.getParent() + "/" + birdName + newSession + "." + tokens[1]);

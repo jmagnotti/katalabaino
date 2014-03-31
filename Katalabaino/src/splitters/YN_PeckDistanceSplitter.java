@@ -43,7 +43,7 @@ class YN_DistanceRule extends MultiClassRule {
 		rules.add(new ComparisonRule(ComparisonRule.GT_OR_EQ, 220));
 	}
 
-	private double dev2(double a, double b) {
+	private double squaredError(double a, double b) {
 		return Math.pow(a - b, 2);
 	}
 
@@ -56,8 +56,8 @@ class YN_DistanceRule extends MultiClassRule {
 		Point2D p1 = locations.get(probe - 1);
 		Point2D p2 = locations.get(lastPecked - 1);
 
-		double distance = Math.sqrt(dev2(p1.getX(), p2.getX())
-				+ dev2(p1.getY(), p2.getY()));
+		double distance = Math.sqrt(squaredError(p1.getX(), p2.getX())
+				+ squaredError(p1.getY(), p2.getY()));
 
 		return arrayValidate(distance);
 	}

@@ -137,7 +137,9 @@ public class Colors {
 		if (string.equalsIgnoreCase("green.jpg"))
 			return GREEN;
 
-		// System.out.println(string);
+		if (!abbrToID.containsKey(string.substring(0, 3))) {
+			return GRAY;
+		}
 
 		return abbrToID.get(string.substring(0, 3).toLowerCase());
 	}

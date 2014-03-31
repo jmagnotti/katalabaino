@@ -22,7 +22,7 @@ class ProbeDelayRule extends MultiClassRule
 		while (pd.length() < 4)
 			pd = "0" + pd;
 
-		return "pd" + pd;
+		return "pd" + pd + ".";
 	}
 
 }

@@ -23,15 +23,12 @@ import core.Shapes;
 import core.Stimulus;
 import core.Trial;
 
-public class FC_CDSession extends Session implements Comparable<Session>
-{
-	public FC_CDSession()
-	{
+public class FC_CDSession extends Session implements Comparable<Session> {
+	public FC_CDSession() {
 		super();
 	}
 
-	public FC_CDSession(File f) throws SAXException, IOException, ParserConfigurationException
-	{
+	public FC_CDSession(File f) throws SAXException, IOException, ParserConfigurationException {
 		this(new FileInputStream(f));
 	}
 
@@ -44,15 +41,11 @@ public class FC_CDSession extends Session implements Comparable<Session>
 	 * @throws SAXException
 	 * @throws ParserConfigurationException
 	 */
-	public FC_CDSession(InputStream is) throws SAXException, IOException,
-			ParserConfigurationException
-	{
+	public FC_CDSession(InputStream is) throws SAXException, IOException, ParserConfigurationException {
 		super(is);
 	}
 
-	public FC_CDSession fromMDB(Connection session, Connection results, String sName, String rName)
-			throws SQLException
-	{
+	public FC_CDSession fromMDB(Connection session, Connection results, String sName, String rName) throws SQLException {
 		FC_CDSession fc_cdSession = new FC_CDSession();
 
 		fc_cdSession.comment = "Forced-Choice Change Detection";
@@ -94,9 +87,16 @@ public class FC_CDSession extends Session implements Comparable<Session>
 		res.execute("Select * from StimResponses WHERE correctionTrial = 0 ORDER BY TrialNum ASC, CorrectionTrial ASC");
 		rs = res.getResultSet();
 		while (rs.next()) {
-			responses.get(rs.getInt("TrialNum") - 1).add(
-					new SampleResponse(rs.getInt("ListPosition"), rs.getInt("ResponseTime"), rs
-							.getInt("CorrectionTrial"), rs.getInt("xpos"), rs.getInt("ypos")));
+			if (rs.getMetaData().getColumnCount() < 5) {
+				responses.get(rs.getInt("TrialNum") - 1).add(
+						new SampleResponse(rs.getInt("ListPosition"), rs.getInt("ResponseTime"), rs
+								.getInt("CorrectionTrial"), -1, -1));
+
+			} else {
+				responses.get(rs.getInt("TrialNum") - 1).add(
+						new SampleResponse(rs.getInt("ListPosition"), rs.getInt("ResponseTime"), rs
+								.getInt("CorrectionTrial"), rs.getInt("xpos"), rs.getInt("ypos")));
+			}
 		}
 		rs.close();
 		res.close();
@@ -105,9 +105,16 @@ public class FC_CDSession extends Session implements Comparable<Session>
 		res.execute("Select * from StimResponses WHERE correctionTrial > 0 ORDER BY TrialNum ASC, CorrectionTrial ASC");
 		rs = res.getResultSet();
 		while (rs.next()) {
-			corrTrialResponses.get(rs.getInt("TrialNum") - 1).add(
-					new SampleResponse(rs.getInt("ListPosition"), rs.getInt("ResponseTime"), rs
-							.getInt("CorrectionTrial"), rs.getInt("xpos"), rs.getInt("ypos")));
+
+			if (rs.getMetaData().getColumnCount() < 5) {
+				corrTrialResponses.get(rs.getInt("TrialNum") - 1).add(
+						new SampleResponse(rs.getInt("ListPosition"), rs.getInt("ResponseTime"), rs
+								.getInt("CorrectionTrial"), -1, -1));
+			} else {
+				corrTrialResponses.get(rs.getInt("TrialNum") - 1).add(
+						new SampleResponse(rs.getInt("ListPosition"), rs.getInt("ResponseTime"), rs
+								.getInt("CorrectionTrial"), rs.getInt("xpos"), rs.getInt("ypos")));
+			}
 		}
 		rs.close();
 		res.close();
@@ -139,28 +146,27 @@ public class FC_CDSession extends Session implements Comparable<Session>
 			t.sampleResponses = responses.get(t.trialNumber - 1);
 			t.correctionTrialSampleResponses = corrTrialResponses.get(t.trialNumber - 1);
 
-			// this is for TRUE DRO condition, this won't work if the data are from the cumulative
+			// this is for TRUE DRO condition, this won't work if the data are
+			// from the cumulative
 			// peck penalty days
 			if (t.sampleResponses.size() > 0)
 				t.actualViewTime = t.viewTime + (int) t.sampleResponses.lastElement().responseTime;
 			else
 				t.actualViewTime = t.viewTime;
 
-			for (int i = 1; i <= t.sampleSetSize; i++) {		
+			for (int i = 1; i <= t.sampleSetSize; i++) {
 				t.sampleStimuli.add(new Stimulus(rs.getString("Item" + i), rs.getInt("POS" + i)));
 			}
 
 			// changed item
-			t.choiceStimuli.add(new Stimulus(rs.getString("ItemP2"),
-					t.sampleStimuli.get(0).position));
+			t.choiceStimuli.add(new Stimulus(rs.getString("ItemP2"), t.sampleStimuli.get(0).position));
 
 			// unchanged item
 			if (t.sampleSetSize > 1) {
-				t.choiceStimuli.add(new Stimulus(rs.getString("ItemP"),
-						t.sampleStimuli.get(1).position));
-			}
-			else
+				t.choiceStimuli.add(new Stimulus(rs.getString("ItemP"), t.sampleStimuli.get(1).position));
+			} else {
 				t.choiceStimuli.add(new Stimulus("NULL", 0, Colors.NONE, Shapes.NONE, "empty"));
+			}
 
 			fc_cdSession.trials.add(t);
 		}
@@ -175,16 +181,13 @@ public class FC_CDSession extends Session implements Comparable<Session>
 	}
 
 	@Override
-	public Session fromXML(File xmlFile) throws SAXException, IOException,
-			ParserConfigurationException
-	{
+	public Session fromXML(File xmlFile) throws SAXException, IOException, ParserConfigurationException {
 		return new FC_CDSession(xmlFile);
 	}
 
 	@Override
-	public Session fromStream(InputStream stream) throws FileNotFoundException, SAXException,
-			IOException, ParserConfigurationException
-	{
+	public Session fromStream(InputStream stream) throws FileNotFoundException, SAXException, IOException,
+			ParserConfigurationException {
 		return new FC_CDSession(stream);
 	}
 
