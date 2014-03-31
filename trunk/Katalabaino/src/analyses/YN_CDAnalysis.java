@@ -1,11 +1,16 @@
 package analyses;
 
+import core.ComparisonRule;
 import mappers.PercentCorrectMap;
 import mappers.SessionInformationMap;
 import sessions.YN_CDSession;
 import splitters.ConfigurationSplitter;
 import splitters.ProbeDelaySplitter;
 import splitters.SampleSetSizeSplitter;
+import splitters.YNPeckSplitter;
+import splitters.YN_PeckDistanceSplitter;
+import filters.ProbeDelayFilter;
+import filters.SampleSetSizeFilter;
 import filters.SessionNameFilter;
 
 public class YN_CDAnalysis extends TypicalAnalysis {
@@ -16,23 +21,32 @@ public class YN_CDAnalysis extends TypicalAnalysis {
 
 	@Override
 	public void do_analyze() {
-		analysis.addFilter(new SessionNameFilter("fr_3"));
 
 		analysis.addMap(new SessionInformationMap());
 		analysis.addMap(new PercentCorrectMap());
-
-		analysis.addSplitter(new SampleSetSizeSplitter());
-		analysis.analyze();
-
-		analysis.addSplitter(new ProbeDelaySplitter());
-		analysis.analyze();
-
+		analysis.addFilter(new SessionNameFilter("fr_3"));
 		analysis.addSplitter(new ConfigurationSplitter("icm"));
+		analysis.addSplitter(new ProbeDelaySplitter());
+		analysis.addSplitter(new SampleSetSizeSplitter());
+		analysis.analyze(true);
+
+		analysis.addMap(new PercentCorrectMap());
+		analysis.addFilter(new SessionNameFilter("fr_3"));
+		analysis.addFilter(new SampleSetSizeFilter(new ComparisonRule(ComparisonRule.GREATER_THAN, 1)));
+		analysis.addSplitter(new YN_PeckDistanceSplitter());
+		analysis.analyze(true);
+
+		analysis.addMap(new PercentCorrectMap());
+		analysis.addFilter(new SessionNameFilter("fr_3"));
+		analysis.addFilter(new SampleSetSizeFilter(3));
+		analysis.addSplitter(new YNPeckSplitter());
+		analysis.addSplitter(new ProbeDelaySplitter());
 		analysis.analyze();
 	}
 
 	public static void main(String[] args) throws Exception {
-		String dir = "Z:/warehouse/YN_CD/acquisition/";
+		// String dir = "Z:/warehouse/YN_CD/acquisition/";
+		String dir = "/Users/jmagnotti/warehouse/YN_CD/acquisition/";
 		String[] birds = { "ted", "mark", "curly" };
 
 		for (String bird : birds) {

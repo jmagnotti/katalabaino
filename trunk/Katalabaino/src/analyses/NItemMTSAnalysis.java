@@ -36,14 +36,15 @@ public class NItemMTSAnalysis extends TypicalAnalysis {
 
 	public static void main(String[] args) throws Exception {
 		String loc = "Z:/Dropbox/AU_Projects/katz/target_search/For John/n-item_mts/";
-		String[] phases = {"shape_train/", "8_poly/",  "4_poly", "Line_Segments/"};
-		String[] birds = { "oleg", "jupiter", "emil", "Hesse", "mars", "sinclair"};
+		String[] phases = { "shape_train/", "8_poly/", "4_poly", "Line_Segments/" };
+		String[] birds = { "oleg", "jupiter", "emil", "Hesse", "mars", "sinclair" };
 
-		for(String dir : phases){
-		for (String bird : birds) {
-			Thread t = new Thread(new NItemMTSAnalysis(loc + dir, bird));
-			t.start();
-		}}
+		for (String dir : phases) {
+			for (String bird : birds) {
+				Thread t = new Thread(new NItemMTSAnalysis(loc + dir, bird));
+				t.start();
+			}
+		}
 	}
 
 }

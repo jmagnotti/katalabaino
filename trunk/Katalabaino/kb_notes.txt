@@ -27,3 +27,8 @@ Would Like:
 	You can reverse a filter by calling flip() ? It's as easy as:
 		analysis.addFilter(new CorrectTrialsOnlyFilter().flip());
 		to have a nice filter for Incorrect trials without writing a new class!
+
+		
+		
+++TODO/Feature Requests
+	wouldn't it be nice if FILTERS had some way to let you (the output file) know that they were activated? The idea would be to have a toString() or toAbbrString() method in EVERY filter so when you're looking at an output file you know that (say) probe delays > 0 we're filtered out. The parent class could have a toString() [or toAbbrString()] method that returns 'filterON' so that you are aware that something is happening, even if the concrete child class doesn't know what is going on. 
