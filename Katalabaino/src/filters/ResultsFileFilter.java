@@ -8,7 +8,7 @@ import core.Session;
 public class ResultsFileFilter extends Filter
 {
 	public static final int	INCLUDE	= 0;
-	public static final int	EXCLUDE	= 0;
+	public static final int	EXCLUDE	= 1;
 
 	private int				rule;
 	private Vector<String>	list;
