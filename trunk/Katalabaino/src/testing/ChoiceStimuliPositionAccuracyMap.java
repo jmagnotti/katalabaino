@@ -3,8 +3,8 @@ package testing;
 import java.util.Vector;
 
 import core.Mapper;
-import core.Session;
-import core.Trial;
+import core.session.Session;
+import core.trial.Trial;
 
 public class ChoiceStimuliPositionAccuracyMap extends Mapper
 {

@@ -8,9 +8,9 @@ import mappers.SessionInformationMap;
 import sessions.HumanListMemorySession;
 import splitters.CorrectPositionSplitter;
 import splitters.ListMemoryInteferenceSplitter;
-import core.Analysis;
-import core.Session;
-import core.SessionFactory;
+import core.analysis.Analysis;
+import core.session.Session;
+import core.session.SessionFactory;
 import filters.SessionNameFilter;
 
 public class ListMemoryAnalysis

@@ -3,10 +3,10 @@ package mappers;
 import java.util.Vector;
 
 import calc.MahalanobisHelper;
-import core.Analysis;
 import core.Mapper;
-import core.Session;
-import core.Trial;
+import core.analysis.Analysis;
+import core.session.Session;
+import core.trial.Trial;
 
 /**
  * Finds the Mahalanobis Distance of the changed item. Sigma is based on the X,Y locations of the

@@ -1,9 +1,9 @@
 package splitters;
 
-import core.Colors;
 import core.MultiClassRule;
 import core.Splitter;
-import core.Trial;
+import core.trial.Colors;
+import core.trial.Trial;
 
 class SampleClassRule extends MultiClassRule {
 	@Override

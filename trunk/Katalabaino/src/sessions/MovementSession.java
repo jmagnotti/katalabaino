@@ -3,7 +3,7 @@ package sessions;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import core.Session;
+import core.session.Session;
 
 public class MovementSession extends OFSSession {
 

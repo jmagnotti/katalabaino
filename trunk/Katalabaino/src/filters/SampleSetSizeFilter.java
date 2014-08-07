@@ -2,7 +2,7 @@ package filters;
 
 import core.ComparisonRule;
 import core.Filter;
-import core.Trial;
+import core.trial.Trial;
 
 public class SampleSetSizeFilter extends Filter {
 	private ComparisonRule rule;

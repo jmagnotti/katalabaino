@@ -2,7 +2,7 @@ package splitters;
 
 import core.MultiClassRule;
 import core.Splitter;
-import core.Trial;
+import core.trial.Trial;
 
 class PeckLocationRule extends MultiClassRule {
 

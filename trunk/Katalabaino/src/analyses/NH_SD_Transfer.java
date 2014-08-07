@@ -11,11 +11,11 @@ import mappers.SessionInformationMap;
 import sessions.SDSession;
 import splitters.BaselineTransferSplitter;
 import splitters.TrialTypeSplitter;
-import core.CombinedAnalysis;
 import core.ComparisonRule;
-import core.FileTypeConverter;
-import core.Session;
-import core.SessionFactory;
+import core.analysis.CombinedAnalysis;
+import core.session.Session;
+import core.session.SessionFactory;
+import file.FileTypeConverter;
 import filters.ResponseTimeFilter;
 import filters.SampleResponseResponseTimeFilter;
 

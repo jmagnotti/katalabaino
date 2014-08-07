@@ -7,11 +7,11 @@ import mappers.MeanResponseTimeMap;
 import mappers.SessionInformationMap;
 import sessions.StroopSession;
 import splitters.ConfigurationSplitter;
-import core.Analysis;
 import core.ComparisonRule;
-import core.FileTypeConverter;
-import core.Session;
-import core.SessionFactory;
+import core.analysis.Analysis;
+import core.session.Session;
+import core.session.SessionFactory;
+import file.FileTypeConverter;
 import filters.CorrectTrialsOnlyFilter;
 import filters.ResponseTimeFilter;
 

@@ -2,14 +2,15 @@ package core;
 
 import java.util.Vector;
 
+import core.analysis.Analysis;
+import core.session.Session;
+import core.trial.Trial;
 
-public abstract class Mapper
-{
-	protected Vector<String>	resultString;
-	private final String		name;
+public abstract class Mapper {
+	protected Vector<String> resultString;
+	private final String name;
 
-	public Mapper(String name)
-	{
+	public Mapper(String name) {
 		this.name = name;
 
 		resultString = new Vector<String>();
@@ -21,27 +22,21 @@ public abstract class Mapper
 
 	public abstract Vector<String> cleanUp();
 
-	public boolean allowSplits()
-	{
+	public boolean allowSplits() {
 		return true;
 	}
 
-	public boolean needsTrials()
-	{
+	public boolean needsTrials() {
 		return true;
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return name.replace("\t", Analysis.field_delimiter);
 	}
 
-	public String toString(String prefix)
-	{
-		return prefix
-				+ this.toString().replace(Analysis.field_delimiter,
-						Analysis.field_delimiter + prefix);
+	public String toString(String prefix) {
+		return prefix + this.toString().replace(Analysis.field_delimiter, Analysis.field_delimiter + prefix);
 	}
 
 }

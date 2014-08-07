@@ -2,9 +2,10 @@ package testing;
 
 import java.util.Vector;
 
-import core.Session;
+import core.analysis.UnstructuredAnalysis;
+import core.session.Session;
 
-public class ColorRTAnalysis extends MultiSessionHDAnalysis
+public class ColorRTAnalysis extends UnstructuredAnalysis
 {
 
 	public ColorRTAnalysis(Vector<? extends Session> data)

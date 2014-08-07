@@ -19,9 +19,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import core.Colors;
-import core.Shapes;
-import core.Stimulus;
+import core.trial.Colors;
+import core.trial.Shapes;
+import core.trial.Stimulus;
 
 public class SessionExtracter {
 	// this isn't the cleanest thing ever, but the group is embedded in the

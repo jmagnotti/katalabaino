@@ -9,6 +9,7 @@ import mappers.SessionInformationMap;
 import sessions.SDSession;
 import splitters.TrialTypeSplitter;
 import core.ComparisonRule;
+import core.analysis.TypicalAnalysis;
 import filters.CorrectTrialsOnlyFilter;
 import filters.ResponseTimeFilter;
 import filters.SampleResponseResponseTimeFilter;
@@ -53,10 +54,10 @@ public class NH_SD_Acquisition extends TypicalAnalysis {
 	}
 
 	public static void main(String[] args) throws Exception {
-		String dir = "Z:/warehouse/magpie/";
+		String dir = "Z:/warehouse/nutcracker/";
 		// String[] birds = { "blue", "blueA0", "blueA3", "red", "red004",
 		// "redx01", "yellow" };
-		String[] birds = { "red004" };
+		String[] birds = { "lance" };
 		for (String bird : birds) {
 			Thread t = new Thread(new NH_SD_Acquisition(dir, bird));
 			t.start();

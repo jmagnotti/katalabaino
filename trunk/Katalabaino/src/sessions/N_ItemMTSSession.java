@@ -15,11 +15,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import core.ConnectionCloser;
-import core.SampleResponse;
-import core.Session;
-import core.Stimulus;
-import core.Trial;
+import core.session.Session;
+import core.trial.SampleResponse;
+import core.trial.Stimulus;
+import core.trial.Trial;
+import file.ConnectionCloser;
 
 public class N_ItemMTSSession extends Session
 {

@@ -12,15 +12,15 @@ import splitters.BlockSplitter;
 import splitters.PseudoTrueSplitter;
 import splitters.TrialTypeSplitter;
 import testing.ItemPairAccuracyMap;
-import testing.MultiSessionHDAnalysis;
-import core.Analysis;
 import core.ComparisonRule;
-import core.FileTypeConverter;
 import core.MultiClassRule;
-import core.Session;
-import core.SessionFactory;
 import core.Splitter;
-import core.Trial;
+import core.analysis.Analysis;
+import core.analysis.UnstructuredAnalysis;
+import core.session.Session;
+import core.session.SessionFactory;
+import core.trial.Trial;
+import file.FileTypeConverter;
 import filters.TrialConfigurationCountFilter;
 
 public class HumanPseudoSDAnalysis
@@ -67,7 +67,7 @@ public class HumanPseudoSDAnalysis
 
 		analysis.analyze();
 
-		MultiSessionHDAnalysis mshdAnalysis = new MultiSessionHDAnalysis(sessions);
+		UnstructuredAnalysis mshdAnalysis = new UnstructuredAnalysis(sessions);
 
 		// analysis.addFilter(new SessionIDFilter(new ComparisonRule(ComparisonRule.INCLUSIVE,
 		// (block) * blockSize + 1, (block + 1) * blockSize)));

@@ -7,14 +7,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import core.MDBTRFilter;
-import core.SessionFactory;
+import core.session.Session;
+import core.session.SessionFactory;
+import file.MDBTRFilter;
 
 public class CreateHalfSessions {
 	public static void main(String[] args) throws SQLException, IOException {
 
 		Connection sessionDB = null;
-		String prefix = "Z:/warehouse/session_mod/";
+//		String prefix = "Z:/warehouse/session_mod/";
+		String prefix = "Z:/warehouse/transfer_mod/";
+		SessionFactory.convertTStoMDB(prefix);
+
 		String[] filePaths = new File(prefix).list(new MDBTRFilter());
 
 		for (String filePath : filePaths) {

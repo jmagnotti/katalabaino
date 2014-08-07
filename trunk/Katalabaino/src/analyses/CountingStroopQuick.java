@@ -6,8 +6,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-import core.Colors;
-import core.Shapes;
+import core.trial.Colors;
+import core.trial.Shapes;
 
 public class CountingStroopQuick
 {

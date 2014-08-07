@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import core.MultiClassRule;
 import core.Splitter;
-import core.Trial;
+import core.trial.Trial;
 
 class CDProbeDelayRule extends MultiClassRule
 {

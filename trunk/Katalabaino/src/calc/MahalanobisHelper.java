@@ -5,7 +5,7 @@ import org.apache.commons.math.linear.InvalidMatrixException;
 import org.apache.commons.math.stat.descriptive.SummaryStatistics;
 
 import core.PositionHelper;
-import core.Trial;
+import core.trial.Trial;
 
 public class MahalanobisHelper
 {

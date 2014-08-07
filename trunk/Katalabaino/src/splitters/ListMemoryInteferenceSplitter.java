@@ -4,18 +4,15 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import core.Splitter;
-import core.Trial;
+import core.trial.Trial;
 
-abstract class InterferenceRules
-{
-	public Vector<Integer>	trials;
-	public HashMap<Integer, Integer>	trialToNBack, trialToListPosition;
+abstract class InterferenceRules {
+	public Vector<Integer> trials;
+	public HashMap<Integer, Integer> trialToNBack, trialToListPosition;
 }
 
-class SetARules extends InterferenceRules
-{
-	public SetARules()
-	{
+class SetARules extends InterferenceRules {
+	public SetARules() {
 		trials = new Vector<Integer>();
 		trials.add(3);
 		trials.add(11);
@@ -56,11 +53,9 @@ class SetARules extends InterferenceRules
 
 }
 
-class SetBRules extends InterferenceRules
-{
+class SetBRules extends InterferenceRules {
 
-	SetBRules()
-	{
+	SetBRules() {
 		trials = new Vector<Integer>();
 		trials.add(3);
 		trials.add(10);
@@ -102,14 +97,12 @@ class SetBRules extends InterferenceRules
 
 }
 
-public class ListMemoryInteferenceSplitter extends Splitter
-{
-	private InterferenceRules	ir;
-	public static final int		SET_A	= 0;
-	public static final int		SET_B	= 1;
+public class ListMemoryInteferenceSplitter extends Splitter {
+	private InterferenceRules ir;
+	public static final int SET_A = 0;
+	public static final int SET_B = 1;
 
-	public ListMemoryInteferenceSplitter(int which)
-	{
+	public ListMemoryInteferenceSplitter(int which) {
 		super();
 
 		if (SET_A == which)
@@ -119,8 +112,7 @@ public class ListMemoryInteferenceSplitter extends Splitter
 	}
 
 	@Override
-	public String getClassMembership(Trial trial)
-	{
+	public String getClassMembership(Trial trial) {
 		if (ir.trials.contains(trial.trialNumber)) {
 			return "nb" + ir.trialToNBack.get(trial.trialNumber) + ".lp"
 					+ ir.trialToListPosition.get(trial.trialNumber);

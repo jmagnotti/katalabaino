@@ -12,12 +12,6 @@ public class FileWatcher implements Runnable {
 
 	private static boolean keepGoing;
 
-	protected FileWatcher() {
-		keepGoing = true;
-		watchActions = new Vector<WatchAction>();
-		modificationDates = new HashMap<File, Long>();
-	}
-
 	public FileWatcher(WatchAction wa) {
 		keepGoing = true;
 		watchActions = new Vector<WatchAction>();
@@ -64,7 +58,6 @@ public class FileWatcher implements Runnable {
 	}
 
 	private void checkAndUpdate() {
-
 		for (WatchAction wa : watchActions) {
 			Vector<File> changed = new Vector<File>();
 			for (File file : wa.getWatchFiles()) {
@@ -75,7 +68,7 @@ public class FileWatcher implements Runnable {
 			if (changed.size() > 0) {
 				wa.handleFileChangedEvent(changed);
 				// putting this here so that any changes that occur during the
-				// call to handle are duplicated
+				// call to handle aren't duplicated
 				for (File f : changed) {
 					modificationDates.put(f, f.lastModified() + 1L);
 				}

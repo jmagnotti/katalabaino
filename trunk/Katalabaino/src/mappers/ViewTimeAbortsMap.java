@@ -4,9 +4,9 @@ import java.util.Vector;
 
 import core.DescriptiveStatistics;
 import core.Mapper;
-import core.SampleResponse;
-import core.Session;
-import core.Trial;
+import core.session.Session;
+import core.trial.SampleResponse;
+import core.trial.Trial;
 
 public class ViewTimeAbortsMap extends Mapper
 {

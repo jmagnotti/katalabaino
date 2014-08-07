@@ -10,12 +10,12 @@ import sessions.PseudoSDSession;
 import splitters.BlockSplitter;
 import splitters.TrialTypeSplitter;
 import testing.ItemPairAccuracyMap;
-import testing.MultiSessionHDAnalysis;
-import core.Analysis;
 import core.ComparisonRule;
-import core.FileTypeConverter;
-import core.Session;
-import core.SessionFactory;
+import core.analysis.Analysis;
+import core.analysis.UnstructuredAnalysis;
+import core.session.Session;
+import core.session.SessionFactory;
+import file.FileTypeConverter;
 import filters.SessionNumberFilter;
 import filters.TrialFilter;
 
@@ -53,7 +53,7 @@ public class HumanSDAnalysis
 				Vector<Session> sessions = SessionFactory.BuildSessions(new PseudoSDSession(),
 						zipFile);
 
-				MultiSessionHDAnalysis analysis = new MultiSessionHDAnalysis(sessions);
+				UnstructuredAnalysis analysis = new UnstructuredAnalysis(sessions);
 
 				analysis.addFilter(new TrialFilter(new ComparisonRule(ComparisonRule.INCLUSIVE,
 						(blockSize * block) + 1, blockSize * block)));

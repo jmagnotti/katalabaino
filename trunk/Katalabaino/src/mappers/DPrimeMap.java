@@ -6,8 +6,8 @@ import org.apache.commons.math.MathException;
 import org.apache.commons.math.distribution.NormalDistributionImpl;
 
 import core.Mapper;
-import core.Session;
-import core.Trial;
+import core.session.Session;
+import core.trial.Trial;
 
 public class DPrimeMap extends Mapper {
 	private double hits, misses, falseAlarms, correctRejections;

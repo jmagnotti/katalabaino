@@ -5,20 +5,16 @@ import java.util.Vector;
 import core.ComparisonRule;
 import core.MultiClassRule;
 import core.Splitter;
-import core.Trial;
+import core.trial.Trial;
 
-class BlockSplitRule extends MultiClassRule
-{
+class BlockSplitRule extends MultiClassRule {
 
-	public BlockSplitRule(Vector<ComparisonRule> rules)
-	{
+	public BlockSplitRule(Vector<ComparisonRule> rules) {
 		this.rules = rules;
-
 	}
 
 	@Override
-	public String getClassMembership(Trial trial)
-	{
+	public String getClassMembership(Trial trial) {
 		String classLabel = "";
 		for (int i = 0; i < rules.size() && classLabel.equals(""); i++) {
 			if (rules.get(i).validate(trial.trialNumber)) {
@@ -38,11 +34,9 @@ class BlockSplitRule extends MultiClassRule
 
 }
 
-public class BlockSplitter extends Splitter
-{
+public class BlockSplitter extends Splitter {
 
-	public BlockSplitter(int binSize, int nTrials)
-	{
+	public BlockSplitter(int binSize, int nTrials) {
 		Vector<ComparisonRule> rules = new Vector<ComparisonRule>();
 
 		for (int i = binSize; i <= nTrials; i += binSize) {

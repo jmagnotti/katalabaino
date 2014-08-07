@@ -1,6 +1,7 @@
 package analyses;
 
 import core.ComparisonRule;
+import core.analysis.TypicalAnalysis;
 import mappers.PercentCorrectMap;
 import mappers.SessionInformationMap;
 import sessions.YN_CDSession;

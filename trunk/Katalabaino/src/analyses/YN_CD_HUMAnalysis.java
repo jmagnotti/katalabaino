@@ -8,10 +8,10 @@ import mappers.SessionInformationMap;
 import sessions.YN_CDSession;
 import splitters.BlockSplitter;
 import splitters.SampleSetSizeSplitter;
-import core.Analysis;
-import core.FileTypeConverter;
-import core.Session;
-import core.SessionFactory;
+import core.analysis.Analysis;
+import core.session.Session;
+import core.session.SessionFactory;
+import file.FileTypeConverter;
 
 public class YN_CD_HUMAnalysis {
 	public static void main(String[] args) throws Exception {

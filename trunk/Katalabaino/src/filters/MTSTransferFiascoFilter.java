@@ -1,10 +1,10 @@
 package filters;
 
-import core.Analysis;
 import core.Filter;
-import core.Shapes;
-import core.Stimulus;
-import core.Trial;
+import core.analysis.Analysis;
+import core.trial.Shapes;
+import core.trial.Stimulus;
+import core.trial.Trial;
 
 /**
  * Handles the issue with Jupiter's Polygon transfer that had some trials with half-polygon
