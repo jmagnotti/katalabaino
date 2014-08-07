@@ -2,7 +2,7 @@ package filters;
 
 import core.ComparisonRule;
 import core.Filter;
-import core.Session;
+import core.session.Session;
 
 public class SessionNumberFilter extends Filter
 {

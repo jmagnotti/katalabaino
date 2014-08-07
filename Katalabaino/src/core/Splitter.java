@@ -3,13 +3,15 @@ package core;
 import java.util.HashMap;
 import java.util.Vector;
 
+import core.session.Session;
+import core.trial.Trial;
+
 /**
  * Create a splitter based on some multiclass rule. then call getSplits to get a
  * labeled map of splits
  */
 public class Splitter {
 	private Splitter child;
-
 	protected MultiClassRule splitRule;
 	HashMap<String, Vector<Trial>> dataSplits;
 
@@ -21,7 +23,8 @@ public class Splitter {
 		this.splitRule = splitRule;
 	}
 
-	public HashMap<String, Vector<Trial>> split(Vector<Trial> trials) {
+	public HashMap<String, Vector<Trial>> split(Session session) {
+		Vector<Trial> trials = session.trials;
 		dataSplits = new HashMap<String, Vector<Trial>>();
 
 		String key = "";

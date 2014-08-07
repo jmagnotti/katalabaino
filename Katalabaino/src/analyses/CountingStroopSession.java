@@ -12,7 +12,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import core.Session;
+import core.session.Session;
 
 public class CountingStroopSession extends Session
 {

@@ -1,5 +1,6 @@
 package analyses;
 
+import core.analysis.TypicalAnalysis;
 import mappers.CountMap;
 import mappers.SessionInformationMap;
 import sessions.FC_CDSession;

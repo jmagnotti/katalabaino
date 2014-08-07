@@ -1,5 +1,8 @@
 package core;
 
+import core.session.Session;
+import core.trial.Trial;
+
 public abstract class Filter {
 	protected Filter child;
 	private boolean flipped;

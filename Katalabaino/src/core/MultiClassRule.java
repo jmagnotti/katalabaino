@@ -2,6 +2,8 @@ package core;
 
 import java.util.Vector;
 
+import core.trial.Trial;
+
 /**
  * These rules are like {@link ComparisonRule} but are multi-class.
  * 

@@ -16,12 +16,12 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import core.Colors;
-import core.ConnectionCloser;
-import core.Session;
-import core.Shapes;
-import core.Stimulus;
-import core.Trial;
+import core.session.Session;
+import core.trial.Colors;
+import core.trial.Shapes;
+import core.trial.Stimulus;
+import core.trial.Trial;
+import file.ConnectionCloser;
 
 public class HumanListMemorySession extends Session
 {

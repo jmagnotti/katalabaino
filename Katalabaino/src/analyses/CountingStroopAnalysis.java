@@ -6,10 +6,10 @@ import java.util.Vector;
 import mappers.PercentCorrectMap;
 import mappers.SessionInformationMap;
 import splitters.TrialTypeSplitter;
-import core.Analysis;
 import core.ComparisonRule;
-import core.Session;
-import core.SessionFactory;
+import core.analysis.Analysis;
+import core.session.Session;
+import core.session.SessionFactory;
 import filters.ResponseTimeFilter;
 import filters.SessionNumberFilter;
 

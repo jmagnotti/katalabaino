@@ -1,15 +1,11 @@
 package testing;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-public class QuickScript
-{
-	public static double[] forcedChoice_ECJ(double n, double c)
-	{
+public class QuickScript {
+	public static double[] forcedChoice_ECJ(double n, double c) {
 		double[] res = new double[2];
 
-		if (c >= n) return new double[] { 100, 0 };
+		if (c >= n)
+			return new double[] { 100, 0 };
 
 		double g = (n - c) / n;
 		g *= g;
@@ -22,11 +18,11 @@ public class QuickScript
 		return res;
 	}
 
-	public static double[] forcedChoice_MAG(double n, double c)
-	{
+	public static double[] forcedChoice_MAG(double n, double c) {
 		double[] res = new double[2];
 
-		if (c >= n) return new double[] { 100, 0 };
+		if (c >= n)
+			return new double[] { 100, 0 };
 
 		double g = (n - c) / n;
 		g *= ((n - 1) - c) / (n - 1);
@@ -39,8 +35,7 @@ public class QuickScript
 		return res;
 	}
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 
 		for (int c = 1; c <= 5; c++) {
 			for (String s : new String[] { "acc" }) { // , "g" }) {

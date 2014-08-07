@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 
 import core.MultiClassRule;
 import core.Splitter;
-import core.Trial;
+import core.trial.Trial;
 
 class ProbeDelayRule extends MultiClassRule
 {

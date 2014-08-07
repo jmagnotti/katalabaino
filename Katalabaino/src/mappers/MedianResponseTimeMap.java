@@ -5,8 +5,8 @@ import java.util.Vector;
 import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
 
 import core.Mapper;
-import core.Session;
-import core.Trial;
+import core.session.Session;
+import core.trial.Trial;
 
 public class MedianResponseTimeMap extends Mapper
 {

@@ -3,8 +3,8 @@ package mappers;
 import java.util.Vector;
 
 import core.Mapper;
-import core.Session;
-import core.Trial;
+import core.session.Session;
+import core.trial.Trial;
 
 /**
  * Make sure you know what unit your VT is stored in--likely ms.

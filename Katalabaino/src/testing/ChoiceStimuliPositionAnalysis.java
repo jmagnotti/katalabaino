@@ -2,9 +2,10 @@ package testing;
 
 import java.util.Vector;
 
-import core.Session;
+import core.analysis.UnstructuredAnalysis;
+import core.session.Session;
 
-public class ChoiceStimuliPositionAnalysis extends MultiSessionHDAnalysis
+public class ChoiceStimuliPositionAnalysis extends UnstructuredAnalysis
 {
 
 	public ChoiceStimuliPositionAnalysis(Vector<? extends Session> data)

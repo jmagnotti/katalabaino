@@ -4,10 +4,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Vector;
 
-import core.Colors;
 import core.Mapper;
-import core.Session;
-import core.Trial;
+import core.session.Session;
+import core.trial.Colors;
+import core.trial.Trial;
 
 public class ItemPairAccuracyMap extends Mapper
 {

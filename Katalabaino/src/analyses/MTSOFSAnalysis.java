@@ -9,11 +9,11 @@ import mappers.CountMap;
 import mappers.SessionInformationMap;
 import sessions.MTSOFSSession;
 import splitters.BlockSplitter;
-import core.Analysis;
-import core.FileTypeConverter;
 import core.Filter;
-import core.Session;
-import core.SessionFactory;
+import core.analysis.Analysis;
+import core.session.Session;
+import core.session.SessionFactory;
+import file.FileTypeConverter;
 import filters.CorrectionProcedureFilter;
 
 public class MTSOFSAnalysis

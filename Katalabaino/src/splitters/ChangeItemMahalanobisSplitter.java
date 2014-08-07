@@ -7,7 +7,7 @@ import calc.MahalanobisHelper;
 import core.ComparisonRule;
 import core.MultiClassRule;
 import core.Splitter;
-import core.Trial;
+import core.trial.Trial;
 
 class MahalanobisDistanceRule extends MultiClassRule
 {

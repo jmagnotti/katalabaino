@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import core.Mapper;
-import core.Session;
-import core.Stimulus;
-import core.Trial;
+import core.session.Session;
+import core.trial.Stimulus;
+import core.trial.Trial;
 
 public class ImageMap extends Mapper
 {

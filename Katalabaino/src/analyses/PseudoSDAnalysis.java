@@ -7,10 +7,10 @@ import mappers.PercentCorrectMap;
 import mappers.SessionInformationMap;
 import sessions.PseudoSDSession;
 import splitters.StimulusSetSplitter;
-import core.Analysis;
-import core.FileTypeConverter;
-import core.Session;
-import core.SessionFactory;
+import core.analysis.Analysis;
+import core.session.Session;
+import core.session.SessionFactory;
+import file.FileTypeConverter;
 
 @SuppressWarnings("unused")
 public class PseudoSDAnalysis {

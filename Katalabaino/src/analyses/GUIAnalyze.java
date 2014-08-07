@@ -1,6 +1,6 @@
 package analyses;
 
-import core.AnalysisBuilderGUI;
+import core.analysis.AnalysisBuilderGUI;
 
 public class GUIAnalyze
 {

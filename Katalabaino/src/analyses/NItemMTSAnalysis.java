@@ -8,6 +8,7 @@ import mappers.SessionInformationMap;
 import sessions.N_ItemMTSSession;
 import splitters.ChoiceSetSizeSplitter;
 import core.ComparisonRule;
+import core.analysis.TypicalAnalysis;
 import filters.CorrectTrialsOnlyFilter;
 import filters.ResponseTimeFilter;
 

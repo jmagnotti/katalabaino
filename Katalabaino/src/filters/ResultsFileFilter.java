@@ -3,7 +3,7 @@ package filters;
 import java.util.Vector;
 
 import core.Filter;
-import core.Session;
+import core.session.Session;
 
 public class ResultsFileFilter extends Filter
 {

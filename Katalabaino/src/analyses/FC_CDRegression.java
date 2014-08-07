@@ -4,9 +4,9 @@ import java.io.File;
 import java.util.Vector;
 
 import sessions.FC_CDSession;
-import core.Session;
-import core.SessionFactory;
-import core.Trial;
+import core.session.Session;
+import core.session.SessionFactory;
+import core.trial.Trial;
 
 public class FC_CDRegression
 {

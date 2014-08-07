@@ -5,7 +5,7 @@ import java.util.Vector;
 
 import core.Splitter;
 import core.MultiClassRule;
-import core.Trial;
+import core.trial.Trial;
 
 class TDDirectionRule extends MultiClassRule {
 	private Vector<Point2D.Float> locations;

@@ -2,10 +2,10 @@ package mappers;
 
 import java.util.Vector;
 
-import core.Analysis;
 import core.Mapper;
-import core.Session;
-import core.Trial;
+import core.analysis.Analysis;
+import core.session.Session;
+import core.trial.Trial;
 
 public class SessionInformationMap extends Mapper {
 	private int includeResultsFile = -1;

@@ -4,8 +4,8 @@ import java.util.Vector;
 
 import core.MultiClassRule;
 import core.Splitter;
-import core.Stimulus;
-import core.Trial;
+import core.trial.Stimulus;
+import core.trial.Trial;
 
 class StimulusInclusionRule extends MultiClassRule {
 

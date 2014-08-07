@@ -2,7 +2,7 @@ package legacy;
 
 import java.util.Vector;
 
-import core.Stimulus;
+import core.trial.Stimulus;
 
 public class Trial {
 	public int trialNumber;

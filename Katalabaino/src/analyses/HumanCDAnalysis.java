@@ -8,9 +8,9 @@ import mappers.HitsMissesFalseAlarmsCorrectRejectionsMap;
 import mappers.SessionInformationMap;
 import sessions.HumanCDSession;
 import splitters.TrialTypeSplitter;
-import core.Analysis;
-import core.Session;
-import core.SessionFactory;
+import core.analysis.Analysis;
+import core.session.Session;
+import core.session.SessionFactory;
 
 public class HumanCDAnalysis
 {

@@ -9,7 +9,7 @@ import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.util.Vector;
 
-import launcher.BirdNames;
+import core.constants.BirdNames;
 import launcher.WatchAction;
 
 public class MagpieCopyAction implements WatchAction {

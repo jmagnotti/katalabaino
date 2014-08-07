@@ -1,7 +1,7 @@
 package filters;
 
 import core.Filter;
-import core.Session;
+import core.session.Session;
 
 public class SessionNameFilter extends Filter
 {
