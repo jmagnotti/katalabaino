@@ -8,7 +8,7 @@ Before you can analyze your data, there are several prerequisites. This guide wi
   * Windows XP or better
   * Microsoft Office XP or better^1^
   * [http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/indigo/SR2/eclipse-java-indigo-SR2-win32.zip Eclipse 32-bit] or 64-bit
-
+  * Java version 1.7 OR BELOW (Java 1.8 removed support for accessing MDB files using the current technique)
 Note: If you get 64-bit Eclipse, you will need to manually obtain and select a 32-bit JDK. If you don't know how to do this, get 32-bit Eclipse.
 == Optional Software ==
   * Sigmaplot
