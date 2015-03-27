@@ -1,0 +1,1 @@
+The goal of this project is to allow for students in the AU CCL to learn a single tool for data pre-processing, rather than re-inventing the wheel for each new project. The targeted audience is masters/doctoral students with high motivation but low programming background. Therefore, the framework favors transparency and ease-of-use over algorithmic elegance or being totally DRY.
